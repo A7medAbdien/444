@@ -1,20 +1,72 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Assignment 1
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-input [(ngModel)]="name" type="text" placeholder="ex. Ahmed Abdin"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Age</ion-label>
+    <ion-input [(ngModel)]="age" type="number" placeholder="ex. 21"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Gander</ion-label>
+    <ion-select [(ngModel)]="gender" placeholder="Select Gander">
+      <ion-select-option value="Male">Male</ion-select-option>
+      <ion-select-option value="Female">Female</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Contact Information</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Phone</ion-label>
+      <ion-input [(ngModel)]="phone" type="number" placeholder="ex. 3333 3333"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input [(ngModel)]="email" type="email" placeholder="ex. example@em.em"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-radio-group [(ngModel)]="membership_type">
+      <ion-list-header>
+        <ion-label>Membership Type </ion-label>
+        <!-- <ion-label>Membership Type {{membership_type}}</ion-label> -->
+      </ion-list-header>
+
+      <ion-item *ngFor="let item of membership_types">
+        <ion-label>{{item}}</ion-label>
+        <ion-radio slot="start" value="{{item}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Field of Interest</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of fields_of_interest">
+      <ion-label>{{item.val}}</ion-label>
+      <!-- <ion-label>{{item.val}} {{item.checked}}</ion-label> -->
+      <ion-checkbox slot="start" [(ngModel)]="item.checked"></ion-checkbox>
+    </ion-item>
+
+  </ion-list>
 </ion-content>

@@ -7,6 +7,19 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor() { }
 
+  name;
+  age;
+  gender;
+  phone;
+  email;
+  membership_types = ['Weakly', 'Monthly', 'Free Time']
+  membership_type;
+  fields_of_interest = [
+    { val: "Watercolor and gouache", checked: false },
+    { val: "Sketching and drawing", checked: false },
+    { val: "Mixed media", checked: false },
+    { val: "Art journaling", checked: false }
+  ]
 }
