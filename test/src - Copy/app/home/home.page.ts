@@ -1,4 +1,3 @@
-import { DataListService } from './../data-list.service';
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
@@ -9,7 +8,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class HomePage {
 
-  constructor(public alertCtrl: AlertController, public d: DataListService) { }
+  constructor(public alertCtrl: AlertController) { }
 
   name;
   age;
@@ -32,8 +31,6 @@ export class HomePage {
 
 
   my_fields = '';
-
-  // to show the fields or field
   count_fields = 0;
   show_field = '';
 
@@ -74,16 +71,6 @@ export class HomePage {
 
     this.my_fields = '';
     this.count_fields = 0;
-    this.d.list.push(
-      {
-        name: this.name,
-        age: this.age,
-        gender: this.gender,
-        phone: this.phone,
-        email: this.email,
-        membership_type: this.membership_type,
-        my_fields: this.my_fields,
-      })
     x.present();
   }
 }
