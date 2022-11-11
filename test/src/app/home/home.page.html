@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Assignment 1
+      Assignment 2
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -19,19 +19,19 @@
   <!-- Getting Name -->
   <ion-item>
     <ion-label>Name</ion-label>
-    <ion-input [(ngModel)]="name" type="text" placeholder="ex. Ahmed"></ion-input>
+    <ion-input [(ngModel)]="d.name" type="text" placeholder="ex. Ahmed"></ion-input>
   </ion-item>
 
   <!-- Getting Age -->
   <ion-item>
     <ion-label>Age</ion-label>
-    <ion-input [(ngModel)]="age" type="number" placeholder="ex. 21"></ion-input>
+    <ion-input [(ngModel)]="d.age" type="number" placeholder="ex. 21"></ion-input>
   </ion-item>
 
   <!-- Getting Gander -->
   <ion-item>
     <ion-label>Gander</ion-label>
-    <ion-select [(ngModel)]="gender" placeholder="Select Gander">
+    <ion-select [(ngModel)]="d.gender" placeholder="Select Gander">
       <ion-select-option value="Male">Male</ion-select-option>
       <ion-select-option value="Female">Female</ion-select-option>
     </ion-select>
@@ -46,26 +46,26 @@
     <!-- Getting Phone -->
     <ion-item>
       <ion-label>Phone</ion-label>
-      <ion-input [(ngModel)]="phone" type="number" placeholder="ex. 3333 3333"></ion-input>
+      <ion-input [(ngModel)]="d.phone" type="number" placeholder="ex. 3333 3333"></ion-input>
     </ion-item>
 
     <!-- Getting Email -->
     <ion-item>
       <ion-label>Email</ion-label>
-      <ion-input [(ngModel)]="email" type="email" placeholder="ex. example@em.em"></ion-input>
+      <ion-input [(ngModel)]="d.email" type="email" placeholder="ex. example@em.em"></ion-input>
     </ion-item>
   </ion-list>
 
 
   <!-- Getting Membership Type, Radio -->
   <ion-list>
-    <ion-radio-group [(ngModel)]="membership_type">
+    <ion-radio-group [(ngModel)]="d.membership_type">
       <ion-list-header>
         <ion-label>Membership Type </ion-label>
         <!-- <ion-label>Membership Type {{membership_type}}</ion-label> -->
       </ion-list-header>
 
-      <ion-item *ngFor="let item of membership_types">
+      <ion-item *ngFor="let item of d.membership_types">
         <ion-label>{{item}}</ion-label>
         <ion-radio slot="start" value="{{item}}"></ion-radio>
       </ion-item>
@@ -79,23 +79,25 @@
       <ion-label>Field of Interest</ion-label>
     </ion-list-header>
 
-    <ion-item *ngFor="let item of fields_of_interests">
+    <ion-item *ngFor="let item of d.fields_of_interests">
       <ion-label>{{item.val}}</ion-label>
       <!-- <ion-label>{{item.val}} {{item.checked}}</ion-label> -->
       <ion-checkbox slot="start" [(ngModel)]="item.checked"></ion-checkbox>
     </ion-item>
 
-    <!-- <ion-item *ngFor="let item of my_fields">
-      <ion-label>{{item.val}}</ion-label>
-      <ion-checkbox slot="start" [(ngModel)]="item.checked"></ion-checkbox>
-    </ion-item> -->
   </ion-list>
 
   <ion-button (click)="showAlert()" expand="block" shape="round">
     Register
   </ion-button>
+
+  <ion-button routerLink="/members" exp and="block" fill="clear" shape="round">
+    View members
+  </ion-button>
   <br>
   <br>
+
+  list of members
 
   <ion-list>
     <ion-item>
