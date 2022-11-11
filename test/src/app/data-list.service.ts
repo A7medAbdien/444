@@ -24,7 +24,7 @@ export class DataListService {
   public email;
 
   // membership type
-  public membership_types = ['Weakly', 'Monthly', 'Free Time']
+  public membership_types = ['Weekly', 'Monthly', 'Free Time']
   public membership_type;
 
   public fields_of_interests = [
