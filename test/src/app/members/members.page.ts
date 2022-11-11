@@ -9,27 +9,25 @@ import { DataListService } from './../data-list.service';
   styleUrls: ['./members.page.scss'],
 })
 export class MembersPage implements OnInit {
+
+  constructor(public alertCtrl: AlertController, public d: DataListService) { }
+
+  ngOnInit() { }
+
+  // ------------------------------- Attributes ---------------------------
+
   filteredList = [];
   selectedType;
 
-  constructor(public alertCtrl: AlertController, public d: DataListService) {
-    this.filteredList = [];
-    this.selectedType;
-
-  }
-
-  ngOnInit() {
-  }
-
   // -------------------------------- Methods -----------------------------
 
-
   // Delete a member
-  DeleteItem(item) {
-    var i = this.d.list.indexOf(item);
-    if (i > -1) {
-      this.d.list.splice(i, 1);
-    }
+  DeleteMember(member) {
+    var i = this.d.list.indexOf(member);
+    var j = this.filteredList.indexOf(member);
+
+    if (i > -1) this.d.list.splice(i, 1);
+    if (j > -1) this.filteredList.splice(i, 1);
   }
 
   // Filter
