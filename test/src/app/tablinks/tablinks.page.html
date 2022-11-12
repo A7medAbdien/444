@@ -5,20 +5,20 @@
 </ion-header>
 
 <ion-content>
-    <ion-tabs>
+    <ion-tabs (ionTabsDidChange)="getSelectedTab($event)">
 
         <ion-tab-bar slot="bottom">
-            <ion-tab-button tab="profile">
+            <ion-tab-button tab="profile" (click)="onClickTab()">
                 <ion-icon name="person-circle-outline"></ion-icon>
                 <ion-label>Profile</ion-label>
             </ion-tab-button>
 
-            <ion-tab-button tab="members">
+            <ion-tab-button tab="members" (click)="onClickTab()">
                 <ion-icon name="easel-outline"></ion-icon>
                 <ion-label>Dashboard</ion-label>
             </ion-tab-button>
 
-            <ion-tab-button tab="settings">
+            <ion-tab-button tab="settings" (click)="onClickTab()">
                 <ion-icon name="settings-outline"></ion-icon>
                 <ion-label>Settings</ion-label>
             </ion-tab-button>
