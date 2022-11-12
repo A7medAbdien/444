@@ -1,14 +1,17 @@
-# tabs
+# Tabs
 
-## add them to an existing app
+## Add them to an existing app
 
 1. create pages
 2. in **app-routing** only the tablinks
-3. add pages as a children to tablinks
+3. in **tablinks-routing** add pages as a children to tablinks
+4. in **tablinks.page** add i-tabs
 
-4. crete pages and one called tablinks
-    `ionic g page tablinks` 
-5. in **app-routing** only the tablinks with `path: ''`
+---
+
+1. crete pages and one called tablinks
+    * `ionic g page tablinks` 
+2. in **app-routing** only the tablinks with `path: ''`
     ```js
     import { NgModule } from '@angular/core';
     import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
@@ -28,7 +31,7 @@
     })
     export class AppRoutingModule { }
     ``` 
-6. in **tablinks-routing** add them as a children to `component: TablinksPage`
+3. in **tablinks-routing** add them as a children to `component: TablinksPage`
     ```js
     import { NgModule } from '@angular/core';
     import { Routes, RouterModule } from '@angular/router';
@@ -76,7 +79,7 @@
     })
     export class TablinksPageRoutingModule { }
     ```
-7. add tabs in **tablinks.page.html**
+4. add tabs in **tablinks.page.html**
     ```html
     <ion-tabs>
 
@@ -105,7 +108,21 @@
     </ion-tabs>
     ```
 
+### getSelectedTab($event)
 
+1. in **tablinks.html** 
+    ```html 
+    <ion-tabs (ionTabsDidChange)="getSelectedTab($event)"> 
+    ```
+
+2. in **tablinks.ts**
+    ```ts
+    selectedTab;
+    getSelectedTab(e) {
+        this.selectedTab = e.tab
+        console.log(this.selectedTab);
+    }
+    ```
 
 
 # Promises and Observable
