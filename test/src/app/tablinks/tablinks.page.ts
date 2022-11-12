@@ -19,8 +19,4 @@ export class TablinksPage implements OnInit {
         this.selectedTab = e.tab
         console.log(this.selectedTab);
     }
-
-    onClickTab() {
-
-    }
 }
