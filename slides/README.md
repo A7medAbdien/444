@@ -1,6 +1,6 @@
 # Tabs
 
-## Add them to an existing app
+## Add tabs to an existing app
 
 1. create pages
 2. in **app-routing** only the tablinks
@@ -124,6 +124,52 @@
     }
     ```
 
+## Toggles
+
+1. in **.ts**, boolean variable and its listener
+2. in **.html**, toggle component, with (click) and [(ngModel)]
+3. in **html**, two *ngIf 
+---
+
+1. **.ts**
+    ```js
+    public data: any = { myToggle: true };
+    isClicked(myToggle) {
+    }
+    ```
+2. **.html**
+    ```html
+        <ion-list>
+        <ion-item>
+            <ion-label>Vegetarian</ion-label>
+            <!-- Toggle component -->
+            <ion-toggle (click)="isClicked(data.myToggle)" [(ngModel)]="data.myToggle"></ion-toggle>
+        </ion-item>
+
+        <!--  Toggle True -->
+        <ion-card *ngIf="data.myToggle">
+            <ion-card-header>
+                I only eat vegetarian foods
+            </ion-card-header>
+            <ion-list>
+                <!-- <button ion-item> Mushroom </button> -->
+                <ion-item><ion-label>Mushroom</ion-label></ion-item>
+                <ion-item><ion-label>Spinach</ion-label></ion-item>
+                <ion-item><ion-label>RedPeppers</ion-label></ion-item>
+            </ion-list>
+        </ion-card>
+
+        <!--  Toggle False -->
+        <ion-card *ngIf="!data.myToggle">
+            <ion-card-header> I love meat </ion-card-header>
+            <ion-list>
+                <ion-item><ion-label>Beef</ion-label></ion-item>
+                <ion-item><ion-label>Chicken</ion-label></ion-item>
+                <ion-item><ion-label>Sausage</ion-label></ion-item>
+            </ion-list>
+        </ion-card>
+    </ion-list>
+    ```
 
 # Promises and Observable
 
