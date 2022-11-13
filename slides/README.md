@@ -171,6 +171,8 @@
     </ion-list>
     ```
 
+
+
 # Promises and Observable
 
 1. local storage with capacitor
