@@ -1,3 +1,59 @@
+
+---
+---
+
+# Navigation
+- create pages by `ionic g pages xxx`
+1. via HTML, routerLink
+2. via Router injectable, ch4 slide 8
+3. viva NavController
+
+in **.html**
+
+```html
+<ion-list>
+    <!-- no need to add pages/detail 
+    - so wt we enter here is the path attribute of the Routes item -->
+    <ion-button routerLink="/detail/Item1" routerDirection="back">
+        Go To detail
+    </ion-button>
+    <ion-button (click)="viaNav()">
+        Go To Login via NavController
+    </ion-button>
+    <ion-button (click)="viaRouter()">
+        Go To Main via Router
+    </ion-button>
+</ion-list>
+```
+
+in **.ts**
+```js
+    constructor(public navCtrl: NavController, public router: Router) { }
+
+    viaNav() {
+        this.navCtrl.navigateRoot('/login')
+    }
+
+    viaRouter() {
+        this.router.navigate(['/main'])
+    }
+```
+
+## Navigation with parameters - details example
+
+1. in **app-routing**, add the parameter (:id)
+2. apply the routing
+   1. routerLink
+   2. NavController
+
+---
+
+1. in **app-routing** 
+
+## Gesture
+---
+---
+
 # Tabs
 
 ## Add tabs to an existing app
@@ -33,6 +89,7 @@
     })
     export class AppRoutingModule { }
     ``` 
+
 3. in **tablinks-routing** add them as a children to `component: TablinksPage`
     ```js
     import { NgModule } from '@angular/core';
@@ -81,6 +138,7 @@
     })
     export class TablinksPageRoutingModule { }
     ```
+
 4. add tabs in **tablinks.page.html**
     ```html
     <ion-tabs>
@@ -126,13 +184,14 @@
     }
     ```
 
-# Toggles
+# Toggle
 
 1. in **.ts**, boolean variable and its listener
 2. in **.html**, toggle component, with (click) and [(ngModel)]
 3. in **html**, two *ngIf 
 ---
 
+### card
 ### 
 
 1. **.ts**
@@ -182,6 +241,8 @@
 3. in **.html**, ngModel sets the value, {{}} gets the value
 
 ---
+
+
 
 # Promises and Observable
 
