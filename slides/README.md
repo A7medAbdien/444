@@ -9,6 +9,8 @@
 
 ---
 
+###
+
 1. crete pages and one called tablinks
     * `ionic g page tablinks` 
 2. in **app-routing** only the tablinks with `path: ''`
@@ -124,12 +126,14 @@
     }
     ```
 
-## Toggles
+# Toggles
 
 1. in **.ts**, boolean variable and its listener
 2. in **.html**, toggle component, with (click) and [(ngModel)]
 3. in **html**, two *ngIf 
 ---
+
+### 
 
 1. **.ts**
     ```js
@@ -171,7 +175,13 @@
     </ion-list>
     ```
 
+# Shared Service
 
+1. in **CLI** Create Service
+2. in **service.ts** create shared variables, maybe sitters and getters
+3. in **.html**, ngModel sets the value, {{}} gets the value
+
+---
 
 # Promises and Observable
 
