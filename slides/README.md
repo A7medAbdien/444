@@ -1,8 +1,5 @@
-
----
----
-
 # Navigation
+
 - create pages by `ionic g pages xxx`
 1. via HTML, routerLink
 2. via Router injectable, ch4 slide 8
@@ -48,9 +45,103 @@ in **.ts**
 
 ---
 
-1. in **app-routing** 
+### fab, 2
+### ActivatedRoute, 5
 
-## Gesture
+1. in **app-routing**
+    ```js
+    {
+        // just add /:id
+        path: 'detail/:id',
+        loadChildren: () => import('./pages/detail/detail.module').then(m => m.DetailPageModule)
+    },
+    ```
+2. in **page1.html** 
+    ```html
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <!-- <ion-fab-button (tap)="AddItem()"> -->
+        <ion-fab-button (click)="AddItem()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-item>
+        <ion-label>Type:</ion-label>
+        <ion-input type="text" [(ngModel)]="itemValue" placeholder="Add New Item here">
+        </ion-input>
+    </ion-item>
+
+    <ion-list>
+        <ion-list-header color="secondary">Available Items</ion-list-header>
+        <ion-item *ngFor="let x of List" routerLink="/detail/{{x}}" routerDirection="forward">
+            {{x}}
+        </ion-item>
+        <!-- using Nav -->
+        <!-- <ion-item *ngFor="let x of List" (click)="Next(x)">
+            {{x}}
+        </ion-item> -->
+    </ion-list>
+    ```
+3. in **page2.html**
+    ```html
+    <h2>You selected {{myId}}</h2>
+    <ion-button expand="block" (click)="Back()">
+        Back
+    </ion-button>
+    ```
+4. in **page1.ts** 
+    ```js
+    public List = ["Item 1", "Item 2", "Item 3"];
+    itemValue;
+
+    constructor(public navCtrl: NavController, public router: Router) { }
+
+    // Next(x) {
+    //    this.navCtrl.navigateForward('detail/' + x);
+    // }
+    AddItem() {
+        if (this.itemValue != null)
+            this.List.push(this.itemValue);
+        console.log(this.itemValue);
+    }
+
+    ```
+5. in **page2.ts** 
+    ```js
+    export class DetailPage implements OnInit {
+        myId;
+        constructor(public navCtrl: NavController, public ActRoute: ActivatedRoute) { }
+        ngOnInit() {
+            this.myId = this.ActRoute.snapshot.paramMap.get('id');
+        }
+
+        Back() {
+            // only if page1 is the root
+            this.navCtrl.navigateRoot('/');
+        }
+    }
+    ```
+
+## Gesture, access DOM attributes
+
+1. in **.html**, pass `$event`
+    ```html
+    <ion-card (click)="tapEvent($event)">
+        <ion-item>
+            Tapped: {{tap}} times
+        </ion-item>
+    </ion-card>
+    ```
+
+2. in **ts**, get access to the DOM object
+    ```js
+    tap = 0
+    tapEvent(e) {
+        this.tap++;
+        e.target.color = "primary";
+    }
+    ```
+
 ---
 ---
 
@@ -64,8 +155,6 @@ in **.ts**
 4. in **tablinks.page** add i-tabs
 
 ---
-
-###
 
 1. crete pages and one called tablinks
     * `ionic g page tablinks` 
@@ -168,7 +257,7 @@ in **.ts**
     </ion-tabs>
     ```
 
-### getSelectedTab($event)
+## getSelectedTab($event)
 
 1. in **tablinks.html** 
     ```html 
@@ -191,8 +280,7 @@ in **.ts**
 3. in **html**, two *ngIf 
 ---
 
-### card
-### 
+### card, 2
 
 1. **.ts**
     ```js
