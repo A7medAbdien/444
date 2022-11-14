@@ -264,6 +264,53 @@ in **.ts**
 ---
 ---
 
+# Service
+
+## interface
+
+1. **CLI**, `ionic  g service  DataList`
+2. **.service.ts**, add shred data
+    ```js
+    interface Student {
+    name: string,
+    course: string,
+    description: string
+    };
+
+    @Injectable({
+    providedIn: 'root'
+    })
+
+    export class DataListService {
+    constructor() { }
+
+    public List: Student[] = [
+        { name: "Ali", course: "ITCS444", description: "Mobile Development Course " },
+        { name: "Mohamed", course: "ITCS555", description: "Advanced Mobile Course " },
+        { name: "Fatema", course: "ITCS333", description: "Operating System Course " },
+        { name: "Jasim", course: "ITCS222", description: "Information Systems Course " }
+    ];
+
+    }
+    ```
+3. access shred data
+   1. **.js**
+        ```js
+        constructor(public DataSrv: DataListService) { }
+        public List = this.DataSrv.List;
+        ```
+   2. **.html**
+        ```html
+        <ion-item *ngFor="let x of DataSrv.List">
+        {{x.name}}
+        </ion-item>
+        ```
+
+# Fruits EX (Service, Alert, Navigation)
+
+1. **.service**
+2. **app-routing**
+
 # Tabs
 
 ## Add tabs to an existing app
