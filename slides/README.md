@@ -1,3 +1,26 @@
+# All
+
+ch 4
+
+1. Navigation 👍
+2. Interface 👍
+3. ModalPage 👍
+4. Service
+5. Fruits
+6. HTTP
+7. Modal-ex
+8. ToDo
+9. Filter
+10. CheckList
+
+ch 6
+
+1. LocalStorage-ex1
+2. LocalStorage-ex2
+3. LocalStorage-ex3
+4. Users
+
+
 # Navigation
 
 - create pages by `ionic g pages xxx`
@@ -140,6 +163,102 @@ in **.ts**
         this.tap++;
         e.target.color = "primary";
     }
+    ```
+
+# Modal Page - pass data to Modal page
+
+1. **app.module**, add module of the LoginPageModule
+2. **home.ts**, import the ModalController and add Modal creator method
+3. **home.html**, presenting Modal page trigger
+4. **login.ts**, import the ModalController (dismiss), NavParams (get passed data)
+5. **login.html**, dismiss trigger
+
+---
+
+1. **app.module**
+    ```js
+    import { LoginPageModule } from './login/login.module';
+
+    @NgModule({
+    declarations: [AppComponent],
+    // added LoginPageModule, not LoginPage
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, LoginPageModule],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    bootstrap: [AppComponent],
+    })
+    ```
+
+2. **home.ts**
+    ```js
+    firstName;
+    middleInitial;
+    
+    constructor(public modalCtrl: ModalController) { }
+    
+    async presentModal() {
+        const modal = await this.modalCtrl.create({
+        component: LoginPage,
+        componentProps: {
+            'firstName': this.firstName,
+            'middleInitial': this.middleInitial
+        },
+        backdropDismiss: false
+        });
+        return await modal.present();
+    }
+    ```
+
+3. **home.html**
+    ```html
+    <ion-item>
+    <ion-label>Initial data</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label>First Name: </ion-label>
+        <ion-input [(ngModel)]="firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Middle: </ion-label>
+        <ion-input [(ngModel)]="middleInitial"></ion-input>
+    </ion-item>
+    <ion-button (click)="presentModal()">Login Page</ion-button>
+    ```
+
+4. **login.ts**
+    ```js
+    export class LoginPage implements OnInit {
+
+        ngOnInit() {
+        }
+
+        @Input() firstName: string;
+        @Input() lastName: string;
+        @Input() middleInitial: string;
+
+        constructor(navParams: NavParams, public modalCtrl: ModalController) {
+            // componentProps can also be accessed at construction time using NavParams
+            console.log(navParams.get('firstName'));
+        }
+
+        dismiss() {
+            this.modalCtrl.dismiss({
+            'dismissed': true
+            });
+        }
+    }
+    ```
+
+5. **login.html**
+    ```html
+    <ion-item>
+        <ion-label>First Name:</ion-label>
+        <ion-input [(ngModel)]="firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Middle:</ion-label>
+        <ion-input [(ngModel)]="middleInitial" [disabled]="!middleInitial"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="dismiss()">Dismiss</ion-button>
     ```
 
 ---
