@@ -7,10 +7,10 @@ ch 4
 3. ModalPage 👍
 4. Service 👍
 5. Fruits 👍
-6. HTTP/cordova
-7. Modal-ex
-8. ToDo
-9. Filter
+6. HTTP/cordova, can not get http to work 👎
+7. Modal-ex, 'ionic-angular' no longer supported 👎
+8. ToDo, 👍, the same as fruits but added modal
+9. Filter, http not working so i use dataService
 10. CheckList
 
 ch 6
