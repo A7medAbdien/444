@@ -10,7 +10,7 @@ ch 4
 6. HTTP/cordova, can not get http to work 👎
 7. Modal-ex, 'ionic-angular' no longer supported 👎
 8. ToDo, 👍, the same as fruits but added modal
-9. Filter, http not working so i use dataService
+9. Filter, http not working so i used dataService
 10. CheckList
 
 ch 6
@@ -322,7 +322,7 @@ $Brief:$
 3. **app.module**, add xxxPageModule to imports (M)
 4. **home**, apply `presentModal()` (M) and `routerLink="/detail/{{i}}"` (N)
 5. **detail**, apply activateRoute (N)
-6. **login**
+6. **login**, after adding item shows an alert with an input (A)
 
 ---
 
@@ -600,12 +600,154 @@ $Brief:$
     </td>
     </tr>
     </table>
-# HTTP/Cordova
 
-1. **app-module:**  add `HttpClientModule` to imports
-2. **CLI:** 
-   1. `ionic cordova plugin add  cordova-plugin-advanced-http` or `npm i cordova-plugin-advanced-http`,
-   2. `npm install @ionic-native/http`
+---
+
+# Filter - on input
+
+1. **.html**, pass `$event` to get the length of the target on `(input)` listener
+2. **.ts**, use `.filter((x)=>{})` and `isFiltered`
+
+**in .html:**
+```html
+<ion-input type="text" placeholder="Search Students..." (input)="filterList($event)">
+</ion-input>
+
+<ion-list *ngIf="!isfiltered">
+<ion-item *ngFor="let x of List">
+    <ion-label>{{x.name}}</ion-label>
+    <p class="item-description">{{x.description}}</p>
+</ion-item>
+</ion-list>
+
+<ion-list *ngIf="isfiltered">
+<ion-item *ngFor="let y of filteredList">
+    <ion-label>{{y.name}}</ion-label>
+    <p class="item-description">{{y.description}}</p>
+</ion-item>
+</ion-list>
+```
+
+**in .js:**
+```js
+List = [{
+    name: "Ali",
+    description: "First Year student"
+    },
+    {
+    name: "Jasim",
+    description: "Second Year student on proabbtion"
+    }, {
+    name: "Maryam",
+    description: "Thidrd Year student"
+    }
+];
+filterList(event) {
+    if (event.target.value.length > 0) {
+
+        var filteredlist = this.List.filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+            return true;
+        } else {
+            return false;
+        }
+        });
+
+        this.filteredList = filteredlist;
+        this.isfiltered = true;
+
+    } else {
+        this.isfiltered = false;
+    }
+}
+```
+
+# CheckList - Ex
+
+1. set interfaces, in interface folder
+2. set functions, in .service
+   1. crete
+   2. remove
+   3. rename/reset
+   4. get by id
+   5. generate slug/ random name
+   6. save/load
+
+# some functions
+1. crete
+    ```js
+    createChecklist(data): void {
+        this.checklists.push({
+        id: this.generateSlug(data.name),
+        title: data.name,
+        items: []
+        });
+        console.log(this.checklists);
+        this.save();
+    }
+    ```
+2. remove
+    ```js
+    removeChecklist(checklist): void {
+        let index = this.checklists.indexOf(checklist);
+        if (index > -1) {
+        this.checklists.splice(index, 1); this.save();
+        }
+    }
+    ```
+3. rename/reset
+    ```js
+    renameChecklist(checklist, data): void {
+        let index = this.checklists.indexOf(checklist);
+        if (index > -1) {
+        this.checklists[index].title = data.name; this.save();
+        }
+    }
+    ```
+4. get by id
+    ```js
+    getChecklist(id): Checklist {
+        return this.checklists.find(checklist => checklist.id === id);
+    }
+    ```
+5. generate slug/ random name
+    ```js
+    generateSlug(title): string {
+        // NOTE: This is a simplistic slug generator and will not handle things like special characters.
+        let slug = title.toLowerCase().replace(/\s+/g, '-');
+
+        // Check if the slug already exists
+        let exists = this.checklists.filter(
+        (checklist) => {
+            return checklist.id.substring(0, slug.length) === slug;
+        });
+
+        // If the title is already being	used, add a number to make the	slug unique
+        if (exists.length > 0) { slug = slug + exists.length.toString(); }
+        return slug;
+    }
+    ```
+6. open alert to add/rename
+    ```js
+    async openCreateItem(checklistId, newItem) {
+        let alert = await this.alertCtrl.create({
+        header: 'Create Item',
+        inputs: [{ name: 'name', placeholder: 'Item Name', value: newItem }],
+        buttons: [{
+            text: 'OK',
+            handler: data => {
+            this.addItem(checklistId, data);
+            }
+        },
+        {
+            text: 'Cancel',
+            handler: data => { }
+        }]
+        });
+        alert.present();
+    }
+    ```
+
 
 # Tabs
 
