@@ -5,5 +5,56 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-list-header color="warning">
+      <ion-label>New Product</ion-label>
+    </ion-list-header>
+
+  </ion-list>
+
+  <form [formGroup]="productForm">
+
+    <ion-item>
+      <ion-label floating>Product Id</ion-label>
+      <ion-input type="number" formControlName="productId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Product Name</ion-label>
+      <ion-input type="text" formControlName="productName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Product Score</ion-label>
+      <ion-input type="text" formControlName="productScore"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Product Icon</ion-label>
+      <ion-input type="text" formControlName="productIcon"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-button type="submit" (click)="insertItem(productForm.value)" expand="block" fill="clear" shape="round">
+        Insert
+      </ion-button>
+      <ion-icon name="arrow"></ion-icon>
+    </ion-item>
+  </form>
+
+  <ion-list *ngIf="list.length>0">
+    <ion-list-header>
+      <ion-label>List all Products</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Id</ion-label>
+      <ion-label>Name</ion-label>
+      <ion-label>Score</ion-label>
+      <ion-label>Icon</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let item of list">
+      <ion-label>{{ item.id}}</ion-label>
+      <ion-label>{{item.name}}</ion-label>
+      <ion-label>{{item.score}}</ion-label>
+      <ion-icon slot="end" name="{{item.icon}}"></ion-icon>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
