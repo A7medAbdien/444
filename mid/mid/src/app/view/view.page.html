@@ -1,5 +1,11 @@
 <ion-header>
   <ion-toolbar>
+    <ion-button (click)="save()" slot="end" fill="clear" shape="round">
+      Save
+    </ion-button>
+    <ion-button [routerLink]="['/home']" slot="start" fill="clear" shape="round">
+      Back
+    </ion-button>
     <ion-title>view</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -33,7 +39,7 @@
     <ion-item>
       <ion-button type="submit" (click)="insertItem(productForm.value)" expand="block" fill="clear" shape="round">
         <ion-label>Insert</ion-label>
-        <ion-icon slot="end" name="add"></ion-icon>
+        <ion-icon slot="end" name="arrow-down"></ion-icon>
       </ion-button>
     </ion-item>
   </form>

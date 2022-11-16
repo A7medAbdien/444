@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { DataService } from '../data.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-view',
@@ -11,8 +12,16 @@ import { DataService } from '../data.service';
 export class ViewPage implements OnInit {
   ngOnInit(): void {
   }
+  private _storage: Storage | null = null;
 
-  constructor(public AlertCtrl: AlertController, public formBuilder: FormBuilder, dataSer: DataService) {
+  async init() {
+    // If using, define drivers here: await this.storage.defineDriver(/*...*/);
+    const storage = await this.storage.create();
+    this._storage = storage;
+  }
+
+  constructor(public AlertCtrl: AlertController, public formBuilder: FormBuilder, dataSer: DataService, private storage: Storage) {
+    this.init();
     this.productForm = formBuilder.group({
       productId: [''],
       productName: [''],
@@ -20,6 +29,12 @@ export class ViewPage implements OnInit {
       productIcon: [''],
     });
     this.list = dataSer.List;
+
+    this.storage.get("list")
+      .then((res) => {
+        console.log(res);
+        this.list = JSON.parse(res);
+      })
   }
 
 
@@ -44,5 +59,9 @@ export class ViewPage implements OnInit {
       buttons: ['Ok']
     });
     alert.present();
+  }
+
+  save() {
+    this.storage.set("List", JSON.stringify(this.list))
   }
 }

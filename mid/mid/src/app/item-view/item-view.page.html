@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-button [routerLink]="['/home']" slot="start" fill="clear" shape="round">
+      Back
+    </ion-button>
     <ion-title>item-view</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -41,7 +44,7 @@
 
   <ion-button [routerLink]="['/home']" expand="block" fill="clear" shape="round" color="danger">
     Close
-    <ion-icon slot="start" name="exit"></ion-icon>
+    <ion-icon slot="start" name="close"></ion-icon>
   </ion-button>
 
 </ion-content>
