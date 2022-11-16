@@ -12,6 +12,13 @@ export interface Product {
 })
 export class DataService {
 
-  List: Product[] = [];
+  List: Product[] = [
+    {
+      id: 0,
+      name: "string",
+      score: "2",
+      icon: "car",
+    }
+  ];
   constructor() { }
 }
