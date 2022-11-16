@@ -5,5 +5,24 @@
 </ion-header>
 
 <ion-content>
+  <ion-list-header color="warning">
+    <ion-label>Product Score</ion-label>
+  </ion-list-header>
+  <ion-grid>
+    <ion-row *ngFor="let item of list">
+      <ion-col size="4">
+        <ion-button>
+          item.name
+        </ion-button>
+      </ion-col>
+
+      <ion-col button *ngFor=" let r of RateArray" (click)="setRating(r.value)" size="2">
+        <ion-button fill={{r.fill}}>
+          {{r.value}}
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
