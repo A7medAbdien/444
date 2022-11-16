@@ -5,5 +5,20 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>Select Product</ion-label>
+      <ion-select placeholder="Select Product" *ngFor="let item of list">
+        <ion-select-option value={{item.id}}>
+          {{item.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button [routerLink]="['/home']" expand="block" fill="clear" shape="round" color="danger">
+    Close
+    <ion-icon slot="start" name="x"></ion-icon>
+  </ion-button>
 
 </ion-content>

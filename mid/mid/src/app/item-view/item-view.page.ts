@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-item-view',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemViewPage implements OnInit {
 
-  constructor() { }
+  list: any;
+  constructor(dataSer: DataService) {
+    this.list = dataSer.List;
+  }
 
   ngOnInit() {
   }
