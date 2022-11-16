@@ -245,7 +245,6 @@ in **.html**
   LoginForm: FormGroup;
   Users = [];
 
-
   // ------------------------- Methods -------------------------
   Login(val) {
     if (this.LoginForm.valid)
