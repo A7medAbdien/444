@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 import { DataService } from '../data.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ViewPage implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(public formBuilder: FormBuilder, dataSer: DataService) {
+  constructor(public AlertCtrl: AlertController, public formBuilder: FormBuilder, dataSer: DataService) {
     this.productForm = formBuilder.group({
       productId: [''],
       productName: [''],
@@ -35,5 +36,13 @@ export class ViewPage implements OnInit {
       icon: data.productIcon,
     });
     console.log(this.list);
+  }
+  async onSubmit() {
+    let alert = await this.AlertCtrl.create({
+      header: "Insertion Alert",
+      message: "Sure you want to insert this Item",
+      buttons: ['Ok']
+    });
+    alert.present();
   }
 }

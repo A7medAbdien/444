@@ -12,7 +12,7 @@
 
   </ion-list>
 
-  <form [formGroup]="productForm">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
 
     <ion-item>
       <ion-label floating>Product Id</ion-label>
@@ -32,14 +32,14 @@
     </ion-item>
     <ion-item>
       <ion-button type="submit" (click)="insertItem(productForm.value)" expand="block" fill="clear" shape="round">
-        Insert
+        <ion-label>Insert</ion-label>
+        <ion-icon slot="end" name="add"></ion-icon>
       </ion-button>
-      <ion-icon name="arrow"></ion-icon>
     </ion-item>
   </form>
 
   <ion-list *ngIf="list.length>0">
-    <ion-list-header>
+    <ion-list-header color="warning">
       <ion-label>List all Products</ion-label>
     </ion-list-header>
     <ion-item>
