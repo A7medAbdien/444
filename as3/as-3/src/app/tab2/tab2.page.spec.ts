@@ -9,16 +9,15 @@ describe('Tab2Page', () => {
   let component: Tab2Page;
   let fixture: ComponentFixture<Tab2Page>;
 
-  // beforeEach(async () => {
-  //   await TestBed.configureTestingModule({
-  //     declarations: [Tab2Page],
-  //     imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
-  //   }).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [Tab2Page]
+    }).compileComponents();
 
-  //   fixture = TestBed.createComponent(Tab2Page);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
+    fixture = TestBed.createComponent(Tab2Page);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
