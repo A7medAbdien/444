@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-// import { DataListService } from '../data-list.service'; 
-import { DataListService } from './../data-list.service';
+// import { DataListService } from '../data-list.service';
+import { DataListService, Student } from './../data-list.service';
 
 @Component({
   selector: 'app-members',
@@ -39,6 +39,16 @@ export class MembersPage implements OnInit {
     })
   }
 
+  // handing fields
 
+  private my_fields_list = '';
+
+  // to show the fields or field
+  private count_fields = 0;
+  private show_field = '';
+
+  async showAlert(member: Student) {
+    this.d.showAlert(member);
+  }
 
 }

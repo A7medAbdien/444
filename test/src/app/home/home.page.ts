@@ -14,7 +14,7 @@ export class HomePage {
 
   // handing fields
 
-  my_fields = '';
+  my_fields_list = '';
 
   // to show the fields or field
   count_fields = 0;
@@ -30,7 +30,8 @@ export class HomePage {
 
     this.d.fields_of_interests.forEach(f => {
       if (f.checked == true) {
-        this.my_fields += "<li> " + f.val + "</li>";
+        this.my_fields_list += "<li> " + f.val + "</li>";
+        this.d.my_fields.push(f.val);
         this.count_fields++;
       };
     });
@@ -52,10 +53,10 @@ export class HomePage {
 
       Membership Type: ${this.d.membership_type} <br>
 
-      ${this.show_field} of interest:  ${this.my_fields} `
+      ${this.show_field} of interest:  ${this.my_fields_list} `
     });
 
-    this.my_fields = '';
+    this.my_fields_list = '';
     this.count_fields = 0;
     this.d.list.push(
       {
@@ -65,7 +66,7 @@ export class HomePage {
         phone: this.d.phone,
         email: this.d.email,
         membership_type: this.d.membership_type,
-        my_fields: this.my_fields,
+        my_fields: this.d.my_fields,
       })
     x.present();
   }

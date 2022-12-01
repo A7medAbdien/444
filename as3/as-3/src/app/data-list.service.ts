@@ -43,7 +43,7 @@ export class DataListService {
   public list: Student[] =
     [
       { name: "Ahmed", age: 20, gender: "Male", phone: 33334444, email: "example2.ex", membership_type: "Free Time", my_fields: ["Watercolor and gouache"] },
-      { name: "Ali", age: 22, gender: "Male", phone: 35552223, email: "example3.ex", membership_type: "Weekly", my_fields: ["Mixed media"] },
+      { name: "Ali", age: 22, gender: "Male", phone: 35552223, email: "example3.ex", membership_type: "Weekly", my_fields: ["Mixed media", "Watercolor and gouache"] },
       { name: "Jojo", age: 24, gender: "Female", phone: 35566223, email: "example1.ex", membership_type: "Monthly", my_fields: ["Mixed media"] }
     ]
 
