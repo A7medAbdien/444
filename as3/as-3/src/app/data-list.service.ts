@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 export interface Student {
   name: string,
@@ -17,7 +17,7 @@ export interface Student {
 })
 export class DataListService {
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController) { }
+  constructor(public alertCtrl: AlertController) { }
 
   public current_student: Student = {
     name: '',
