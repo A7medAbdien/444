@@ -6,6 +6,13 @@
 
 <ion-content>
 
+  <!-- Students Information -->
+  <ion-item>
+    <ion-label>Ahmed Gmal, 20180763, Section:02</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Ahmed Mohamed, 20162878, Section:01</ion-label>
+  </ion-item>
 
   <ion-list>
     <ion-radio-group [(ngModel)]="selectedType">
@@ -54,5 +61,11 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/add-member']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 
 </ion-content>

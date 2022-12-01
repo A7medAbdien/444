@@ -1,7 +1,6 @@
 import { DataListService } from './../data-list.service';
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -58,6 +57,7 @@ export class HomePage {
 
     this.my_fields_list = '';
     this.count_fields = 0;
+    x.present();
     this.d.list.push(
       {
         name: this.d.name,
@@ -68,6 +68,5 @@ export class HomePage {
         membership_type: this.d.membership_type,
         my_fields: this.d.my_fields,
       })
-    x.present();
   }
 }
