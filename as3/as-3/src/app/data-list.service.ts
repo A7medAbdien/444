@@ -29,20 +29,10 @@ export class DataListService {
     my_fields: []
   };
 
-  public name;
-  public age;
-  public gender;
-
-  // contact information
-  public phone;
-  public email;
-
   // membership type
   public membership_types = ['Weekly', 'Monthly', 'Free Time']
-  public membership_type;
 
   // fields of interest
-  public my_fields: string[] = [];
   public fields_of_interests = [
     { val: "Watercolor and gouache", checked: false },
     { val: "Sketching and drawing", checked: false },
@@ -63,7 +53,7 @@ export class DataListService {
   // to show the fields or field
   private count_fields = 0;
   private show_field = '';
-  // -----------  end of handing alert massage
+  // ------------  end of handing alert massage
 
   // show alert when item clicked, used in tab1 (search member)
   async showAlert(member: Student) {
@@ -101,41 +91,15 @@ export class DataListService {
   }
 
   async addWithAlert() {
+    // add checked fields_of_interests to my_fields
     this.fields_of_interests.forEach(f => {
       if (f.checked == true) {
-        this.my_fields_list += "<li> " + f.val + "</li>";
         this.current_student.my_fields.push(f.val);
-        this.count_fields++;
       };
     });
-    (this.count_fields > 1) ? this.show_field = 'Fields' : this.show_field = 'Field';
-
-    let x = await this.alertCtrl.create({
-      header: 'Assignment 1',
-      subHeader: 'The member of the following information:',
-      message: `
-      Name: ${this.current_student.name}<br>
-      Age: ${this.current_student.age}<br>
-      Gender: ${this.current_student.gender}<br>
-
-      Contact information: <br>
-      Phone: ${this.current_student.phone}<br>
-      Email: ${this.current_student.email}<br>
-
-      Membership Type: ${this.current_student.membership_type} <br>
-
-      ${this.show_field} of interest:  ${this.my_fields_list} `,
-      buttons: [{
-        "text": "Ok", "handler": () => {
-          this.navCtrl.navigateBack('/tabs/tab1');
-        }
-      }]
-    });
-
-    this.my_fields_list = '';
-    this.count_fields = 0;
-    x.present();
-    this.list.push(this.current_student)
+    this.showAlert(this.current_student);
+    this.list.push(this.current_student);
+    // cleanup
     this.current_student = {
       name: '',
       age: '',
@@ -145,6 +109,11 @@ export class DataListService {
       membership_type: '',
       my_fields: []
     };
+    this.fields_of_interests.forEach(f => {
+      if (f.checked == true) {
+        f.checked = false;
+      };
+    });
   }
 
 }
