@@ -25,3 +25,22 @@ The app should be able to:
 - Generate and display reports of various needs. 
 - Specify advanced search parameters to generate different statistics about products and save results to use for placing orders from
 suppliers.
+
+
+In adjusting the prototype we need to add...
+1. add item
+2. show item details
+   1. name
+   2. supplier
+   3. quantity/ threshold
+   4. history of item,the old purchases
+3. supplier work-flow
+   1. Placed items with their status
+   2. favorite items
+4. Scheduling
+   1. show option for employees to trade
+   2. show for the employees their Schedule
+5. change the whole design
+   1. colors
+   2. component (keyboard)
+   3. icons
