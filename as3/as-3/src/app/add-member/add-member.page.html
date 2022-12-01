@@ -9,19 +9,19 @@
   <!-- Getting Name -->
   <ion-item>
     <ion-label>Name</ion-label>
-    <ion-input [(ngModel)]="d.name" type="text" placeholder="ex. Ahmed"></ion-input>
+    <ion-input [(ngModel)]="d.current_student.name" type="text" placeholder="ex. Ahmed"></ion-input>
   </ion-item>
 
   <!-- Getting Age -->
   <ion-item>
     <ion-label>Age</ion-label>
-    <ion-input [(ngModel)]="d.age" type="number" placeholder="ex. 21"></ion-input>
+    <ion-input [(ngModel)]="d.current_student.age" type="number" placeholder="ex. 21"></ion-input>
   </ion-item>
 
   <!-- Getting Gander -->
   <ion-item>
     <ion-label>Gander</ion-label>
-    <ion-select [(ngModel)]="d.gender" placeholder="Select Gander">
+    <ion-select [(ngModel)]="d.current_student.gender" placeholder="Select Gander">
       <ion-select-option value="Male">Male</ion-select-option>
       <ion-select-option value="Female">Female</ion-select-option>
     </ion-select>
@@ -36,20 +36,20 @@
     <!-- Getting Phone -->
     <ion-item>
       <ion-label>Phone</ion-label>
-      <ion-input [(ngModel)]="d.phone" type="number" placeholder="ex. 3333 3333"></ion-input>
+      <ion-input [(ngModel)]="d.current_student.phone" type="number" placeholder="ex. 3333 3333"></ion-input>
     </ion-item>
 
     <!-- Getting Email -->
     <ion-item>
       <ion-label>Email</ion-label>
-      <ion-input [(ngModel)]="d.email" type="email" placeholder="ex. example@em.em"></ion-input>
+      <ion-input [(ngModel)]="d.current_student.email" type="email" placeholder="ex. example@em.em"></ion-input>
     </ion-item>
   </ion-list>
 
 
   <!-- Getting Membership Type, Radio -->
   <ion-list>
-    <ion-radio-group [(ngModel)]="d.membership_type">
+    <ion-radio-group [(ngModel)]="d.current_student.membership_type">
       <ion-list-header>
         <ion-label>Membership Type </ion-label>
         <!-- <ion-label>Membership Type {{membership_type}}</ion-label> -->
