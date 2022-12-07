@@ -136,8 +136,8 @@ export class DataListService {
 
   public workshops: Workshop[] =
     [
-      { title: 'Watercolorists', type: 'Watercolor and gouache', date: '2022-12-05', start_time: '14:00', duration: '2h' },
       { title: 'MM', type: 'Mixed media', date: '2022-12-03', start_time: '10:30', duration: '1h 30m' },
+      { title: 'Watercolorists', type: 'Watercolor and gouache', date: '2022-12-05', start_time: '14:00', duration: '2h' },
     ]
 
 
