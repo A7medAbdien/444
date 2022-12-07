@@ -1,3 +1,4 @@
+import { DataListService, Workshop } from './../data-list.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
-
+  constructor(public d: DataListService) { }
+  showAlert(workshop) { this.d.showWorkshopAlert(workshop) }
+  DeleteWorkshop(workshop) { }
 }

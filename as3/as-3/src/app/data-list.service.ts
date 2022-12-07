@@ -11,6 +11,13 @@ export interface Student {
   my_fields: string[]
 }
 
+export interface Workshop {
+  title: string,
+  type: string,
+  date: string,
+  start_time: string,
+  duration: string,
+}
 
 @Injectable({
   providedIn: 'root'
@@ -114,6 +121,54 @@ export class DataListService {
         f.checked = false;
       };
     });
+  }
+
+  // --------------------------- Workshop Methods -------------------------
+
+  public current_workshop: Workshop = {
+    title: '',
+    type: '',
+    date: '',
+    start_time: '',
+    duration: ''
+  }
+
+
+  public workshops: Workshop[] =
+    [
+      { title: 'Watercolorists', type: 'Watercolor and gouache', date: '2022-12-05', start_time: '14:00', duration: '2h' },
+      { title: 'MM', type: 'Mixed media', date: '2022-12-03', start_time: '10:30', duration: '1h 30m' },
+    ]
+
+
+  async showWorkshopAlert(workshop: Workshop) {
+
+    // alert massage
+    let x = await this.alertCtrl.create({
+      header: 'Assignment 1',
+      subHeader: 'The member of the following information:',
+      message: `
+      Title: ${workshop.title}<br>
+      Type: ${workshop.type}<br>
+      Date: ${workshop.date}<br>
+      Start Time: ${workshop.start_time}<br>
+      Duration: ${workshop.duration}<br>`
+    });
+    x.present();
+  }
+
+  async addWorkshopWithAlert() {
+
+    this.showWorkshopAlert(this.current_workshop);
+    this.workshops.push(this.current_workshop);
+    // cleanup
+    this.current_workshop = {
+      title: '',
+      type: '',
+      date: '',
+      start_time: '',
+      duration: ''
+    }
   }
 
 }
