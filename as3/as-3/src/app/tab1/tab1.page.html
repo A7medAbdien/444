@@ -42,11 +42,11 @@
 
   <!-- filtered list -->
   <ion-list>
-    <ion-item>
+    <ion-list-header>
       <!-- <ion-label>Name {{selectedType}}</ion-label> -->
       <ion-label>Name </ion-label>
       <ion-label>Membership Type</ion-label>
-    </ion-item>
+    </ion-list-header>
 
     <ion-item-sliding *ngFor="let member of filteredList">
       <!-- Member data -->
@@ -61,11 +61,11 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button [routerLink]="['/add-member']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 
 </ion-content>
