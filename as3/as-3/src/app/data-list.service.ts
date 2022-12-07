@@ -76,8 +76,7 @@ export class DataListService {
 
     // alert massage
     let x = await this.alertCtrl.create({
-      header: 'Assignment 1',
-      subHeader: 'The member of the following information:',
+      header: 'The Member Information:',
       message: `
       Name: ${member.name}<br>
       Age: ${member.age}<br>
@@ -145,8 +144,7 @@ export class DataListService {
 
     // alert massage
     let x = await this.alertCtrl.create({
-      header: 'Assignment 1',
-      subHeader: 'The member of the following information:',
+      header: 'The Workshop information:',
       message: `
       Title: ${workshop.title}<br>
       Type: ${workshop.type}<br>
