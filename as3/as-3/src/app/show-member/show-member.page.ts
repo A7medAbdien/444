@@ -9,7 +9,7 @@ import { DataListService } from '../data-list.service';
 })
 export class ShowMemberPage implements OnInit {
   memberIndex;
-  workshopIndex;
+  workshopIndex = -1;
   constructor(public d: DataListService, public ActRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -20,7 +20,8 @@ export class ShowMemberPage implements OnInit {
   }
 
   addMemberToWorkshop() {
-    this.d.addMemberToWorkshop(this.memberIndex, this.d.shown_student);
+    this.d.addMemberToWorkshop(this.workshopIndex, this.d.shown_student);
+    this.workshopIndex = -1;
   }
 
 }
