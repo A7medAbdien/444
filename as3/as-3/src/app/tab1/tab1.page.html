@@ -48,9 +48,9 @@
       <ion-label>Membership Type</ion-label>
     </ion-list-header>
 
-    <ion-item-sliding *ngFor="let member of filteredList">
+    <ion-item-sliding *ngFor="let member of filteredList;let i=index">
       <!-- Member data -->
-      <ion-item (click)="showAlert(member)">
+      <ion-item (click)="showAlert(member)" [routerLink]="['/show-member/'+i]">
         <ion-label>{{member.name}}</ion-label>
         <ion-label>{{member.membership_type}}</ion-label>
       </ion-item>

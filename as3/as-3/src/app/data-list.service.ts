@@ -28,12 +28,12 @@ export class DataListService {
   constructor(public alertCtrl: AlertController) { }
 
   public current_student: Student = {
-    name: 'a',
-    age: '3',
-    gender: 'male',
-    phone: '77',
-    email: 'dsa',
-    membership_type: 'sd',
+    name: '',
+    age: '',
+    gender: '',
+    phone: '',
+    email: '',
+    membership_type: '',
     my_fields: []
   };
 
@@ -173,6 +173,9 @@ export class DataListService {
   }
 
   // ------------------------- addMemberToWorkshop() ------------------------
+
+  public shown_student!: Student;
+
   addMemberToWorkshop(member: Student) {
 
 

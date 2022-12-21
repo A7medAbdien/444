@@ -8,19 +8,19 @@ const routes: Routes = [
   },
   {
     path: 'add-member',
-    loadChildren: () => import('./add-member/add-member.module').then( m => m.AddMemberPageModule)
+    loadChildren: () => import('./add-member/add-member.module').then(m => m.AddMemberPageModule)
   },
   {
     path: 'add-workshop',
-    loadChildren: () => import('./add-workshop/add-workshop.module').then( m => m.AddWorkshopPageModule)
+    loadChildren: () => import('./add-workshop/add-workshop.module').then(m => m.AddWorkshopPageModule)
   },
   {
-    path: 'show-member',
-    loadChildren: () => import('./show-member/show-member.module').then( m => m.ShowMemberPageModule)
+    path: 'show-member/:memberIndex',
+    loadChildren: () => import('./show-member/show-member.module').then(m => m.ShowMemberPageModule)
   },
   {
     path: 'show-workshop',
-    loadChildren: () => import('./show-workshop/show-workshop.module').then( m => m.ShowWorkshopPageModule)
+    loadChildren: () => import('./show-workshop/show-workshop.module').then(m => m.ShowWorkshopPageModule)
   }
 ];
 @NgModule({
@@ -29,4 +29,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

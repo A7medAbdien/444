@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Show Member</ion-title>
+    <ion-title>Show Member{{memberIndex}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,19 +9,19 @@
   <!-- Getting Name -->
   <ion-item>
     <ion-label>Name</ion-label>
-    <ion-label>{{d.current_student.name}}</ion-label>
+    <ion-label>{{d.shown_student.name}}</ion-label>
   </ion-item>
 
   <!-- Getting Age -->
   <ion-item>
     <ion-label>Age</ion-label>
-    <ion-label>{{d.current_student.age}}</ion-label>
+    <ion-label>{{d.shown_student.age}}</ion-label>
   </ion-item>
 
   <!-- Getting Gander -->
   <ion-item>
     <ion-label>Gander</ion-label>
-    <ion-label>{{d.current_student.gender}}</ion-label>
+    <ion-label>{{d.shown_student.gender}}</ion-label>
   </ion-item>
 
   <!-- Start Contact Information Section  -->
@@ -29,13 +29,13 @@
     <!-- Getting Phone -->
     <ion-item>
       <ion-label>Phone</ion-label>
-      <ion-label>{{d.current_student.phone}}</ion-label>
+      <ion-label>{{d.shown_student.phone}}</ion-label>
     </ion-item>
 
     <!-- Getting Email -->
     <ion-item>
       <ion-label>Email</ion-label>
-      <ion-label>{{d.current_student.email}}</ion-label>
+      <ion-label>{{d.shown_student.email}}</ion-label>
     </ion-item>
   </ion-list>
 
@@ -44,7 +44,7 @@
   <ion-list>
     <ion-item>
       <ion-label>Membership Type </ion-label>
-      <ion-label>{{d.current_student.membership_type}}</ion-label>
+      <ion-label>{{d.shown_student.membership_type}}</ion-label>
     </ion-item>
   </ion-list>
 
@@ -54,8 +54,8 @@
       <ion-label>Field of Interest</ion-label>
     </ion-list-header>
 
-    <ion-item *ngFor="let item of d.fields_of_interests">
-      <ion-label>{{item.val}}</ion-label>
+    <ion-item *ngFor="let item of d.shown_student.my_fields">
+      <ion-label>{{item}}</ion-label>
     </ion-item>
   </ion-list>
 
@@ -67,7 +67,7 @@
 
     <ion-item>
       <ion-label>Available Workshops</ion-label>
-      <ion-select [(ngModel)]="d.current_student.gender" placeholder="Select Workshops">
+      <ion-select [(ngModel)]="d.shown_student.gender" placeholder="Select Workshops">
         <ion-select-option *ngFor="let workshop of d.workshops" value=" Male">{{workshop.title}}</ion-select-option>
       </ion-select>
     </ion-item>
