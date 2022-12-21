@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Member</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- Getting Name -->
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-label>{{d.current_student.name}}</ion-label>
+  </ion-item>
+
+  <!-- Getting Age -->
+  <ion-item>
+    <ion-label>Age</ion-label>
+    <ion-label>{{d.current_student.age}}</ion-label>
+  </ion-item>
+
+  <!-- Getting Gander -->
+  <ion-item>
+    <ion-label>Gander</ion-label>
+    <ion-label>{{d.current_student.gender}}</ion-label>
+  </ion-item>
+
+  <!-- Start Contact Information Section  -->
+  <ion-list>
+    <!-- Getting Phone -->
+    <ion-item>
+      <ion-label>Phone</ion-label>
+      <ion-label>{{d.current_student.phone}}</ion-label>
+    </ion-item>
+
+    <!-- Getting Email -->
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-label>{{d.current_student.email}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <!-- Getting Membership -->
+  <ion-list>
+    <ion-item>
+      <ion-label>Membership Type </ion-label>
+      <ion-label>{{d.current_student.membership_type}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Getting Field of Interest -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Field of Interest</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of d.fields_of_interests">
+      <ion-label>{{item.val}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Getting Available Workshops -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Available Workshops</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let workshop of d.workshops">
+      <ion-label>{{workshop.title}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button (click)="addWithAlert()" expand="block" shape="round">
+    Register
+  </ion-button>
+  <ion-button [routerLink]="['/tabs/tab1']" expand="block" shape="round">
+    Back
+  </ion-button>
+
+</ion-content>
