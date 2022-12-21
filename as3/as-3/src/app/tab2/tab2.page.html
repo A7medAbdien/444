@@ -11,9 +11,9 @@
       <ion-label>Type</ion-label>
     </ion-list-header>
 
-    <ion-item-sliding *ngFor="let workshop of d.workshops">
+    <ion-item-sliding *ngFor="let workshop of d.workshops; let i=index">
       <!-- workshop data -->
-      <ion-item (click)="showAlert(workshop)">
+      <ion-item (click)="showAlert(workshop)" [routerLink]="['/show-workshop/'+i]">
         <ion-label>{{workshop.title}}</ion-label>
         <ion-label>{{workshop.type}}</ion-label>
       </ion-item>

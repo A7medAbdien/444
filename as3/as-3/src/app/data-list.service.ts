@@ -172,7 +172,7 @@ export class DataListService {
     }
   }
 
-  // ------------------------- addMemberToWorkshop() ------------------------
+  // ------------------------- show-member page ------------------------
 
   public shown_student!: Student;
 
@@ -184,5 +184,9 @@ export class DataListService {
     }
     else alert("This member is already registered");
   }
+
+  // ------------------------- show-workshop page ------------------------
+
+  public shown_workshop!: Workshop;
 
 }

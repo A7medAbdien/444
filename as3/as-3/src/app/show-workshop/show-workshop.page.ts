@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DataListService } from '../data-list.service';
 
 @Component({
@@ -8,9 +9,12 @@ import { DataListService } from '../data-list.service';
 })
 export class ShowWorkshopPage implements OnInit {
 
-  constructor(public d: DataListService) { }
+  constructor(public d: DataListService, public ActRoute: ActivatedRoute) { }
 
+  workshopIndex;
   ngOnInit() {
+    this.workshopIndex = this.ActRoute.snapshot.paramMap.get('workshopIndex');
+    this.d.shown_workshop = this.d.workshops[this.workshopIndex];
   }
 
   addWithAlert() { }

@@ -19,7 +19,7 @@ const routes: Routes = [
     loadChildren: () => import('./show-member/show-member.module').then(m => m.ShowMemberPageModule)
   },
   {
-    path: 'show-workshop',
+    path: 'show-workshop/:workshopIndex',
     loadChildren: () => import('./show-workshop/show-workshop.module').then(m => m.ShowWorkshopPageModule)
   }
 ];
