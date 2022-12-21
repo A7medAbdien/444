@@ -176,9 +176,13 @@ export class DataListService {
 
   public shown_student!: Student;
 
-  addMemberToWorkshop(member: Student) {
-
-
+  addMemberToWorkshop(workshopIndex: number, member: Student): void {
+    var i = this.workshops[workshopIndex].members.indexOf(member);
+    if (i == -1) {
+      this.workshops[workshopIndex].members.push(member);
+      alert("Registered Successfully");
+    }
+    else alert("This member is already registered");
   }
 
 }

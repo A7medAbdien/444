@@ -9,11 +9,9 @@ import { DataListService } from '../data-list.service';
 })
 export class ShowMemberPage implements OnInit {
   memberIndex;
+  workshopIndex;
   constructor(public d: DataListService, public ActRoute: ActivatedRoute) { }
 
-  addWithAlert() {
-    this.d.addWithAlert();
-  }
   ngOnInit() {
     this.memberIndex = this.ActRoute.snapshot.paramMap.get('memberIndex');
     this.d.shown_student = this.d.list[this.memberIndex];
@@ -21,5 +19,8 @@ export class ShowMemberPage implements OnInit {
     // console.log(this.d.shown_student);
   }
 
+  addMemberToWorkshop() {
+    this.d.addMemberToWorkshop(this.memberIndex, this.d.shown_student);
+  }
 
 }

@@ -67,16 +67,18 @@
 
     <ion-item>
       <ion-label>Available Workshops</ion-label>
-      <ion-select [(ngModel)]="d.shown_student.gender" placeholder="Select Workshops">
-        <ion-select-option *ngFor="let workshop of d.workshops" value=" Male">{{workshop.title}}</ion-select-option>
+      <ion-select [(ngModel)]="workshopIndex" placeholder="Select Workshops">
+        <ion-select-option *ngFor="let workshop of d.workshops; let i=index" value="{{i}}">
+          {{workshop.title}}
+        </ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
   <br>
   <br>
-  <ion-button (click)="addWithAlert()" expand="block" shape="round">
-    Register
+  <ion-button (click)="addMemberToWorkshop()" expand="block" shape="round">
+    Register in workshop
   </ion-button>
   <ion-button [routerLink]="['/tabs/tab1']" expand="block" shape="round">
     Back
