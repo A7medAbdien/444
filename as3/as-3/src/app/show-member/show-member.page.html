@@ -65,11 +65,16 @@
       <ion-label>Available Workshops</ion-label>
     </ion-list-header>
 
-    <ion-item *ngFor="let workshop of d.workshops">
-      <ion-label>{{workshop.title}}</ion-label>
+    <ion-item>
+      <ion-label>Available Workshops</ion-label>
+      <ion-select [(ngModel)]="d.current_student.gender" placeholder="Select Workshops">
+        <ion-select-option *ngFor="let workshop of d.workshops" value=" Male">{{workshop.title}}</ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>
 
+  <br>
+  <br>
   <ion-button (click)="addWithAlert()" expand="block" shape="round">
     Register
   </ion-button>
