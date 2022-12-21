@@ -94,7 +94,7 @@ export class DataListService {
 
     this.my_fields_list = '';
     this.count_fields = 0;
-    x.present();
+    //x.present();
   }
 
   async addWithAlert() {
@@ -154,7 +154,7 @@ export class DataListService {
       Start Time: ${workshop.start_time}<br>
       Duration: ${workshop.duration}<br>`
     });
-    x.present();
+    //x.present();
   }
 
   async addWorkshopWithAlert() {
