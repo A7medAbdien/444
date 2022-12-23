@@ -7,19 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input type="text" [(ngModel)]="username"></ion-input>
-  </ion-item>
 
-  <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input type="password" [(ngModel)]="password"></ion-input>
-  </ion-item>
-
-  <ion-button (click)="loginUser(username, password)">Login</ion-button>
-  <ion-button (click)="logoutUser()">Logout</ion-button>
-  <ion-button (click)="signupUser(username, password)">Signup</ion-button>
-  <ion-button (click)="resetPassword(username)">Reset</ion-button>
+  <ion-button (click)="presentToast()">Toast</ion-button>
 
 </ion-content>

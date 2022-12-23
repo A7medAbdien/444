@@ -1,4 +1,10 @@
-#
+#  outline
+
+1. Side Menu
+2. Toast
+
+
+# side menu
 
 1. app.component.ts: hv where to go
 2. app.component.html: hv design of sideMenu
@@ -15,3 +21,35 @@
       </ion-toolbar>
     </ion-header>
     ```
+
+# Toast
+
+## ts
+```typescript
+  constructor(public toastCtrl: ToastController) { }
+
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Your settings have been saved.',
+      duration: 2000,
+      color: 'primary',
+      position: 'top',
+      buttons: [{
+        text: 'wow', handler: () => {
+          toast.dismiss();
+        }
+      }]
+    });
+
+    toast.present();
+    toast.onDidDismiss().then((resp) => {
+      console.log('Dismissed toast');
+    });
+
+  }
+```
+
+## html
+```html
+  <ion-button (click)="presentToast()">Toast</ion-button>
+```

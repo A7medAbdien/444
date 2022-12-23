@@ -6,6 +6,7 @@ import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 export interface Idea {
   id?: string,
@@ -21,41 +22,26 @@ export interface Idea {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  constructor(public toastCtrl: ToastController) { }
 
-  username = '';
-  password = '';
-
-  constructor(public afAuth: AngularFireAuth, private router: Router) {
-    const authObserver = afAuth.authState.subscribe(
-      user => {
-        if (user) {
-          alert("User signed in");
-          // this.router.navigate(['/members']);
-          authObserver.unsubscribe();
-        } else {
-          alert("User signed out");
-          this.router.navigate(['/home']);
-          authObserver.unsubscribe();
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Your settings have been saved.',
+      duration: 2000,
+      color: 'primary',
+      position: 'top',
+      buttons: [{
+        text: 'wow', handler: () => {
+          toast.dismiss();
         }
-      });
-  }
+      }]
+    });
 
-  loginUser(newEmail: string, newPassword: string): Promise<any> {
-    return this.afAuth.signInWithEmailAndPassword
-      (newEmail, newPassword);
-  }
+    toast.present();
+    toast.onDidDismiss().then((resp) => {
+      console.log('Dismissed toast');
+    });
 
-  resetPassword(email: string): Promise<void> {
-    return this.afAuth.sendPasswordResetEmail(email);
-  }
-
-  logoutUser(): Promise<void> {
-    return this.afAuth.signOut();
-  }
-
-  signupUser(newEmail: string, newPassword: string): Promise<any> {
-    return this.afAuth.createUserWithEmailAndPassword
-      (newEmail, newPassword);
   }
 
 }
