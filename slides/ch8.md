@@ -119,3 +119,62 @@ export class HomePage {
   </ion-item>
 </ion-content>
 ```
+
+# Auth
+
+## login.ts
+```typescript
+  username = '';
+  password = '';
+
+  constructor(public afAuth: AngularFireAuth, private router: Router) {
+    const authObserver = afAuth.authState.subscribe(
+      user => {
+        if (user) {
+          alert("User signed in");
+          // this.router.navigate(['/members']);
+          authObserver.unsubscribe();
+        } else {
+          alert("User signed out");
+          this.router.navigate(['/home']);
+          authObserver.unsubscribe();
+        }
+      });
+  }
+
+  loginUser(newEmail: string, newPassword: string): Promise<any> {
+    return this.afAuth.signInWithEmailAndPassword
+      (newEmail, newPassword);
+  }
+
+  resetPassword(email: string): Promise<void> {
+    return this.afAuth.sendPasswordResetEmail(email);
+  }
+
+  logoutUser(): Promise<void> {
+    return this.afAuth.signOut();
+  }
+
+  signupUser(newEmail: string, newPassword: string): Promise<any> {
+    return this.afAuth.createUserWithEmailAndPassword
+      (newEmail, newPassword);
+  }
+```
+
+## login.html
+```html
+  <ion-item>
+    <ion-label floating>Username</ion-label>
+    <ion-input type="text" [(ngModel)]="username"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="loginUser(username, password)">Login</ion-button>
+  <ion-button (click)="logoutUser()">Logout</ion-button>
+  <ion-button (click)="signupUser(username, password)">Signup</ion-button>
+  <ion-button (click)="resetPassword(username)">Reset</ion-button>
+```
