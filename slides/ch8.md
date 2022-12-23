@@ -1,7 +1,37 @@
-import { DataListService } from './../data-list.service';
-import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+# Ideas
 
+1. CML
+2. app.models.ts
+
+## CML
+`npm install firebase @angular/fire –-save`
+
+## app.models.ts
+```typescript
+var firebaseConfig = {
+  apiKey: "AIzaSyDEGcc9Td9SnVPV4eA9741wYPFstMmP1Qc",
+  authDomain: "test-a4a87.firebaseapp.com",
+  projectId: "test-a4a87",
+  storageBucket: "test-a4a87.appspot.com",
+  messagingSenderId: "571282620186",
+  appId: "1:571282620186:web:0f40f3d70f36311d0836a3",
+  measurementId: "G-JHLKEG5M6S"
+};
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, IonicModule.forRoot(),
+
+    // initialize angularfire with credentials from the dashboard
+    AngularFireModule.initializeApp(firebaseConfig),
+    // Import the AngularFireDatabaseModule to use database
+    AngularFirestoreModule]
+    //...
+    })
+```
+
+## home.ts
+```typescript
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { DocumentReference } from '@angular/fire/compat/firestore';
@@ -14,8 +44,6 @@ export interface Idea {
   notes: string
 }
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -25,7 +53,6 @@ export class HomePage {
 
   public ideas: Observable<Idea[]>;
   private ideaCollection: AngularFirestoreCollection<Idea>;
-  public idea: Idea = {} as Idea;
 
   constructor(private afs: AngularFirestore) {
     this.ideaCollection = this.afs.collection<Idea>('ideas');
@@ -69,5 +96,26 @@ export class HomePage {
       alert('Inserted successfully');
     });
   }
+```
 
-}
+## home.html
+```html
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Awesome Label</ion-label>
+    <ion-input [(ngModel)]="idea.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Awesome Label</ion-label>
+    <ion-input [(ngModel)]="idea.notes"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="Insert()" expand="block" fill="clear" shape="round">
+    Click me
+  </ion-button>
+
+  <ion-item *ngFor="let i of ideas | async">
+    <ion-label>{{i.name}}</ion-label>
+  </ion-item>
+</ion-content>
+```
