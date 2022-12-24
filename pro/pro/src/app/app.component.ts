@@ -12,18 +12,18 @@ export class AppComponent {
       case "owner":
         this.appPages = [
           { title: 'Cashier', url: '/cashier-tabs', icon: 'wallet' },
-          { title: 'Manage Shifts', url: '/folder/Outbox', icon: 'calendar' },
-          { title: 'Report', url: '/folder/Favorites', icon: 'bar-chart' },
+          { title: 'Manage Shifts', url: '/trade-requests', icon: 'calendar' },
+          { title: 'Report', url: '/report', icon: 'bar-chart' },
           { title: 'Suppliers', url: '/slist', icon: 'cube' },
           { title: 'Employee', url: '/elist', icon: 'briefcase' },
-          { title: 'Orders', url: '/folder/Spam', icon: 'rocket' },
+          { title: 'Orders', url: '/orders-tabs', icon: 'rocket' },
           { title: 'Accounts', url: '/folder/Spam', icon: 'person' },
         ];
         break;
       case "emp":
         this.appPages = [
           { title: 'Cashier', url: '/folder/Inbox', icon: 'wallet' },
-          { title: 'Manage Shifts', url: '/folder/Outbox', icon: 'calendar' },
+          { title: 'Manage Shifts', url: '/trade-requests', icon: 'calendar' },
           { title: 'Orders', url: '/folder/Spam', icon: 'rocket' },
           { title: 'Accounts', url: '/folder/Spam', icon: 'person' },
         ];
