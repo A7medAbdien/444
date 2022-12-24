@@ -11,7 +11,7 @@ export class AppComponent {
     switch (this.userType) {
       case "owner":
         this.appPages = [
-          { title: 'Cashier', url: '/folder/Inbox', icon: 'wallet' },
+          { title: 'Cashier', url: '/cashier-tabs', icon: 'wallet' },
           { title: 'Manage Shifts', url: '/folder/Outbox', icon: 'calendar' },
           { title: 'Report', url: '/folder/Favorites', icon: 'bar-chart' },
           { title: 'Suppliers', url: '/folder/Archived', icon: 'cube' },
