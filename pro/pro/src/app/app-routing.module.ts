@@ -103,6 +103,7 @@ const routes: Routes = [
     path: 'add',
     loadChildren: () => import('./sup/add/add.module').then(m => m.AddPageModule)
   },
+  // -------------------------------------------------------------------------------------------------------------- the same as the one in the cashier ?? may result an error
   {
     path: 'add-product',
     loadChildren: () => import('./sup/add-product/add-product.module').then(m => m.AddProductPageModule)
