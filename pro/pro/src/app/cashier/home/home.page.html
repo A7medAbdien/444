@@ -12,6 +12,11 @@
     --border-radius: 14px;
     margin: 10px;
   }
+
+  .my {
+    --border-radius: 14px;
+    margin: 10px;
+  }
 </style>
 <ion-content>
   <ion-searchbar (input)="cashier.filterList($event)" animated="true" placeholder="Animated"></ion-searchbar>
@@ -69,7 +74,7 @@
   </ion-fab>
 </ion-content>
 <ion-footer>
-  <ion-item color="primary" *ngIf="cashier.getCartLength()>0">
+  <ion-item color="primary" class="my" *ngIf="cashier.getCartLength()>0">
     <ion-label>Total: {{cashier.calcCartTotal()}}</ion-label>
   </ion-item>
 </ion-footer>
