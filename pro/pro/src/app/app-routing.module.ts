@@ -41,6 +41,41 @@ const routes: Routes = [
     path: 'cashier-tabs',
     loadChildren: () => import('./cashier/cashier-tabs/cashier-tabs.module').then(m => m.CashierTabsPageModule)
   },
+  // ---------------------------- Tab 1
+  {
+    path: 'details',
+    loadChildren: () => import('./cashier/tab1/details/details.module').then(m => m.DetailsPageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./cashier/tab1/cart/cart.module').then(m => m.CartPageModule)
+  },
+  {
+    path: 'pay',
+    loadChildren: () => import('./cashier/tab1/pay/pay.module').then(m => m.PayPageModule)
+  },
+  {
+    path: 'success',
+    loadChildren: () => import('./cashier/tab1/success/success.module').then(m => m.SuccessPageModule)
+  },
+  // ---------------------------- Tab 2
+  {
+    path: 'trade',
+    loadChildren: () => import('./cashier/tab2/trade/trade.module').then(m => m.TradePageModule)
+  },
+  {
+    path: 'add-shift',
+    loadChildren: () => import('./cashier/tab2/add-shift/add-shift.module').then(m => m.AddShiftPageModule)
+  },
+  // ---------------------------- Tab 3
+  {
+    path: 'details',
+    loadChildren: () => import('./cashier/tab3/details/details.module').then(m => m.DetailsPageModule)
+  },
+  {
+    path: 'add-product',
+    loadChildren: () => import('./cashier/tab3/add-product/add-product.module').then(m => m.AddProductPageModule)
+  },
   // ------------------------------------------------ shifts
   {
     path: 'trade-requests',
@@ -61,7 +96,7 @@ const routes: Routes = [
     loadChildren: () => import('./sup/list/list.module').then(m => m.ListPageModule)
   },
   {
-    path: 'details',
+    path: 'sdetails',
     loadChildren: () => import('./sup/details/details.module').then(m => m.DetailsPageModule)
   },
   {
@@ -78,7 +113,7 @@ const routes: Routes = [
     loadChildren: () => import('./emp/list/list.module').then(m => m.ListPageModule)
   },
   {
-    path: 'details',
+    path: 'edetails',
     loadChildren: () => import('./emp/details/details.module').then(m => m.DetailsPageModule)
   },
   {
