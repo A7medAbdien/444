@@ -5,14 +5,36 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ];
+  userType = 'emp'; // TODO get the user type
+  public appPages;
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor() {
+    switch (this.userType) {
+      case "owner":
+        this.appPages = [
+          { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
+          { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
+          { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
+          { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
+          { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
+          { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+        ];
+        break;
+      case "emp":
+        this.appPages = [
+          { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
+          { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
+          { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
+          { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
+        ];
+        break;
+      case "emp":
+        this.appPages = [
+          { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
+        ];
+        break;
+      default:
+        break;
+    }
+  }
 }
