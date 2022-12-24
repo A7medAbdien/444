@@ -21,7 +21,7 @@
 <ion-content>
   <ion-searchbar (input)="cashier.filterList($event)" animated="true" placeholder="Animated"></ion-searchbar>
   <ion-list *ngIf="!cashier.isFiltered">
-    <ion-item *ngFor="let prod of cashier.products">
+    <ion-item *ngFor="let prod of cashier.products" [routerLink]="['/item-details',prod.id]">
       <ion-thumbnail>
         <img alt="Silhouette of mountains" src="{{prod.image}}" />
       </ion-thumbnail>
@@ -44,7 +44,7 @@
 
 
   <ion-list *ngIf="cashier.isFiltered">
-    <ion-item *ngFor="let prod of cashier.filteredList">
+    <ion-item *ngFor="let prod of cashier.filteredList" [routerLink]="['/item-details',prod.id]">
       <ion-thumbnail>
         <img alt="Silhouette of mountains" src="{{prod.image}}" />
       </ion-thumbnail>
