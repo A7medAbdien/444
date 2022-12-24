@@ -5,32 +5,34 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  userType = 'emp'; // TODO get the user type
+  userType = 'owner'; // TODO get the user type
   public appPages;
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {
     switch (this.userType) {
       case "owner":
         this.appPages = [
-          { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-          { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-          { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-          { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-          { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-          { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+          { title: 'Cashier', url: '/folder/Inbox', icon: 'wallet' },
+          { title: 'Manage Shifts', url: '/folder/Outbox', icon: 'calendar' },
+          { title: 'Report', url: '/folder/Favorites', icon: 'bar-chart' },
+          { title: 'Suppliers', url: '/folder/Archived', icon: 'cube' },
+          { title: 'Employee', url: '/folder/Trash', icon: 'briefcase' },
+          { title: 'Orders', url: '/folder/Spam', icon: 'rocket' },
+          { title: 'Accounts', url: '/folder/Spam', icon: 'person' },
         ];
         break;
       case "emp":
         this.appPages = [
-          { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-          { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-          { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-          { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
+          { title: 'Cashier', url: '/folder/Inbox', icon: 'wallet' },
+          { title: 'Manage Shifts', url: '/folder/Outbox', icon: 'calendar' },
+          { title: 'Orders', url: '/folder/Spam', icon: 'rocket' },
+          { title: 'Accounts', url: '/folder/Spam', icon: 'person' },
         ];
         break;
-      case "emp":
+      case "sup":
         this.appPages = [
-          { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
+          { title: 'Orders', url: '/folder/Spam', icon: 'rocket' },
+          { title: 'Accounts', url: '/folder/Spam', icon: 'person' },
         ];
         break;
       default:
