@@ -75,6 +75,37 @@ const routes: Routes = [
     path: 'add-shift',
     loadChildren: () => import('./emp/add-shift/add-shift.module').then(m => m.AddShiftPageModule)
   },
+  // ------------------------------------------------ shifts
+  {
+    path: 'trade-requests',
+    loadChildren: () => import('./shifts/trade-requests/trade-requests.module').then(m => m.TradeRequestsPageModule)
+  },
+  {
+    path: 'trade',
+    loadChildren: () => import('./shifts/trade/trade.module').then(m => m.TradePageModule)
+  },
+  // ------------------------------------------------ report
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then(m => m.ReportPageModule)
+  },
+  // ------------------------------------------------ orders
+  {
+    path: 'orders-tabs',
+    loadChildren: () => import('./orders/orders-tabs/orders-tabs.module').then(m => m.OrdersTabsPageModule)
+  },
+  {
+    path: 'list',
+    loadChildren: () => import('./orders/list/list.module').then(m => m.ListPageModule)
+  },
+  {
+    path: 'favorites',
+    loadChildren: () => import('./orders/favorites/favorites.module').then(m => m.FavoritesPageModule)
+  },
+  {
+    path: 'history',
+    loadChildren: () => import('./orders/history/history.module').then( m => m.HistoryPageModule)
+  },
 ];
 
 @NgModule({
