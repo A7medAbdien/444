@@ -130,6 +130,24 @@ const routes: Routes = [
     path: 'orders-tabs',
     loadChildren: () => import('./orders/orders-tabs/orders-tabs.module').then(m => m.OrdersTabsPageModule)
   },
+  // ---------------------------- Tab 1
+  {
+    path: 'add-order',
+    loadChildren: () => import('./orders/tab1/add-order/add-order.module').then(m => m.AddOrderPageModule)
+  },
+  {
+    path: 'order-details',
+    loadChildren: () => import('./orders/tab1/order-details/order-details.module').then(m => m.OrderDetailsPageModule)
+  },
+  // ---------------------------- Tab 3
+  {
+    path: 'filter-history',
+    loadChildren: () => import('./orders/tab3/filter-history/filter-history.module').then(m => m.FilterHistoryPageModule)
+  },
+  {
+    path: 'history-details',
+    loadChildren: () => import('./orders/tab3/history-details/history-details.module').then(m => m.HistoryDetailsPageModule)
+  },
   // ------------------------------------------------ account
   {
     path: 'account',
