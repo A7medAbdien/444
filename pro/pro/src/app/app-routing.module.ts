@@ -43,7 +43,7 @@ const routes: Routes = [
   },
   // ---------------------------- Tab 1
   {
-    path: 'item-details',
+    path: 'item-details/:id',
     loadChildren: () => import('./cashier/tab1/details/details.module').then(m => m.DetailsPageModule)
   },
   {
