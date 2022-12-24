@@ -94,18 +94,6 @@ const routes: Routes = [
     path: 'orders-tabs',
     loadChildren: () => import('./orders/orders-tabs/orders-tabs.module').then(m => m.OrdersTabsPageModule)
   },
-  {
-    path: 'list',
-    loadChildren: () => import('./orders/list/list.module').then(m => m.ListPageModule)
-  },
-  {
-    path: 'favorites',
-    loadChildren: () => import('./orders/favorites/favorites.module').then(m => m.FavoritesPageModule)
-  },
-  {
-    path: 'history',
-    loadChildren: () => import('./orders/history/history.module').then( m => m.HistoryPageModule)
-  },
 ];
 
 @NgModule({
