@@ -12,16 +12,18 @@ export interface Product {
   ipc: number;
   image: string;
   price: number;
+  desertion: string;
 };
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CashierService {
   public products: Product[] = [
-    { id: "123", name: "prod1", quantity: 55, skut: 5, sup: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 12 },
-    { id: "456", name: "prod2", quantity: 30, skut: 10, sup: "sup1", ipc: 10, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 11 },
-    { id: "789", name: "prod3", quantity: 45, skut: 5, sup: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15 }
+    { id: "123", name: "prod1", quantity: 55, skut: 5, sup: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 12, desertion: "hi" },
+    { id: "456", name: "prod2", quantity: 30, skut: 10, sup: "sup1", ipc: 10, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 11, desertion: "hi" },
+    { id: "789", name: "prod3", quantity: 45, skut: 5, sup: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, desertion: "hi" }
   ];
   constructor() { }
 }
