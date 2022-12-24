@@ -67,7 +67,9 @@
       <ion-icon name="cart"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-item *ngIf="cashier.getCartLength()>0">
+</ion-content>
+<ion-footer>
+  <ion-item color="primary" *ngIf="cashier.getCartLength()>0">
     <ion-label>Total: {{cashier.calcCartTotal()}}</ion-label>
   </ion-item>
-</ion-content>
+</ion-footer>
