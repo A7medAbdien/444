@@ -41,6 +41,20 @@ const routes: Routes = [
     path: 'cashier-tabs',
     loadChildren: () => import('./cashier/cashier-tabs/cashier-tabs.module').then(m => m.CashierTabsPageModule)
   },
+  // ------------------------------------------------ shifts
+  {
+    path: 'trade-requests',
+    loadChildren: () => import('./shifts/trade-requests/trade-requests.module').then(m => m.TradeRequestsPageModule)
+  },
+  {
+    path: 'trade',
+    loadChildren: () => import('./shifts/trade/trade.module').then(m => m.TradePageModule)
+  },
+  // ------------------------------------------------ report
+  {
+    path: 'report',
+    loadChildren: () => import('./report/report.module').then(m => m.ReportPageModule)
+  },
   // ------------------------------------------------ suppliers
   {
     path: 'slist',
@@ -75,24 +89,15 @@ const routes: Routes = [
     path: 'add-shift',
     loadChildren: () => import('./emp/add-shift/add-shift.module').then(m => m.AddShiftPageModule)
   },
-  // ------------------------------------------------ shifts
-  {
-    path: 'trade-requests',
-    loadChildren: () => import('./shifts/trade-requests/trade-requests.module').then(m => m.TradeRequestsPageModule)
-  },
-  {
-    path: 'trade',
-    loadChildren: () => import('./shifts/trade/trade.module').then(m => m.TradePageModule)
-  },
-  // ------------------------------------------------ report
-  {
-    path: 'report',
-    loadChildren: () => import('./report/report.module').then(m => m.ReportPageModule)
-  },
   // ------------------------------------------------ orders
   {
     path: 'orders-tabs',
     loadChildren: () => import('./orders/orders-tabs/orders-tabs.module').then(m => m.OrdersTabsPageModule)
+  },
+  // ------------------------------------------------ account
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then(m => m.AccountPageModule)
   },
 ];
 
