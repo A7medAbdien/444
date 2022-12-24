@@ -92,15 +92,15 @@ const routes: Routes = [
   },
   // ------------------------------------------------ suppliers
   {
-    path: 'slist',
+    path: 'sup-list',
     loadChildren: () => import('./sup/list/list.module').then(m => m.ListPageModule)
   },
   {
-    path: 'sdetails',
+    path: 'sup-details',
     loadChildren: () => import('./sup/details/details.module').then(m => m.DetailsPageModule)
   },
   {
-    path: 'add',
+    path: 'add-sup',
     loadChildren: () => import('./sup/add/add.module').then(m => m.AddPageModule)
   },
   // -------------------------------------------------------------------------------------------------------------- the same as the one in the cashier ?? may result an error
@@ -110,15 +110,15 @@ const routes: Routes = [
   },
   // ------------------------------------------------ employees
   {
-    path: 'elist',
+    path: 'emp-list',
     loadChildren: () => import('./emp/list/list.module').then(m => m.ListPageModule)
   },
   {
-    path: 'edetails',
+    path: 'emp-details',
     loadChildren: () => import('./emp/details/details.module').then(m => m.DetailsPageModule)
   },
   {
-    path: 'add',
+    path: 'add-emp',
     loadChildren: () => import('./emp/add/add.module').then(m => m.AddPageModule)
   },
   {
