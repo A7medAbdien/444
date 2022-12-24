@@ -39,6 +39,38 @@ const routes: Routes = [
     path: 'cashier-tabs',
     loadChildren: () => import('./cashier/cashier-tabs/cashier-tabs.module').then(m => m.CashierTabsPageModule)
   },
+  {
+    path: 'slist',
+    loadChildren: () => import('./sup/list/list.module').then(m => m.ListPageModule)
+  },
+  {
+    path: 'details',
+    loadChildren: () => import('./sup/details/details.module').then(m => m.DetailsPageModule)
+  },
+  {
+    path: 'add',
+    loadChildren: () => import('./sup/add/add.module').then(m => m.AddPageModule)
+  },
+  {
+    path: 'add',
+    loadChildren: () => import('./emp/add/add.module').then(m => m.AddPageModule)
+  },
+  {
+    path: 'add-product',
+    loadChildren: () => import('./sup/add-product/add-product.module').then(m => m.AddProductPageModule)
+  },
+  {
+    path: 'elist',
+    loadChildren: () => import('./emp/list/list.module').then(m => m.ListPageModule)
+  },
+  {
+    path: 'details',
+    loadChildren: () => import('./emp/details/details.module').then(m => m.DetailsPageModule)
+  },
+  {
+    path: 'add-shift',
+    loadChildren: () => import('./emp/add-shift/add-shift.module').then(m => m.AddShiftPageModule)
+  },
 ];
 
 @NgModule({

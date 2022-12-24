@@ -14,8 +14,8 @@ export class AppComponent {
           { title: 'Cashier', url: '/cashier-tabs', icon: 'wallet' },
           { title: 'Manage Shifts', url: '/folder/Outbox', icon: 'calendar' },
           { title: 'Report', url: '/folder/Favorites', icon: 'bar-chart' },
-          { title: 'Suppliers', url: '/folder/Archived', icon: 'cube' },
-          { title: 'Employee', url: '/folder/Trash', icon: 'briefcase' },
+          { title: 'Suppliers', url: '/slist', icon: 'cube' },
+          { title: 'Employee', url: '/elist', icon: 'briefcase' },
           { title: 'Orders', url: '/folder/Spam', icon: 'rocket' },
           { title: 'Accounts', url: '/folder/Spam', icon: 'person' },
         ];
