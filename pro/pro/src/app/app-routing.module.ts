@@ -43,7 +43,7 @@ const routes: Routes = [
   },
   // ---------------------------- Tab 1
   {
-    path: 'details',
+    path: 'item-details',
     loadChildren: () => import('./cashier/tab1/details/details.module').then(m => m.DetailsPageModule)
   },
   {
@@ -69,7 +69,7 @@ const routes: Routes = [
   },
   // ---------------------------- Tab 3
   {
-    path: 'details',
+    path: 'product-details',
     loadChildren: () => import('./cashier/tab3/details/details.module').then(m => m.DetailsPageModule)
   },
   {
