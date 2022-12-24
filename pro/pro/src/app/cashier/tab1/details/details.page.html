@@ -1,9 +1,24 @@
 <ion-header>
+
   <ion-toolbar>
-    <ion-title>details</ion-title>
+    <ion-buttons slot="start" [routerLink]="['/cashier-tabs', 'home']">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>detailsooo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-fab *ngIf="cashier.getCartLength()>0" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      {{cashier.getCartLength()}}
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
+<ion-footer>
+  <ion-item color="primary" class="my" *ngIf="cashier.getCartLength()>0">
+    <ion-label>Total: {{cashier.calcCartTotal()}}</ion-label>
+  </ion-item>
+</ion-footer>

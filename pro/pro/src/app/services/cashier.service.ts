@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Product {
   id?: string;
@@ -38,7 +39,7 @@ export class CashierService {
   public cartItem: CartItems = {}
   public cart: Cart = { id: "My-cart", total: 0 } as Cart;
 
-  constructor() { }
+  constructor(public ActRoute: ActivatedRoute) { }
 
   addToCart(id: any) {
     if (this.cartItem[id] > 0) {
