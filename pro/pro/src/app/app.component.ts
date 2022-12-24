@@ -17,7 +17,7 @@ export class AppComponent {
           { title: 'Suppliers', url: '/slist', icon: 'cube' },
           { title: 'Employee', url: '/elist', icon: 'briefcase' },
           { title: 'Orders', url: '/orders-tabs', icon: 'rocket' },
-          { title: 'Accounts', url: '/folder/Spam', icon: 'person' },
+          { title: 'Accounts', url: '/account', icon: 'person' },
         ];
         break;
       case "emp":
