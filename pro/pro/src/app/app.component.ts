@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   userType = 'owner'; // TODO get the user type
   public appPages;
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {
     switch (this.userType) {
       case "owner":
