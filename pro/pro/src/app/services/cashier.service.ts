@@ -1,4 +1,3 @@
-import { Product } from './cashier.service';
 import { Injectable } from '@angular/core';
 
 export interface Product {
@@ -27,6 +26,8 @@ export interface Cart {
   total: number;
 }
 
+export interface cartItems { [key: string]: number };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,10 +44,22 @@ export class CashierService {
     total: 5 * 12
   }
 
-  public cartItems = { test: 1 };
+  public cartItem: cartItems = {}
 
-  addToCart(id) {
-    this.cartItems[id] = 1;
+  addToCart(id: any) {
+    if (this.cartItem[id] >= 1) {
+      this.cartItem[id]++;
+    } else
+      this.cartItem[id] = 1;
+    console.log(this.cartItem)
+  }
+
+  removeToCart(id: any) {
+    if (this.cartItem[id] >= 1) {
+      this.cartItem[id]--;
+    } else
+      delete this.cartItem[id]
+    console.log(this.cartItem)
   }
 
   calcCartTotal(cart: Cart) {
