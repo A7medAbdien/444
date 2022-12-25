@@ -9,9 +9,9 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="PayForm">
+  <form [formGroup]="PayForm" (ngSubmit)="pay()">
     <ion-item>
-      <ion-label position="stacked">
+      <ion-label position=" stacked">
         <h2>Input price</h2>
       </ion-label>
       <style>
@@ -35,9 +35,15 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button expand="block" color="primary" type="submit" [disabled]="PayForm.invalid">
+    <ion-button routerLink="/success" expand="block" color="primary" type="submit"
+      [disabled]="PayForm.invalid&&i>=c.total">
       <ion-label style="margin-right: 20px;">Enter</ion-label>
       <ion-icon name="cash"></ion-icon>
+    </ion-button>
+    <ion-button routerLink="/cashier-tabs/home" routerDirection="back" (click)="cancelPay()" expand="block" fill="clear"
+      color="danger" shape="round">
+      <ion-icon name="trash"></ion-icon>
+      <ion-label>Cancel</ion-label>
     </ion-button>
   </ion-toolbar>
 </ion-footer>

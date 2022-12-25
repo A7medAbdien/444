@@ -33,4 +33,13 @@ export class PayPage implements OnInit {
       if (this.remaining < 0) this.remaining *= -1
     }
   }
+  pay() {
+    this.c.paymentDate = new Date();
+    this.c.remaining = this.remaining;
+    this.cashier.cart = this.c
+  }
+  cancelPay() {
+    this.c = {}
+    this.remaining = 0
+  }
 }
