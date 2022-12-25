@@ -120,6 +120,7 @@ export class DataService {
   ]
 
   me
+  today: Date = new Date();
   constructor(public toastCtrl: ToastController, public navCtrl: NavController) {
     // this.me = this.emp[1]
     this.me = this.users[0];
@@ -213,9 +214,14 @@ export class DataService {
     this.shifts.push(i);
     this.presentToastS("Shift Added Successfully");
   }
-  addShift(i: Shift) {
-    i.who = this.me.id;
-    this.shifts.push(i);
+  addShift(startTime, endTime, empId) {
+    var s: Shift = {} as Shift;
+    s.who = this.me.id;
+    s.day = new Date(startTime);
+    s.startTime = new Date(startTime);
+    s.endTime = new Date(endTime);
+    s.empId = empId;
+    this.shifts.push(s);
     this.presentToastS("Shift Added Successfully");
   }
   addShiftReqFull(i: ShiftRequest) {

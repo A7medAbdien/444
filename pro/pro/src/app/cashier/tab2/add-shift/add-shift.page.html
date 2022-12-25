@@ -1,9 +1,49 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" routerLink="/cashier-tabs/schedule" routerDirection="back"></ion-icon>
+    </ion-buttons>
     <ion-title>Add Shift</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>Shift Employee</ion-label>
+    <ion-select [(ngModel)]="empId" placeholder="Select Employee">
+      <ion-select-option *ngFor="let e of this.d.emp" value="{{e.id}}">{{e.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Start Time</ion-label>
+    <ion-datetime-button datetime="datetime1"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime [(ngModel)]="startTime" min="{{this.d.today.toISOString()}}" id="datetime1"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
 
+  <ion-item>
+    <ion-label>End Time</ion-label>
+    <ion-datetime-button [disabled]="startTime==null" datetime="datetime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]=" true">
+      <ng-template>
+        <ion-datetime [(ngModel)]="endTime" min="{{this.startTime||this.d.today.toISOString()}}"
+          id="datetime"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+  <ion-label color="danger" *ngIf="startTime == endTime && endTime!=null">
+    Start Tate is the same as The End Time
+  </ion-label>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [disabled]="(startTime==null)||( empId==null)|| (endTime == null)||(endTime<=startTime)"
+      (click)="addShift()" routerLink="/cashier-tabs/schedule" expand="block" shape="round">
+      Confirm
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
