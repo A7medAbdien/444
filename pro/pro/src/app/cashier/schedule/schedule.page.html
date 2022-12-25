@@ -27,7 +27,7 @@
   <ion-list *ngIf="!this.isFiltered">
     <ion-card *ngFor="let s of shifts">
       <ion-card-header>
-        <ion-card-subtitle>{{d.getEmp(s.empId)!.name}}</ion-card-subtitle>
+        <ion-card-subtitle>{{d.getEmp(s.empId)?.name}}</ion-card-subtitle>
         <ion-card-title>
           <h1>{{s.day | date: 'fullDate'}}</h1>
         </ion-card-title>
@@ -49,7 +49,7 @@
   <ion-list *ngIf="this.isFiltered">
     <ion-card *ngFor="let s of filteredList">
       <ion-card-header>
-        <ion-card-subtitle>{{d.getEmp(s.empId)!.name}}</ion-card-subtitle>
+        <ion-card-subtitle>{{d.getEmp(s.empId)?.name}}</ion-card-subtitle>
         <h1>{{s.day | date: 'fullDate'}}</h1>
       </ion-card-header>
 

@@ -27,7 +27,7 @@ export class SchedulePage implements OnInit {
 
   filterDate(date) {
     this.isFiltered = true
-    console.log(date);
+    // console.log(date);
     let day = new Date(date);
     var filteredlist = this.shifts.filter((row) => {
       if (row.day.getDate() == day.getDate() && row.day.getMonth() == day.getMonth() && row.day.getFullYear() == day.getFullYear()) {
