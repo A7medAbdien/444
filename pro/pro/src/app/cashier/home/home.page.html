@@ -14,7 +14,7 @@
   }
 </style>
 <ion-content>
-  <ion-searchbar (input)="cashier.filterList($event)" animated="true" placeholder="Animated"></ion-searchbar>
+  <ion-searchbar (input)="cashier.filterList($event)" animated="true" placeholder="Search"></ion-searchbar>
   <ion-list *ngIf="!cashier.isFiltered">
     <ion-item *ngFor="let prod of cashier.products">
       <ion-thumbnail [routerLink]="['/item-details',prod.id]">
