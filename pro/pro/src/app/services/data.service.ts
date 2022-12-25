@@ -1,7 +1,7 @@
 import { Emp, Order, Product, Shift, ShiftRequest, User, } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
-import { ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -120,11 +120,20 @@ export class DataService {
   ]
 
   me
-  constructor(public toastCtrl: ToastController) {
-    this.me = this.emp[1]
+  constructor(public toastCtrl: ToastController, public navCtrl: NavController) {
+    // this.me = this.emp[1]
+    this.me = this.users[0];
   }
 
 
+  onlyOwner(): void {
+    if (this.me.type != "owner") {
+      this.navCtrl.navigateRoot('/');
+    }
+  }
+  isOwner(): boolean {
+    return this.me.type == "owner";
+  }
   // get by Id
   getProduct(id: string) {
     for (const i of this.products) {
@@ -198,6 +207,11 @@ export class DataService {
     i.who = this.me.id;
     this.emp.push(i);
     this.presentToastS("Emp Added Successfully");
+  }
+  addShiftFull(i: Shift) {
+    i.who = this.me.id;
+    this.shifts.push(i);
+    this.presentToastS("Shift Added Successfully");
   }
   addShift(i: Shift) {
     i.who = this.me.id;

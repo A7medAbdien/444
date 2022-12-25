@@ -64,3 +64,11 @@
     </ion-card>
   </ion-list>
 </ion-content>
+
+<ion-footer *ngIf="this.d.isOwner()">
+  <ion-toolbar>
+    <ion-button routerLink="/add-shift" expand="block" shape="round">
+      Add Shift
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

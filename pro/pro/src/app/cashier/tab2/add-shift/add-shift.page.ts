@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/services/data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddShiftPage implements OnInit {
 
-  constructor() { }
+  constructor(public d: DataService) { }
 
   ngOnInit() {
+    this.d.onlyOwner();
   }
 
 }
