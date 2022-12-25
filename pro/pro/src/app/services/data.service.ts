@@ -19,7 +19,7 @@ export class DataService {
     },
     {
       who: "000",
-      id: "789", name: "prod3", quantity: 45, skut: 5, supId: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi"
+      id: "789", name: "prod3", quantity: 45, skut: 5, supId: "sup2", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi"
     }
   ];
   public orders: Order[] = [
@@ -59,6 +59,14 @@ export class DataService {
     {
       who: "000",
       id: "000", type: "owner", name: "owner", email: "owner@gmail.com", phone: 120, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    {
+      who: "000",
+      id: "sup1", type: "sup", name: "supp", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    {
+      who: "000",
+      id: "sup2", type: "sup", name: "supo", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       who: "000",
@@ -280,6 +288,7 @@ export class DataService {
     }
   }
 
+  // present toast
   async presentToastS(massage: string) {
     const toast = await this.toastCtrl.create({
       message: massage,
@@ -306,5 +315,25 @@ export class DataService {
     toast.onDidDismiss().then((resp) => {
       console.log('Dismissed toast');
     });
+  }
+
+  // Search
+  isSearchedProducts: boolean = false;
+  searchedProducts: Product[] = [] as Product[];
+  searchProducts(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.products.filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.searchedProducts = filteredList;
+      // console.log(filteredList)
+      this.isSearchedProducts = true;
+    } else {
+      this.isSearchedProducts = false;
+    }
   }
 }
