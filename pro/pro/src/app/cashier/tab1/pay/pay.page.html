@@ -7,36 +7,38 @@
     <ion-label color="primary" slot="end">${{c.total}}</ion-label>
   </ion-item>
 </ion-header>
-
+<style>
+  ion-input {
+    font-size: 40px;
+  }
+</style>
 <ion-content>
-  <form [formGroup]="PayForm" (ngSubmit)="pay()">
+  <form [formGroup]="PayForm">
     <ion-item>
       <ion-label position=" stacked">
         <h2>Input price</h2>
       </ion-label>
-      <style>
-        ion-input {
-          font-size: 40px;
-        }
-      </style>
+
+
       <ion-input (input)="getRemaining($event)" formControlName="inputPrice" type="number" color="primary"
-        placeholder="$0"></ion-input>
-      <ion-note color="success" *ngIf="i>c.total">Return {{ remaining | currency }}</ion-note>
-      <ion-note color="success" *ngIf="i==c.total">All Done</ion-note>
-      <ion-note color="danger" *ngIf="i<c.total">Still {{ remaining | currency }}</ion-note>
-      <ion-note slot="end" color="danger"
+        placeholder="$0">
+      </ion-input>
+      <ion-note slot="helper" color="warning" *ngIf="i>c.total">Return {{ remaining | currency }}</ion-note>
+      <ion-note slot="helper" color="success" *ngIf="i==c.total">All Done</ion-note>
+      <ion-note slot="error" *ngIf="i<c.total">Still {{ remaining | currency }}</ion-note>
+      <ion-note slot="error"
         *ngIf="PayForm.controls['inputPrice'].hasError('required') && PayForm.controls['inputPrice'].touched">
         RequiredField
       </ion-note>
     </ion-item>
+
   </form>
 
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button routerLink="/success" expand="block" color="primary" type="submit"
-      [disabled]="PayForm.invalid&&i>=c.total">
+    <ion-button (click)="pay()" expand="block" color="primary" type="submit" [disabled]="PayForm.invalid&&i>=c.total">
       <ion-label style="margin-right: 20px;">Enter</ion-label>
       <ion-icon name="cash"></ion-icon>
     </ion-button>

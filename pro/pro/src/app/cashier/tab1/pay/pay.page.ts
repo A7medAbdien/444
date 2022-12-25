@@ -37,6 +37,8 @@ export class PayPage implements OnInit {
     this.c.paymentDate = new Date();
     this.c.remaining = this.remaining;
     this.cashier.cart = this.c
+    console.log(this.c)
+    this.cashier.presentToast("Payed Successfully");
   }
   cancelPay() {
     this.c = {}

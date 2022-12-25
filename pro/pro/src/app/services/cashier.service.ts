@@ -1,6 +1,7 @@
 import { Order } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { Cart, CartItems, Product } from 'src/interfaces';
+import { ToastController } from '@ionic/angular';
 
 
 @Injectable({
@@ -50,7 +51,7 @@ export class CashierService {
   public cartItems: CartItems = {}
   public cart: Cart = { id: "My-cart" } as Cart;
 
-  constructor() { }
+  constructor(public toastCtrl: ToastController) { }
 
   addToCart(id: any) {
     if (this.cartItems[id] > 0) {
@@ -138,5 +139,20 @@ export class CashierService {
     this.cart.cartItems = this.cartItems;
     this.cart.total = this.calcCartTotal();
     this.cartItems = {} as CartItems;
+  }
+
+  async presentToast(massage: string) {
+    const toast = await this.toastCtrl.create({
+      message: massage,
+      duration: 2000,
+      color: 'primary',
+      position: 'top',
+    });
+
+    toast.present();
+    toast.onDidDismiss().then((resp) => {
+      console.log('Dismissed toast');
+    });
+
   }
 }
