@@ -1,4 +1,4 @@
-import { Emp, Order, Shift, ShiftRequest } from './../../interfaces';
+import { Emp, Order, Shift, ShiftRequest, User } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { Cart, CartItems, Product } from 'src/interfaces';
 import { ToastController } from '@ionic/angular';
@@ -44,6 +44,11 @@ export class CashierService {
       cartoons: 5,
       orderedBy: "emp1",
     }
+  ];
+  public users: User[] = [
+    { id: "000", type: "owner", name: "owner", email: "owner@gmail.com", phone: 120, image: "https://ionicframework.com/docs/img/demos/avatar.svg" },
+    { id: "123", type: "emp", name: "emp1", email: "emp1@gmail.com", phone: 123, image: "https://ionicframework.com/docs/img/demos/avatar.svg" },
+    { id: "456", type: "emp", name: "emp2", email: "emp2@gmail.com", phone: 1253, image: "https://ionicframework.com/docs/img/demos/avatar.svg" },
   ];
   public emp: Emp[] = [
     {
