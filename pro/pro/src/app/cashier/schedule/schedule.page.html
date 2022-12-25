@@ -8,5 +8,42 @@
 </ion-header>
 
 <ion-content>
+  <ion-item lines="none">
+    <ion-label>
+      <h3>Today</h3>
+      <ion-label color="primary">
+        <h1>{{today| date:"fullDate"}}</h1>
+      </ion-label>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-datetime display-format="DD/MM/YYYY" minuteValues="0,15,30,45" [(ngModel)]="this.checkedDate"
+      (ionChange)="filterDate(this.checkedDate)"></ion-datetime>
+  </ion-item>
+  <ion-button (click)="stopFilter()" expand="block" fill="clear" shape="round">
+    All Shifts
+  </ion-button>
 
+  <ion-list *ngIf="!this.isFiltered">
+    <ion-item *ngFor="let s of shifts">
+      <ion-label>
+        <h1>{{getEmp(s.empId)!.name}}</h1>
+        <h2>{{s.day | date: 'fullDate'}}</h2>
+        <ion-icon name="time"></ion-icon>
+        {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
+      </ion-label>
+      <ion-icon slot="end" name="add-circle"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="this.isFiltered">
+    <ion-item *ngFor="let s of filteredList">
+      <ion-label>
+        <h1>{{getEmp(s.empId)!.name}}</h1>
+        <h2>{{s.day | date: 'fullDate'}}</h2>
+        <ion-icon name="time"></ion-icon>
+        {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

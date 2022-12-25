@@ -77,8 +77,10 @@ export class CashierService {
 
   public cartItems: CartItems = {}
   public cart: Cart = { id: "My-cart" } as Cart;
-
-  constructor(public toastCtrl: ToastController) { }
+  public currUser: User;
+  constructor(public toastCtrl: ToastController) {
+    this.currUser = this.users[0];
+  }
 
   addToCart(id: any) {
     if (this.cartItems[id] > 0) {
@@ -180,6 +182,13 @@ export class CashierService {
     toast.onDidDismiss().then((resp) => {
       console.log('Dismissed toast');
     });
-
+    // ------------------------------------------------------------ Schedule
+  }
+  getEmp(id) {
+    for (const e of this.emp) {
+      if (e.id == id)
+        return e;
+    }
+    return null;
   }
 }
