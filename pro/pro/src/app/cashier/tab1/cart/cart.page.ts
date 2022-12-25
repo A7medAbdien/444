@@ -17,12 +17,11 @@ export class CartPage implements OnInit {
   deleteCart() {
     // console.log(this.cartIds)
     // console.log(this.cashier.cartItems)
-    this.cashier.cartItems = {} as CartItems;
+    this.cashier.deleteCart();
     this.cartIds = [];
     // console.log(this.cartIds)
   }
-  addCart() {
-    this.cashier.cart.cartItems = this.cashier.cartItems
-    this.cashier.cartItems = {} as CartItems;
+  pay() {
+    this.cartIds = [];
   }
 }

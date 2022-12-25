@@ -48,7 +48,7 @@ export class CashierService {
 
 
   public cartItems: CartItems = {}
-  public cart: Cart = { id: "My-cart", total: 0 } as Cart;
+  public cart: Cart = { id: "My-cart" } as Cart;
 
   constructor() { }
 
@@ -128,5 +128,15 @@ export class CashierService {
     // console.log(filteredlist)
     (filteredlist.length > 0) ? this.hvOrders = true : this.hvOrders = false;
   }
+  // ------------------------------------------------------------
+  deleteCart() {
+    // console.log(this.cartItems)
+    this.cartItems = {} as CartItems;
+  }
 
+  moveToPay() {
+    this.cart.cartItems = this.cartItems;
+    this.cart.total = this.calcCartTotal();
+    this.cartItems = {} as CartItems;
+  }
 }

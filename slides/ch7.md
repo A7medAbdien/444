@@ -2,11 +2,20 @@
 
 
 ```typescript
-this.myForm = formBuilder.group({
-    firstName: ['value'],
-    lastName: ['value', *validation function goes here*],
-    age: ['value', *validation function goes here*, *asynchronous validation function goes here*]
+LoginForm: FormGroup;
+constructor(public formbuilder: FormBuilder) {
+
+this.LoginForm = formbuilder.group({
+username: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(8), Validators.maxLength(30)])],
+
+password: ['', Validators.compose([Validators.required, Validators.minLength(8)])]
 });
+}
+Login(val){
+   if ( this.LoginForm.valid )
+	alert('Login Successful ' + val.username);
+ }
+
 ```
 
 ```html
@@ -24,6 +33,14 @@ this.myForm = formBuilder.group({
 
 <ion-item *ngIf="LoginForm.controls['username'].hasError('maxlength') && LoginForm.controls['username'].touched">
 <p>Sorry, maximum username length is 30!</p></ion-item>
+<ion-item>
+<ion-label floating>Password</ion-label>
+<ion-input type="password" formControlName="password"></ion-input>
+</ion-item>
+<ion-button [disabled]="!LoginForm.valid"
+ full color="primary" style="margin-top: 20px;" type="submit"> Login </ion-button> 
+
+</form>
 
 ```
 

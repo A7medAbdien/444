@@ -14,6 +14,7 @@ export interface Cart {
   id?: string;
   cartItems: CartItems,
   total: number;
+  paymentDate: Date;
 }
 
 export interface CartItems { [key: string]: number };

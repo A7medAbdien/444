@@ -2,8 +2,42 @@
   <ion-toolbar>
     <ion-title>pay</ion-title>
   </ion-toolbar>
+  <ion-item lines="full">
+    <ion-label slot="start">Total bill:</ion-label>
+    <ion-label color="primary" slot="end">${{c.total}}</ion-label>
+  </ion-item>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="PayForm">
+    <ion-item>
+      <ion-label position="stacked">
+        <h2>Input price</h2>
+      </ion-label>
+      <style>
+        ion-input {
+          font-size: 40px;
+        }
+      </style>
+      <ion-input (input)="getRemaining($event)" formControlName="inputPrice" type="number" color="primary"
+        placeholder="$0"></ion-input>
+      <ion-note color="success" *ngIf="i>c.total">Return {{ remaining | currency }}</ion-note>
+      <ion-note color="success" *ngIf="i==c.total">All Done</ion-note>
+      <ion-note color="danger" *ngIf="i<c.total">Still {{ remaining | currency }}</ion-note>
+      <ion-note slot="end" color="danger"
+        *ngIf="PayForm.controls['inputPrice'].hasError('required') && PayForm.controls['inputPrice'].touched">
+        RequiredField
+      </ion-note>
+    </ion-item>
+  </form>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" color="primary" type="submit" [disabled]="PayForm.invalid">
+      <ion-label style="margin-right: 20px;">Enter</ion-label>
+      <ion-icon name="cash"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
