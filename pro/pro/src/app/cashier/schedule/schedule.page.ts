@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/services/data.service';
 import { Shift } from './../../../interfaces';
 import { Component, OnInit } from '@angular/core';
 import { CashierService } from 'src/app/services/cashier.service';
@@ -14,8 +15,8 @@ export class SchedulePage implements OnInit {
   isFiltered: Boolean
   filteredList: Shift[] = [] as Shift[]
 
-  constructor(public cashier: CashierService) {
-    this.shifts = this.cashier.shifts;
+  constructor(public d: DataService) {
+    this.shifts = this.d.shifts;
     this.today = new Date();
     this.isFiltered = true;
     this.filterDate(this.today)
@@ -40,7 +41,7 @@ export class SchedulePage implements OnInit {
 
 
   getEmp(id) {
-    return this.cashier.getEmp(id)
+    return this.d.getEmp(id)
   }
 
   stopFilter() {

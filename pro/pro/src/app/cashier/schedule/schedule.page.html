@@ -27,7 +27,7 @@
   <ion-list *ngIf="!this.isFiltered">
     <ion-card *ngFor="let s of shifts">
       <ion-card-header>
-        <ion-card-subtitle>{{getEmp(s.empId)!.name}}</ion-card-subtitle>
+        <ion-card-subtitle>{{d.getEmp(s.empId)!.name}}</ion-card-subtitle>
         <ion-card-title>
           <h1>{{s.day | date: 'fullDate'}}</h1>
         </ion-card-title>
@@ -37,7 +37,7 @@
         <ion-item lines="none">
           <ion-icon slot="start" name="time"></ion-icon>
           {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
-          <ion-button slot="end" routerLink="/trade/{{s.id}}" fill="clear" *ngIf="cashier.currUser.id != s.empId">
+          <ion-button slot="end" routerLink="/trade/{{s.id}}" fill="clear" *ngIf="d.me.id != s.empId">
             <ion-icon size="large" name="shuffle"></ion-icon>
           </ion-button>
         </ion-item>
@@ -48,7 +48,7 @@
   <ion-list *ngIf="this.isFiltered">
     <ion-card *ngFor="let s of filteredList">
       <ion-card-header>
-        <ion-card-subtitle>{{getEmp(s.empId)!.name}}</ion-card-subtitle>
+        <ion-card-subtitle>{{d.getEmp(s.empId)!.name}}</ion-card-subtitle>
         <h1>{{s.day | date: 'fullDate'}}</h1>
       </ion-card-header>
 
@@ -56,7 +56,7 @@
         <ion-item lines="none">
           <ion-icon slot="start" name="time"></ion-icon>
           {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
-          <ion-button slot="end" routerLink="/trade/{{s.id}}" fill="clear" *ngIf="cashier.currUser.id != s.empId">
+          <ion-button slot="end" routerLink="/trade/{{s.id}}" fill="clear" *ngIf="d.me.id != s.empId">
             <ion-icon size="large" name="shuffle"></ion-icon>
           </ion-button>
         </ion-item>
