@@ -1,5 +1,6 @@
 export interface Product {
   id?: string;
+  who: string;
   name: string;
   quantity: number;
   skut: number; // Stock Keeping Unit Threshold
@@ -12,6 +13,7 @@ export interface Product {
 
 export interface Cart {
   id?: string;
+  who: string;
   cartItems: CartItems,
   total: number;
   paymentDate: Date;
@@ -21,7 +23,8 @@ export interface Cart {
 export interface CartItems { [key: string]: number };
 
 export interface Order extends Product {
-  oId?: string;
+  id?: string;
+  who: string;
   orderedDate: Date;
   expectedDate: Date;
   receivedDate: Date;
@@ -31,6 +34,7 @@ export interface Order extends Product {
 
 export interface User {
   id?: string;
+  who: string;
   type: string;
   name: string;
   email: string;
@@ -45,6 +49,7 @@ export interface Emp extends User {
 
 export interface Shift {
   id?: string;
+  who: string;
   empId: string;
   day: Date;
   startTime: Date;
@@ -53,8 +58,8 @@ export interface Shift {
 
 export interface ShiftRequest {
   id?: string;
-  senderEmail: string;
-  receiverEmail: string;
-  shiftId: string;
+  who: string;
+  myShiftId: string;
+  otherShiftId: string;
   isApproved: boolean;
 }
