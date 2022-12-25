@@ -60,7 +60,7 @@ const routes: Routes = [
   },
   // ---------------------------- Tab 2
   {
-    path: 'trade',
+    path: 'trade/:id',
     loadChildren: () => import('./cashier/tab2/trade/trade.module').then(m => m.TradePageModule)
   },
   {

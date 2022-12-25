@@ -1,4 +1,7 @@
+import { Shift, ShiftRequest } from './../../../../interfaces';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-trade',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TradePage implements OnInit {
 
-  constructor() { }
+  id
+  myShift
+  myShifts
+  otherShift
+  shiftReq
 
+  constructor(public ActRoute: ActivatedRoute, public d: DataService) { }
   ngOnInit() {
+    this.id = this.ActRoute.snapshot.paramMap.get('id');
+    this.otherShift = this.d.getShift(this.id);
   }
 
 }

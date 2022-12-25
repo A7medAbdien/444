@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>trade</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" routerLink="/cashier-tabs/schedule" routerDirection="back"></ion-icon>
+    </ion-buttons>
+    <ion-title>Trade Request</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card color="primary">
+    <ion-card-header>
+      <ion-card-subtitle>{{d.getEmp(otherShift.empId)!.name}}</ion-card-subtitle>
+      <ion-card-title>
+        <h1>{{otherShift.day | date: 'fullDate'}}</h1>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item style="--border-radius: 10px;" lines="none">
+        <ion-icon slot="start" name="time"></ion-icon>
+        {{otherShift.startTime| date: 'hh:mm a'}} - {{otherShift.endTime| date: 'hh:mm a'}}
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
