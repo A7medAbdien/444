@@ -1,4 +1,6 @@
+import { CashierService } from 'src/app/services/cashier.service';
 import { Component, OnInit } from '@angular/core';
+import { CartItems } from 'src/interfaces';
 
 @Component({
   selector: 'app-cart',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-
-  constructor() { }
+  cartIds
+  constructor(public cashier: CashierService) { }
 
   ngOnInit() {
+    this.cartIds = Object.keys(this.cashier.cartItems)
   }
-
+  deleteCart() {
+    // console.log(this.cartIds)
+    // console.log(this.cashier.cartItems)
+    this.cashier.cartItems = {} as CartItems;
+    this.cartIds = [];
+    // console.log(this.cartIds)
+  }
+  addCart() {
+    this.cashier.cart.cartItems = this.cashier.cartItems
+    this.cashier.cartItems = {} as CartItems;
+  }
 }

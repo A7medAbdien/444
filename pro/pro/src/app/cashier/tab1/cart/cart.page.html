@@ -1,9 +1,54 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" routerLink="/cashier-tabs/home" routerDirection="back"></ion-icon>
+    </ion-buttons>
     <ion-title>cart</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <br>
+  <br>
+  <br>
 
+  <ion-item lines="full" *ngFor="let id of cartIds">
+    <ion-item lines="full" lines="none">
+      <ion-button (click)="cashier.addToCart(id)" fill="clear" shape="round">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-label>{{cashier.cartItems[id!]||0}}</ion-label>
+      <ion-button (click)="cashier.removeToCart(id)" fill="clear" shape="round">
+        <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>{{cashier.getProduct(id)!.name}}</h2>
+    </ion-label>
+    <ion-label color="primary">
+      <h1>${{cashier.getProduct(id)!.price}}</h1>
+    </ion-label>
+  </ion-item>
+
+
+  <ion-item lines="full">
+    <ion-icon name="cart" slot="start"></ion-icon> {{cashier.getCartLength()}} Items
+    <ion-label slot="end">Total: {{cashier.calcCartTotal()}}</ion-label>
+  </ion-item>
+
+  <ion-button routerLink="/cashier-tabs/home" routerDirection="back" (click)="deleteCart()" expand="block" fill="clear"
+    color="danger" shape="round">
+    <ion-icon name="trash"></ion-icon>
+    <ion-label>Delete</ion-label>
+  </ion-button>
 </ion-content>
+
+
+<ion-footer *ngIf="cashier.getCartLength()>0">
+  <ion-toolbar>
+    <div style="text-align: center;"> Total: {{cashier.calcCartTotal()}} </div>
+    <ion-button routerLink="/cart" routerDirection="forward" color="primary" expand="block">
+      <ion-label>Pay</ion-label>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

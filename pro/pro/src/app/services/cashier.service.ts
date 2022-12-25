@@ -47,36 +47,36 @@ export class CashierService {
 
 
 
-  public cartItem: CartItems = {}
+  public cartItems: CartItems = {}
   public cart: Cart = { id: "My-cart", total: 0 } as Cart;
 
   constructor() { }
 
   addToCart(id: any) {
-    if (this.cartItem[id] > 0) {
-      this.cartItem[id]++;
+    if (this.cartItems[id] > 0) {
+      this.cartItems[id]++;
     } else
-      this.cartItem[id] = 1;
-    console.log(this.cartItem)
+      this.cartItems[id] = 1;
+    console.log(this.cartItems)
   }
 
   removeToCart(id: any) {
-    if (this.cartItem[id] > 1) {
-      this.cartItem[id]--;
+    if (this.cartItems[id] > 1) {
+      this.cartItems[id]--;
     } else
-      delete this.cartItem[id]
-    console.log(this.cartItem)
+      delete this.cartItems[id]
+    console.log(this.cartItems)
   }
 
   getCartLength() {
-    return Object.keys(this.cartItem).length
+    return Object.keys(this.cartItems).length
   }
 
   calcCartTotal() {
     this.cart.total = 0
-    for (const prod in this.cartItem) {
-      if (Object.prototype.hasOwnProperty.call(this.cartItem, prod)) {
-        const quantity = this.cartItem[prod];
+    for (const prod in this.cartItems) {
+      if (Object.prototype.hasOwnProperty.call(this.cartItems, prod)) {
+        const quantity = this.cartItems[prod];
         const price = this.getProduct(prod)?.price
         this.cart.total += quantity * price!
       }
@@ -91,6 +91,7 @@ export class CashierService {
     }
     return null;
   }
+
 
   isFiltered: boolean = false;
   filteredList: Product[] = [] as Product[];
@@ -111,6 +112,8 @@ export class CashierService {
     }
   }
 
+  // ------------------------------------------------------------
+
   hvOrders: boolean = false;
   orderList: Order[] = [] as Order[];
   getOrders(id) {
@@ -125,4 +128,5 @@ export class CashierService {
     // console.log(filteredlist)
     (filteredlist.length > 0) ? this.hvOrders = true : this.hvOrders = false;
   }
+
 }

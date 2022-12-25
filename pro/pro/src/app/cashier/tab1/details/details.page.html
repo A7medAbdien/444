@@ -80,7 +80,8 @@
   <br>
 </ion-content>
 <ion-footer>
-  <ion-item lines="full" color="primary" class="my" *ngIf="cashier.getCartLength()>0">
+  <ion-item routerLink="/cart" routerDirection="forward" lines="full" color="primary" class="my"
+    *ngIf="cashier.getCartLength()>0">
     <ion-icon name="cart" slot="start"></ion-icon> {{cashier.getCartLength()}} Items
     <ion-label slot="end">Total: {{cashier.calcCartTotal()}}</ion-label>
   </ion-item>

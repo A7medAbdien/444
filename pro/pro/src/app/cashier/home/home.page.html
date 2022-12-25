@@ -29,7 +29,7 @@
         <ion-button (click)="cashier.addToCart(prod.id)" fill="clear" shape="round">
           <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
         </ion-button>
-        <ion-label>{{cashier.cartItem[prod.id!]||0}}</ion-label>
+        <ion-label>{{cashier.cartItems[prod.id!]||0}}</ion-label>
         <ion-button (click)="cashier.removeToCart(prod.id!)" fill="clear" shape="round">
           <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
         </ion-button>
@@ -52,7 +52,7 @@
         <ion-button (click)="cashier.addToCart(prod.id)" fill="clear" shape="round">
           <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
         </ion-button>
-        <ion-label>{{cashier.cartItem[prod.id!]||0}}</ion-label>
+        <ion-label>{{cashier.cartItems[prod.id!]||0}}</ion-label>
         <ion-button (click)="cashier.removeToCart(prod.id!)" fill="clear" shape="round">
           <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
         </ion-button>
@@ -62,7 +62,7 @@
 
 </ion-content>
 <ion-footer>
-  <ion-item color="primary" class="my" *ngIf="cashier.getCartLength()>0">
+  <ion-item routerLink="/cart" routerDirection="forward" color="primary" class="my" *ngIf="cashier.getCartLength()>0">
     <ion-icon name="cart" slot="start"></ion-icon> {{cashier.getCartLength()}} Items
     <ion-label slot="end">Total: {{cashier.calcCartTotal()}}</ion-label>
   </ion-item>
