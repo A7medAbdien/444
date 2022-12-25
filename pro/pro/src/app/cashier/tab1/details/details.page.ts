@@ -9,12 +9,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsPage implements OnInit {
   id;
+<<<<<<< HEAD
   p;
+=======
+  myProduct;
+>>>>>>> 64c0bfc633403f758f6f40c9bbd66af9de09fda6
   constructor(public ActRoute: ActivatedRoute, public cashier: CashierService) { }
 
   ngOnInit() {
     this.id = this.ActRoute.snapshot.paramMap.get('id');
+<<<<<<< HEAD
     this.getProduct(this.id)
+=======
+  }
+
+  getProduct(id) {
+    this.myProduct = this.cashier.getProduct(id);
+>>>>>>> 64c0bfc633403f758f6f40c9bbd66af9de09fda6
   }
 
   getProduct(id) {
