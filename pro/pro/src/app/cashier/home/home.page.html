@@ -60,16 +60,10 @@
     </ion-item>
   </ion-list>
 
-
-  <ion-fab *ngIf="cashier.getCartLength()>0" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
-      {{cashier.getCartLength()}}
-      <ion-icon name="cart"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
 <ion-footer>
   <ion-item color="primary" class="my" *ngIf="cashier.getCartLength()>0">
-    <ion-label>Total: {{cashier.calcCartTotal()}}</ion-label>
+    <ion-icon name="cart" slot="start"></ion-icon> {{cashier.getCartLength()}} Items
+    <ion-label slot="end">Total: {{cashier.calcCartTotal()}}</ion-label>
   </ion-item>
 </ion-footer>

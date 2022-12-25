@@ -96,7 +96,7 @@ in **.ts**
 
     <ion-list>
         <ion-list-header color="secondary">Available Items</ion-list-header>
-        <ion-item *ngFor="let x of List" routerLink="/detail/{{x}}" routerDirection="forward">
+        <ion-item *ngFor="let x of List" routerLink="/detail/{{x}}" routerDirection="backward">
             {{x}}
         </ion-item>
         <!-- using Nav -->

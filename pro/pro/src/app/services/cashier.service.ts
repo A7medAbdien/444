@@ -17,7 +17,7 @@ export class CashierService {
   public cartItem: CartItems = {}
   public cart: Cart = { id: "My-cart", total: 0 } as Cart;
 
-  constructor(public ActRoute: ActivatedRoute) { }
+  constructor() { }
 
   addToCart(id: any) {
     if (this.cartItem[id] > 0) {
