@@ -25,25 +25,42 @@
   </ion-button>
 
   <ion-list *ngIf="!this.isFiltered">
-    <ion-item *ngFor="let s of shifts">
-      <ion-label>
-        <h1>{{getEmp(s.empId)!.name}}</h1>
-        <h2>{{s.day | date: 'fullDate'}}</h2>
-        <ion-icon name="time"></ion-icon>
-        {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
-      </ion-label>
-      <ion-icon *ngIf="cashier.currUser.id != s.empId" slot="end" name="add-circle"></ion-icon>
-    </ion-item>
+    <ion-card *ngFor="let s of shifts">
+      <ion-card-header>
+        <ion-card-subtitle>{{getEmp(s.empId)!.name}}</ion-card-subtitle>
+        <ion-card-title>
+          <h1>{{s.day | date: 'fullDate'}}</h1>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="time"></ion-icon>
+          {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
+          <ion-button slot="end" routerLink="/trade/{{s.id}}" fill="clear" *ngIf="cashier.currUser.id != s.empId">
+            <ion-icon size="large" name="shuffle"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 
   <ion-list *ngIf="this.isFiltered">
-    <ion-item *ngFor="let s of filteredList">
-      <ion-label>
-        <h1>{{getEmp(s.empId)!.name}}</h1>
-        <h2>{{s.day | date: 'fullDate'}}</h2>
-        <ion-icon name="time"></ion-icon>
-        {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
-      </ion-label>
-    </ion-item>
+    <ion-card *ngFor="let s of filteredList">
+      <ion-card-header>
+        <ion-card-subtitle>{{getEmp(s.empId)!.name}}</ion-card-subtitle>
+        <h1>{{s.day | date: 'fullDate'}}</h1>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="time"></ion-icon>
+          {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
+          <ion-button slot="end" routerLink="/trade/{{s.id}}" fill="clear" *ngIf="cashier.currUser.id != s.empId">
+            <ion-icon size="large" name="shuffle"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 </ion-content>
