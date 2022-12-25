@@ -23,10 +23,10 @@
       </ion-button>
     </ion-item>
     <ion-label class="ion-text-wrap">
-      <h2>{{cashier.getProduct(id)!.name}}</h2>
+      <h2>{{cashier.getProduct(id)?.name}}</h2>
     </ion-label>
     <ion-label color="primary">
-      <h1>${{cashier.getProduct(id)!.price}}</h1>
+      <h1>${{cashier.getProduct(id)?.price}}</h1>
     </ion-label>
   </ion-item>
 
