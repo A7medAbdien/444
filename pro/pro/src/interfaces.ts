@@ -18,9 +18,11 @@ export interface Cart {
 
 export interface CartItems { [key: string]: number };
 
-export interface Orders extends Product {
+export interface Order extends Product {
+  oId?: string;
   orderedDate: Date;
   expectedDate: Date;
+  receivedDate: Date;
   cartoons: number;
   orderedBy: string;
 }

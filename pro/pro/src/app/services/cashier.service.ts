@@ -1,3 +1,4 @@
+import { Order } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { Cart, CartItems, Product } from 'src/interfaces';
 
@@ -13,6 +14,38 @@ export class CashierService {
     { id: "456", name: "prod2", quantity: 30, skut: 10, supId: "sup1", ipc: 10, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 11, description: "hi" },
     { id: "789", name: "prod3", quantity: 45, skut: 5, supId: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi" }
   ];
+  public orders: Order[] = [
+    {
+      oId: "111",
+      id: "123", name: "prod1", quantity: 50, skut: 5, supId: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 12, description: "hi",
+      orderedDate: new Date("2022-04-21"),
+      expectedDate: new Date("2022-04-21"),
+      receivedDate: new Date("2022-04-21"),
+      cartoons: 5,
+      orderedBy: "emp1",
+
+    },
+    {
+      oId: "121",
+      id: "456", name: "prod2", quantity: 30, skut: 10, supId: "sup1", ipc: 10, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 11, description: "hi",
+      orderedDate: new Date("2022-04-26"),
+      expectedDate: new Date("2022-04-26"),
+      receivedDate: new Date("2022-04-26"),
+      cartoons: 5,
+      orderedBy: "emp1",
+    },
+    {
+      oId: "131",
+      id: "789", name: "prod3", quantity: 45, skut: 5, supId: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi",
+      orderedDate: new Date("2022-04-25"),
+      expectedDate: new Date("2022-04-26"),
+      receivedDate: new Date("2022-04-28"),
+      cartoons: 5,
+      orderedBy: "emp1",
+    }
+  ];
+
+
 
   public cartItem: CartItems = {}
   public cart: Cart = { id: "My-cart", total: 0 } as Cart;
@@ -78,4 +111,18 @@ export class CashierService {
     }
   }
 
+  hvOrders: boolean = false;
+  orderList: Order[] = [] as Order[];
+  getOrders(id) {
+    var filteredlist = this.orders.filter((row) => {
+      if (row.id!.indexOf(id) != -1) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    this.orderList = filteredlist;
+    // console.log(filteredlist)
+    (filteredlist.length > 0) ? this.hvOrders = true : this.hvOrders = false;
+  }
 }

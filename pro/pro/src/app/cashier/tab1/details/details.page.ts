@@ -10,16 +10,21 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailsPage implements OnInit {
   id;
   p;
-  constructor(public ActRoute: ActivatedRoute, public cashier: CashierService) { }
+  constructor(public ActRoute: ActivatedRoute, public cashier: CashierService) {
+  }
 
   ngOnInit() {
     this.id = this.ActRoute.snapshot.paramMap.get('id');
     this.getProduct(this.id)
+    this.getOrders(this.id);
   }
 
   getProduct(id) {
     this.p = this.cashier.getProduct(id);
   }
 
+  getOrders(id) {
+    this.cashier.getOrders(id)
+  }
 
 }
