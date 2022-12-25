@@ -79,7 +79,7 @@ export class CashierService {
   public cart: Cart = { id: "My-cart" } as Cart;
   public currUser: User;
   constructor(public toastCtrl: ToastController) {
-    this.currUser = this.users[0];
+    this.currUser = this.users[2];
   }
 
   addToCart(id: any) {
