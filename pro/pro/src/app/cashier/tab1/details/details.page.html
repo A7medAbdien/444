@@ -1,9 +1,82 @@
 <ion-header>
+
   <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/cashier-tabs', 'home']">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-buttons>
     <ion-title>details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-img [src]="p.image"></ion-img>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h3>Name</h3>
+        <h1>{{p.name}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h3>Quantity</h3>
+        <h1>{{p.quantity}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h3>Price</h3>
+        <h1>{{p.price}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h3>SKUT(Stoke Keeping Unit Threshold)</h3>
+        <h1>{{p.skut}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h3>Description</h3>
+        <h1>{{p.description}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h3>Supplier</h3>
+        <h1>{{p.supId}}</h1>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Product History
+    </ion-list-header>
+    <ion-item>
+
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-fab *ngIf="cashier.getCartLength()>0" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      {{cashier.getCartLength()}}
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
+<ion-footer>
+  <ion-item color="primary" class="my" *ngIf="cashier.getCartLength()>0">
+    <ion-label>Total: {{cashier.calcCartTotal()}}</ion-label>
+  </ion-item>
+</ion-footer>
