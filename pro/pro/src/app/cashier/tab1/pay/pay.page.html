@@ -19,8 +19,8 @@
         <h2>Input price</h2>
       </ion-label>
 
-
-      <ion-input (input)="getRemaining($event)" formControlName="inputPrice" type="number" color="primary"
+      <ion-label>{{i}}</ion-label>
+      <ion-input (ionChange)="getRemaining($event)" formControlName="inputPrice" type="number" color="primary"
         placeholder="$0">
       </ion-input>
       <ion-note slot="helper" color="warning" *ngIf="i>c.total">Return {{ remaining | currency }}</ion-note>
@@ -39,7 +39,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-button routerLink="/cashier-tabs/home" routerDirection="back" (click)="pay()" expand="block" color="primary"
-      type="submit" [disabled]="PayForm.invalid&&i>=c.total">
+      type="submit" [disabled]="!paid">
       <ion-label style="margin-right: 20px;">Enter</ion-label>
       <ion-icon name="cash"></ion-icon>
     </ion-button>

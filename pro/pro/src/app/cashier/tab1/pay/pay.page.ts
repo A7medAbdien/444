@@ -18,6 +18,7 @@ export class PayPage implements OnInit {
   PayForm: FormGroup;
   c
   i: number = 0;
+  paid = false
   remaining
   ngOnInit() {
     // console.log(this.cashier.cartItems);
@@ -27,10 +28,12 @@ export class PayPage implements OnInit {
   }
 
   getRemaining(event) {
+    this.i = 0
     if (event.target.value.length > 0) {
       this.i = event.target.value
       this.remaining = event.target.value - this.c.total;
-      if (this.remaining < 0) this.remaining *= -1
+      if (this.remaining < 0) this.remaining *= -1;
+      (this.i >= this.c.total) ? this.paid = true : this.paid = false;
     }
   }
   pay() {
