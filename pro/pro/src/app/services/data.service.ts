@@ -1,6 +1,7 @@
 import { Emp, Order, Product, Shift, ShiftRequest, User, } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -118,9 +119,9 @@ export class DataService {
     }
   ]
 
-
-  constructor() {
-
+  me
+  constructor(public toastCtrl: ToastController) {
+    this.me = this.emp[1]
   }
 
 
@@ -153,6 +154,15 @@ export class DataService {
     }
     return null;
   }
+  getEmpByShift(id: string) {
+    for (const i of this.emp) {
+      for (const j of this.shifts) {
+        if (j.id == id)
+          return i;
+      }
+    }
+    return null;
+  }
   getShift(id: string) {
     for (const i of this.shifts) {
       if (i.id == id)
@@ -169,29 +179,47 @@ export class DataService {
   }
 
   // add
-  addProduct(i: Product, who: string) {
-    i.who = who;
+  addProduct(i: Product) {
+    i.who = this.me.id;
     this.products.push(i);
+    this.presentToastS("Product Added Successfully")
   }
-  addOrder(i: Order, who: string) {
-    i.who = who;
+  addOrder(i: Order) {
+    i.who = this.me.id;
     this.orders.push(i);
+    this.presentToastS("Order Added Successfully");
   }
-  addUser(i: User, who: string) {
-    i.who = who;
+  addUser(i: User) {
+    i.who = this.me.id;
     this.users.push(i);
+    this.presentToastS("User Added Successfully");
   }
-  addEmp(i: Emp, who: string) {
-    i.who = who;
+  addEmp(i: Emp) {
+    i.who = this.me.id;
     this.emp.push(i);
+    this.presentToastS("Emp Added Successfully");
   }
-  addShift(i: Shift, who: string) {
-    i.who = who;
+  addShift(i: Shift) {
+    i.who = this.me.id;
     this.shifts.push(i);
+    this.presentToastS("Shift Added Successfully");
   }
-  addShiftReq(i: ShiftRequest, who: string) {
-    i.who = who;
+  addShiftReqFull(i: ShiftRequest) {
+    i.who = this.me.id;
     this.shiftRequests.push(i);
+    this.presentToastS("Request Added Successfully");
+  }
+  addShiftReq(myShiftId: string, otherShiftId: string) {
+    var sr: ShiftRequest = {} as ShiftRequest;
+    sr.who = this.me.id;
+    sr.isApproved = false;
+    sr.myShiftId = myShiftId;
+    sr.otherShiftId = otherShiftId;
+    if (this.getEmpByShift(otherShiftId) != null) {
+      this.getEmpByShift(otherShiftId)?.shiftsRequests.push(sr);
+      this.shiftRequests.push(sr);
+      this.presentToastS("Request Added Successfully");
+    } else this.presentToastF("Employee Not Found");
   }
 
   // remove by Id
@@ -230,5 +258,33 @@ export class DataService {
       const element = this.shiftRequests[i];
       if (element.id == id) delete this.shiftRequests[i];
     }
+  }
+
+  async presentToastS(massage: string) {
+    const toast = await this.toastCtrl.create({
+      message: massage,
+      duration: 2000,
+      color: 'primary',
+      position: 'top',
+    });
+
+    toast.present();
+    toast.onDidDismiss().then((resp) => {
+      console.log('Dismissed toast');
+    });
+  }
+
+  async presentToastF(massage: string) {
+    const toast = await this.toastCtrl.create({
+      message: massage,
+      duration: 2000,
+      color: 'danger',
+      position: 'top',
+    });
+
+    toast.present();
+    toast.onDidDismiss().then((resp) => {
+      console.log('Dismissed toast');
+    });
   }
 }

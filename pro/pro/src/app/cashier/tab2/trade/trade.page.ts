@@ -11,15 +11,22 @@ import { DataService } from 'src/app/services/data.service';
 export class TradePage implements OnInit {
 
   id
-  myShift
+  myShiftId
   myShifts
   otherShift
-  shiftReq
+  shiftReq: ShiftRequest = {} as ShiftRequest;
 
   constructor(public ActRoute: ActivatedRoute, public d: DataService) { }
   ngOnInit() {
     this.id = this.ActRoute.snapshot.paramMap.get('id');
     this.otherShift = this.d.getShift(this.id);
+    this.myShifts = this.d.me.shifts;
   }
 
+  addShiftReq() {
+    this.d.addShiftReq(this.myShiftId, this.otherShift.id);
+    console.log(this.d.shiftRequests)
+    console.log(this.d.emp[0].shiftsRequests)
+    console.log(this.myShiftId + this.otherShift)
+  }
 }

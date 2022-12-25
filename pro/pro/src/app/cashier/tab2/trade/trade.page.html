@@ -24,4 +24,28 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-list>
+    <ion-radio-group [(ngModel)]="myShiftId">
+      <ion-list-header>
+        <ion-label>Select Your Shift </ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let s of myShifts">
+        <ion-label>
+          <h1>{{otherShift.day | date: 'fullDate'}}</h1>
+          <ion-icon slot="start" name="time"></ion-icon>
+          {{otherShift.startTime| date: 'hh:mm a'}} - {{otherShift.endTime| date: 'hh:mm a'}}
+        </ion-label>
+        <ion-radio slot="start" value="{{s.id}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [disabled]="this.myShiftId == (null)" routerLink="/cashier-tabs/schedule" routerDirection="back"
+      (click)="addShiftReq()" expand="block" shape="round">
+      Trade
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
