@@ -1,4 +1,4 @@
-import { Order } from './../../interfaces';
+import { Emp, Order, Shift, ShiftRequest } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { Cart, CartItems, Product } from 'src/interfaces';
 import { ToastController } from '@ionic/angular';
@@ -45,7 +45,29 @@ export class CashierService {
       orderedBy: "emp1",
     }
   ];
-
+  public emp: Emp[] = [
+    {
+      id: "123", type: "emp", name: "emp1", email: "emp1@gmail.com", phone: 123, image: "https://ionicframework.com/docs/img/demos/avatar.svg",
+      shifts: [
+        { id: "321", empId: "123", day: new Date("2022-04-28"), startTime: new Date("2022-04-28"), endTime: new Date("2022-04-28") },
+        { id: "654", empId: "123", day: new Date("2022-05-01"), startTime: new Date("2022-05-01"), endTime: new Date("2022-05-01") },],
+      shiftsRequests: []
+    },
+    {
+      id: "456", type: "emp", name: "emp2", email: "emp2@gmail.com", phone: 1253, image: "https://ionicframework.com/docs/img/demos/avatar.svg",
+      shifts: [
+        { id: "664", empId: "456", day: new Date("2022-05-01"), startTime: new Date("2022-05-01"), endTime: new Date("2022-05-01") }],
+      shiftsRequests: [{ id: "555", senderEmail: "emp2@gmail.com", receiverEmail: "emp1@gmail.com", shiftId: "654", isApproved: false }]
+    }
+  ];
+  public shifts: Shift[] = [
+    { id: "321", empId: "123", day: new Date("2022-04-28"), startTime: new Date("2022-04-28"), endTime: new Date("2022-04-28") },
+    { id: "654", empId: "123", day: new Date("2022-05-01"), startTime: new Date("2022-05-01"), endTime: new Date("2022-05-01") },
+    { id: "664", empId: "456", day: new Date("2022-05-01"), startTime: new Date("2022-05-01"), endTime: new Date("2022-05-01") },
+  ]
+  public shiftRequests: ShiftRequest[] = [
+    { id: "555", senderEmail: "emp2@gmail.com", receiverEmail: "emp1@gmail.com", shiftId: "654", isApproved: false }
+  ]
 
 
   public cartItems: CartItems = {}

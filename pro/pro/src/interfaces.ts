@@ -38,7 +38,7 @@ export interface User {
   image: string;
 }
 
-export interface emp extends User {
+export interface Emp extends User {
   shifts: Shift[],
   shiftsRequests: ShiftRequest[]
 }
