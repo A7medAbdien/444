@@ -315,7 +315,7 @@ export class DataService {
       const element = this.emp[i];
       if (element.id == id) delete this.emp[i];
     }
-    this.presentToastS("Emp Removed Successfully");
+    // this.presentToastS("Emp Removed Successfully");
   }
   removeShift(id: string) {
     for (let i = 0; i < this.shifts.length; i++) {
