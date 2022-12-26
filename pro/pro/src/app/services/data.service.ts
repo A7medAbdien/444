@@ -293,36 +293,43 @@ export class DataService {
       const element = this.products[i];
       if (element.id == id) delete this.products[i];
     }
+    this.presentToastS("Product Removed Successfully");
   }
   removeOrder(id: string) {
     for (let i = 0; i < this.orders.length; i++) {
       const element = this.orders[i];
       if (element.id == id) delete this.orders[i];
     }
+    this.presentToastS("Order Removed Successfully");
   }
   removeUser(id: string) {
+    var element
     for (let i = 0; i < this.users.length; i++) {
-      const element = this.users[i];
-      if (element.id == id) delete this.users[i];
+      element = this.users[i];
+      if (element?.id == id) delete this.users[i];
     }
+    this.presentToastS(`${element.name} Removed Successfully`);
   }
   removeEmp(id: string) {
     for (let i = 0; i < this.emp.length; i++) {
       const element = this.emp[i];
       if (element.id == id) delete this.emp[i];
     }
+    this.presentToastS("Emp Removed Successfully");
   }
   removeShift(id: string) {
     for (let i = 0; i < this.shifts.length; i++) {
       const element = this.shifts[i];
       if (element.id == id) delete this.shifts[i];
     }
+    this.presentToastS("Shift Removed Successfully");
   }
   removeShiftReq(id: string) {
     for (let i = 0; i < this.shiftRequests.length; i++) {
       const element = this.shiftRequests[i];
       if (element.id == id) delete this.shiftRequests[i];
     }
+    this.presentToastS("Shift Request Removed Successfully");
   }
 
   // present toast
@@ -502,10 +509,14 @@ export class DataService {
       return (row.type == "sup") ? true : false;
     });
   }
-
   getSupProducts(supId) {
     return this.products.filter((row) => {
       return (row.supId == supId) ? true : false;
+    });
+  }
+  getEmpShifts(empId) {
+    return this.shifts.filter((row) => {
+      return (row.empId == empId) ? true : false;
     });
   }
 
