@@ -58,29 +58,29 @@ export class DataService {
   public users: User[] = [
     {
       who: "000",
-      id: "000", type: "owner", name: "owner", email: "owner@gmail.com", phone: 120, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+      id: "000", type: "owner", name: "owner", pass: "pass", email: "owner@gmail.com", phone: 120, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       who: "000",
-      id: "sup1", type: "sup", name: "supp", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+      id: "sup1", type: "sup", name: "supp", pass: "pass", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       who: "000",
-      id: "sup2", type: "sup", name: "supo", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+      id: "sup2", type: "sup", name: "supo", pass: "pass", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       who: "000",
-      id: "123", type: "emp", name: "emp1", email: "emp1@gmail.com", phone: 123, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+      id: "123", type: "emp", name: "emp1", pass: "pass", email: "emp1@gmail.com", phone: 123, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       who: "000",
-      id: "456", type: "emp", name: "emp2", email: "emp2@gmail.com", phone: 1253, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+      id: "456", type: "emp", name: "emp2", pass: "pass", email: "emp2@gmail.com", phone: 1253, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
   ];
   public emp: Emp[] = [
     {
       who: "000",
-      id: "123", type: "emp", name: "emp1", email: "emp1@gmail.com", phone: 123, image: "https://ionicframework.com/docs/img/demos/avatar.svg",
+      id: "123", type: "emp", name: "emp1", pass: "pass", email: "emp1@gmail.com", phone: 123, image: "https://ionicframework.com/docs/img/demos/avatar.svg",
       shifts: [
         {
           who: "000",
@@ -94,7 +94,7 @@ export class DataService {
     },
     {
       who: "000",
-      id: "456", type: "emp", name: "emp2", email: "emp2@gmail.com", phone: 1253, image: "https://ionicframework.com/docs/img/demos/avatar.svg",
+      id: "456", type: "emp", name: "emp2", pass: "pass", email: "emp2@gmail.com", phone: 1253, image: "https://ionicframework.com/docs/img/demos/avatar.svg",
       shifts: [
         {
           who: "000",

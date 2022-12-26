@@ -40,6 +40,7 @@ export interface User {
   email: string;
   phone: number;
   image: string;
+  pass: string;
 }
 
 export interface Emp extends User {
