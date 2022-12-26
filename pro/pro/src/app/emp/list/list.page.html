@@ -3,10 +3,45 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>list</ion-title>
+    <ion-title>Employees</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-searchbar (input)="this.d.searchEmpBN($event)" placeholder="Search" animated="true"></ion-searchbar>
+
+  <ion-list *ngIf="!this.d.isSearchedEmp">
+    <ion-item routerLink="/emp-details/{{s.id}}" *ngFor="let s of this.d.emp">
+      <ion-avatar slot="start">
+        <img src="{{s.image}}" />
+      </ion-avatar>
+      <ion-label>
+        <h1>
+          {{s.name}}
+        </h1>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-list *ngIf="this.d.isSearchedEmp">
+    <ion-item routerLink="/emp-details/{{s.id}}" *ngFor="let s of this.d.searchedEmp">
+      <ion-label>
+        <ion-avatar slot="start">
+          <img src="{{s.image}}" />
+        </ion-avatar>
+        <h1>
+          {{s.name}}
+        </h1>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
+
+<ion-footer *ngIf="this.d.isOwner()">
+  <ion-button routerLink="/add-emp" class="ion-margin" expand="block">
+    Add Employee
+  </ion-button>
+</ion-footer>
