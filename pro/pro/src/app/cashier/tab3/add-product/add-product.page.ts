@@ -11,14 +11,6 @@ import { DataService } from 'src/app/services/data.service';
 export class AddProductPage implements OnInit {
 
 
-  name
-  qty
-  skut
-  sup
-  ipc
-  img
-  price
-  description
   addProd: FormGroup
   constructor(public d: DataService, public fb: FormBuilder) {
     this.addProd = fb.group({
@@ -32,10 +24,11 @@ export class AddProductPage implements OnInit {
       des: [''],
     });
   }
+
   isAllP = true;
   allP(e) {
-    (e.target.value < 1) ? this.isAllP = false : this.isAllP = true;
-    console.log(this.isAllP);
+    // console.log(this.isAllP);
+    this.isAllP = this.d.allP(e);
   }
 
   customCounterFormatter(inputLength: number, maxLength: number) {
@@ -45,18 +38,8 @@ export class AddProductPage implements OnInit {
   ngOnInit() {
   }
 
-  check(val) {
-    console.log(val);
-    var prod: Product = {} as Product;
-    prod.name = val.name
-    prod.quantity = val.qty
-    prod.skut = val.skut
-    prod.supId = val.sup
-    prod.ipc = val.ipc
-    prod.image = val.img
-    prod.price = val.price
-    prod.description = val.description
-    this.d.addProduct(prod);
+  addProduct(val) {
+    this.d.addProduct(val);
   }
 
 }

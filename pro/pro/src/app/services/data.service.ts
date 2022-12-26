@@ -197,10 +197,23 @@ export class DataService {
   }
 
   // add
-  addProduct(i: Product) {
+  addProductFull(i: Product) {
     i.who = this.me.id;
     this.products.push(i);
     this.presentToastS("Product Added Successfully")
+  }
+  addProduct(val) {
+    // console.log(val);
+    var prod: Product = {} as Product;
+    prod.name = val.name
+    prod.quantity = val.qty
+    prod.skut = val.skut
+    prod.supId = val.sup
+    prod.ipc = val.ipc
+    prod.image = val.img
+    prod.price = val.price
+    prod.description = val.description
+    this.addProductFull(prod);
   }
   addOrder(i: Order) {
     i.who = this.me.id;
@@ -342,5 +355,11 @@ export class DataService {
     return this.users.filter((row) => {
       return (row.type == "sup") ? true : false;
     });
+  }
+
+  //check if all Positive
+  allP(e) {
+    // console.log(this.isAllP);
+    return (e.target.value < 1) ? false : true;
   }
 }

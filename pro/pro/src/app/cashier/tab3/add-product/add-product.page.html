@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="addProd" (ngSubmit)="check(addProd.value)">
+  <form [formGroup]="addProd" (ngSubmit)="addProduct(addProd.value)">
 
     <ion-item id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
       <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>
