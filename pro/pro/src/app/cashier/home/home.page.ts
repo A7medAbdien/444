@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { CashierService } from 'src/app/services/cashier.service';
 
@@ -8,7 +9,7 @@ import { CashierService } from 'src/app/services/cashier.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(public cashier: CashierService) { }
+  constructor(public cashier: CashierService, public d: DataService) { }
 
   ngOnInit() {
   }

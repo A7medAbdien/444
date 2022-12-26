@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/services/data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.page.scss'],
 })
 export class ListPage implements OnInit {
+  sh
+  searchBase = "p"
+  constructor(public d: DataService) { }
 
-  constructor() { }
-
+  toOrder
   ngOnInit() {
+    this.toOrder = this.d.getProdNeedToOrder()
   }
 
 }

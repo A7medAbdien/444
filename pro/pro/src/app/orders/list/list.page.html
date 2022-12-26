@@ -3,10 +3,72 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>list</ion-title>
+    <ion-title>Orders</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list *ngIf="toOrder.length>0">
+    <ion-list-header>
+      <ion-label>Products to be Ordered</ion-label>
+    </ion-list-header>
+    <ion-list *ngFor="let s of d.sups()">
+      <ion-card *ngIf="d.getProdNeedToOrderGS(s.id).length>0">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item color="primary" style="--border-radius: 15px;">
+                <ion-label>{{s.name}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let p of d.getProdNeedToOrderGS(s.id)">
+            <ion-col size=" 3">
+              <div class="ion-text-center">
+                <h4>{{p.quantity}} left</h4>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="ion-text-center">
+                <h4>{{p.name}}</h4>
+              </div>
+            </ion-col>
+            <ion-col size="3">
+              <div class="ion-text-center">
+                <h4>{{p.price|currency}}</h4>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+    </ion-list>
+
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Placed Orders</ion-label>
+    </ion-list-header>
+    <ion-card routerLink="order-details/{{o.id}}" *ngFor="let o of d.orders">
+      <ion-card-header>
+        <ion-card-subtitle>{{d.getCartLength(o.cartItems)}} item</ion-card-subtitle>
+        <ion-card-title>{{d.getUser(o.sup)?.name}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text>
+          <h2>
+            <ion-icon name="calendar"></ion-icon>
+            {{o.expectedDate|date:"yyyy-MM-dd"}}
+          </h2>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 
 </ion-content>
+
+<ion-footer>
+  <ion-button routerLink="/add-order" expand="block" shape="round">
+    Place Order
+  </ion-button>
+</ion-footer>

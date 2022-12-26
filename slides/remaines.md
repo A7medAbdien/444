@@ -4,7 +4,7 @@ Allow user to select threshold for each item or a value can be applied to select
 
 Place order from supplier of selected items with specified quantity. - A
 
-View items **to be ordered** from suppliers or placed orders. - L
+<!-- View items **to be ordered** from suppliers or placed orders. - L -->
 
 fast moving items, slow moving items, category, price.
 

@@ -1,3 +1,4 @@
+import { CartItems } from 'src/interfaces';
 import { Emp, Order, OrderCart, Product, Shift, ShiftRequest, User, } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
@@ -26,6 +27,7 @@ export class DataService {
     {
       who: "000", id: "156",
       cartItems: { "123": 5, "456": 5, "789": 10 },
+      sup: "sup1",
       total: 100,
       orderedDate: new Date("2022-04-21"),
       expectedDate: new Date("2022-04-21"),
@@ -34,6 +36,7 @@ export class DataService {
     {
       who: "123", id: "166",
       cartItems: { "456": 5, "789": 10 },
+      sup: "sup2",
       total: 150,
       orderedDate: new Date("2022-04-21"),
       expectedDate: new Date("2022-04-21"),
@@ -218,6 +221,74 @@ export class DataService {
     }
     return null;
   }
+
+  // filter
+  sups() {
+    return this.users.filter((row) => {
+      return (row.type == "sup") ? true : false;
+    });
+  }
+  getEmps() {
+    return this.users.filter((row) => {
+      return (row.type == "emp") ? true : false;
+    });
+  }
+  getSupProducts(supId) {
+    return this.products.filter((row) => {
+      return (row.supId == supId) ? true : false;
+    });
+  }
+  getEmpShifts(empId) {
+    return this.shifts.filter((row) => {
+      return (row.empId == empId) ? true : false;
+    });
+  }
+
+  getMyShiftRequestFull() {
+    return this.getMyShiftRequest().map(row => {
+      var myShift = this.getShift(row.myShiftId);
+      var otherShift = this.getShift(row.otherShiftId);
+      return {
+        id: row.id,
+        otherEmp: this.getUser(row.who),
+        otherShiftId: otherShift?.id,
+        otherShiftDay: otherShift?.day,
+        otherShiftST: otherShift?.startTime,
+        otherShiftET: otherShift?.endTime,
+        myShiftId: myShift?.id,
+        myShiftDay: myShift?.day,
+        myShiftST: myShift?.startTime,
+        myShiftET: myShift?.endTime
+      }
+    });
+  }
+  getMyShiftRequest() {
+    return this.shiftRequests.filter((row) => {
+      // if older don't include
+      if (this.getShift(row.otherShiftId)?.empId == this.me.id) {
+        if (this.getShift(row.myShiftId)!.startTime.getTime() < this.today.getTime()) {
+          return false;
+        } else
+          // if by me include
+          return (row.who != this.me.id) ? true : false;
+      }
+      return false;
+    });
+  }
+  getCartLength(cartItems) {
+    return Object.keys(cartItems).length
+  }
+  getProdNeedToOrder() {
+    return this.products.filter(x => {
+      return (x.quantity > x.skut) ? true : false;
+    })
+  }
+  getProdNeedToOrderGS(s) {
+    return this.getSupProducts(s).filter(x => {
+      return (x.quantity <= x.skut) ? true : false;
+    })
+  }
+
 
   // add
   addProductFull(i: Product) {
@@ -531,6 +602,9 @@ export class DataService {
       this.isSearchedProducts = false;
     }
   }
+
+
+
   checkHi(id) {
     for (const i of this.hiProducts) {
       if (i.id == id)
@@ -539,59 +613,6 @@ export class DataService {
     return false;
   }
 
-  // sup filter
-  sups() {
-    return this.users.filter((row) => {
-      return (row.type == "sup") ? true : false;
-    });
-  }
-  getEmps() {
-    return this.users.filter((row) => {
-      return (row.type == "emp") ? true : false;
-    });
-  }
-  getSupProducts(supId) {
-    return this.products.filter((row) => {
-      return (row.supId == supId) ? true : false;
-    });
-  }
-  getEmpShifts(empId) {
-    return this.shifts.filter((row) => {
-      return (row.empId == empId) ? true : false;
-    });
-  }
-
-  getMyShiftRequestFull() {
-    return this.getMyShiftRequest().map(row => {
-      var myShift = this.getShift(row.myShiftId);
-      var otherShift = this.getShift(row.otherShiftId);
-      return {
-        id: row.id,
-        otherEmp: this.getUser(row.who),
-        otherShiftId: otherShift?.id,
-        otherShiftDay: otherShift?.day,
-        otherShiftST: otherShift?.startTime,
-        otherShiftET: otherShift?.endTime,
-        myShiftId: myShift?.id,
-        myShiftDay: myShift?.day,
-        myShiftST: myShift?.startTime,
-        myShiftET: myShift?.endTime
-      }
-    });
-  }
-  getMyShiftRequest() {
-    return this.shiftRequests.filter((row) => {
-      // if older don't include
-      if (this.getShift(row.otherShiftId)?.empId == this.me.id) {
-        if (this.getShift(row.myShiftId)!.startTime.getTime() < this.today.getTime()) {
-          return false;
-        } else
-          // if by me include
-          return (row.who != this.me.id) ? true : false;
-      }
-      return false;
-    });
-  }
 
   setShiftEmp(id, val) {
     for (let i = 0; i < this.shifts.length; i++) {
