@@ -67,7 +67,8 @@
       <ion-label color="danger">Not ALl Values Positive</ion-label>
     </ion-item>
 
-    <ion-button block color="primary" type="submit" expand="block" [disabled]="addProd.invalid||!isAllP">
+    <ion-button routerLink="/cashier-tabs/products" routerDirection="back" block color="primary" type="submit"
+      expand="block" [disabled]="addProd.invalid||!isAllP">
       Confirm
     </ion-button>
   </form>
