@@ -31,7 +31,7 @@ export class DataService {
       expectedDate: new Date("2022-04-21"),
       receivedDate: new Date("2022-04-21"),
       cartoons: 5,
-      orderedBy: "emp1",
+
 
     },
     {
@@ -42,7 +42,7 @@ export class DataService {
       expectedDate: new Date("2022-04-26"),
       receivedDate: new Date("2022-04-26"),
       cartoons: 5,
-      orderedBy: "emp1",
+
     },
     {
       id: "131",
@@ -52,7 +52,7 @@ export class DataService {
       expectedDate: new Date("2022-04-26"),
       receivedDate: new Date("2022-04-28"),
       cartoons: 5,
-      orderedBy: "emp1",
+
     }
   ];
   public users: User[] = [

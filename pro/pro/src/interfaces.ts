@@ -29,7 +29,6 @@ export interface Order extends Product {
   expectedDate: Date;
   receivedDate: Date;
   cartoons: number;
-  orderedBy: string;
 }
 
 export interface User {
