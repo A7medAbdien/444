@@ -225,6 +225,17 @@ export class DataService {
     this.users.push(i);
     this.presentToastS("User Added Successfully");
   }
+  addSup(val) {
+    var s: User = {} as User;
+    s.type = "sup"
+    s.name = val.name
+    s.email = val.email
+    s.pass = val.pass
+    s.phone = val.phone;
+    (val.img == "") ? s.image = "https://ionicframework.com/docs/img/demos/avatar.svg" : s.image = val.img
+    console.log(s);
+    this.addUser(s);
+  }
   addEmp(i: Emp) {
     i.who = this.me.id;
     this.emp.push(i);
