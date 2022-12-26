@@ -1,12 +1,168 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-icon name="arrow-back" routerLink="/me-list" routerDirection="back"></ion-icon>
     </ion-buttons>
-    <ion-title>account</ion-title>
+    <ion-title>Supplier Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<style>
+  ion-thumbnail {
+    --size: 100px;
+    --border-radius: 100px;
+  }
 
+  h1.detailsField {
+    margin: 10px;
+  }
+
+  ion-row.detailsField {
+    background-color: #3880ff;
+    color: #fff;
+    /* text-align: center; */
+  }
+</style>
+
+<ion-content>
+  <br>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="4">
+        <ion-thumbnail>
+          <img src="{{me?.image!}}" />
+        </ion-thumbnail>
+      </ion-col>
+      <ion-col size="8">
+        <br>
+
+        <h1><b>{{me.name}}</b></h1>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br>
+  <br>
+  <ion-item lines="none">
+    <ion-label color="primary" position="stacked">
+      <h2>
+        Email
+      </h2>
+    </ion-label>
+    <h1 class="detailsField">
+      {{me.email}}
+    </h1>
+  </ion-item>
+  <br>
+  <ion-item lines="none">
+    <ion-label color="primary" position="stacked">
+      <h2>
+        Phone
+      </h2>
+    </ion-label>
+    <h1 class="detailsField">
+      {{me.phone}}
+    </h1>
+  </ion-item>
+
+  <br>
+  <div *ngIf="me.type == 'sup'">
+    <ion-list *ngIf="this.d.getSupProducts(me.id).length>0">
+      <ion-list-header>
+        Supplier Products
+      </ion-list-header>
+      <br>
+
+      <ion-grid fixed>
+        <ion-row class="detailsField">
+          <ion-col size="3">
+            <div class="ion-text-center">
+
+              <h3>IPC</h3>
+
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="ion-text-center">
+
+              <h3>Name</h3>
+
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div class="ion-text-center">
+              <h3>Price</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let p of this.d.getSupProducts(me.id)">
+          <ion-col size=" 3">
+            <div class="ion-text-center">
+              <h3>{{p.ipc}}</h3>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="ion-text-center">
+              <h3>{{p.name}}</h3>
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div class="ion-text-center">
+              <h3>{{p.price}}</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </div>
+  <br>
+  <div *ngIf="me.type == 'emp'">
+    <ion-list *ngIf="this.d.getEmpShifts(me.id).length>0">
+      <ion-list-header>
+        Shifts
+      </ion-list-header>
+      <br>
+
+      <ion-grid fixed>
+        <ion-row class="detailsField">
+          <ion-col size="">
+            <div class="ion-text-center">
+
+              <h3>Day</h3>
+
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="ion-text-center">
+
+              <h3>Starting Time</h3>
+
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let s of this.d.getEmpShifts(me.id)">
+          <ion-col size="6">
+            <div class="ion-text-center">
+              <h3>{{s.day| date:"fullDate"}}</h3>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="ion-text-center">
+              <h3>{{s.startTime| date:"hh:mm a"}}</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <ion-button routerLink="/me-list" routerDirection="back" (click)="this.d.removeUser(me?.id)" color="danger"
+    expand="block" fill="outline" shape="round">
+    <ion-icon name="trash"></ion-icon>
+    <ion-label> Remove</ion-label>
+  </ion-button>
+</ion-footer>
