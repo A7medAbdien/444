@@ -8,7 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar (input)="this.d.searchProducts($event)" placeholder="Search" animated="true"></ion-searchbar>
+  <ion-item>
+    <ion-label>Search By</ion-label>
+    <ion-select [(ngModel)]="searchBase" placeholder=" Select Pizza">
+      <ion-select-option value="p">Products</ion-select-option>
+      <ion-select-option value="s">Supplier</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-searchbar (input)="this.d.searchProducts($event,searchBase)" placeholder="Search"
+    animated="true"></ion-searchbar>
 
   <ion-list *ngIf="!this.d.isSearchedProducts">
     <ion-card *ngFor="let p of this.d.products">

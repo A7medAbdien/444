@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products.page.scss'],
 })
 export class ProductsPage implements OnInit {
-
+  searchBase: string = 'p'
   constructor(public d: DataService) { }
 
   ngOnInit() {

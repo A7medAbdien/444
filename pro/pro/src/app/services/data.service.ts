@@ -333,10 +333,45 @@ export class DataService {
   // Search
   isSearchedProducts: boolean = false;
   searchedProducts: Product[] = [] as Product[];
-  searchProducts(event: any) {
+  searchProducts(event, base) {
+    console.log(base)
+    if (event.target.value.length > 0) {
+      switch (base) {
+        case "p":
+          this.searchProductsBP(event);
+          break;
+        case "s":
+          this.searchProductsBS(event);
+          break;
+        default:
+          this.searchProductsBP(event);
+          break;
+      }
+    } else {
+      this.isSearchedProducts = false;
+    }
+  }
+  searchProductsBP(event: any) {
     if (event.target.value.length > 0) {
       var filteredList = this.products.filter((row) => {
         if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.searchedProducts = filteredList;
+      // console.log(filteredList)
+      this.isSearchedProducts = true;
+    } else {
+      this.isSearchedProducts = false;
+    }
+  }
+  searchProductsBS(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.products.filter((row) => {
+        var sup = this.getUser(row.supId)
+        if (sup?.name.indexOf(event.target.value) != -1) {
           return true;
         } else {
           return false;
