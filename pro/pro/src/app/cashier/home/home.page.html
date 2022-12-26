@@ -21,7 +21,7 @@
     <ion-card *ngFor="let prod of cashier.products">
 
 
-      <ion-item *ngIf="prod.quantity>prod.skut" lines="none" color="primary">
+      <ion-item *ngIf="prod.quantity>prod.skut" lines="none">
         <ion-thumbnail slot="start" [routerLink]="['/item-details',prod.id]">
           <img alt="Silhouette of mountains" src="{{prod.image}}" />
         </ion-thumbnail>
@@ -98,7 +98,7 @@
 
   <ion-list *ngIf="cashier.isFiltered">
     <ion-card *ngFor="let prod of cashier.filteredList">
-      <ion-item *ngIf="prod.quantity>prod.skut" lines="none" color="primary">
+      <ion-item *ngIf="prod.quantity>prod.skut" lines="none">
         <ion-thumbnail slot="start" [routerLink]="['/item-details',prod.id]">
           <img alt="Silhouette of mountains" src="{{prod.image}}" />
         </ion-thumbnail>
