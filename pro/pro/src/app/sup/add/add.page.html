@@ -3,12 +3,12 @@
     <ion-buttons slot="start">
       <ion-icon name="arrow-back" routerLink="/sup-list" routerDirection="back"></ion-icon>
     </ion-buttons>
-    <ion-title>Add Product</ion-title>
+    <ion-title>Add Supplier</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="addSup" (ngSubmit)="addProduct(addSup.value)">
+  <form [formGroup]="addSup" (ngSubmit)="addSupVal(addSup.value)">
 
     <ion-item id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
       <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>

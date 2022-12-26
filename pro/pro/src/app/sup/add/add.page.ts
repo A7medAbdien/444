@@ -32,7 +32,7 @@ export class AddPage implements OnInit {
   ngOnInit() {
   }
 
-  addProduct(val) {
+  addSupVal(val) {
     this.d.addSup(val);
   }
 }
