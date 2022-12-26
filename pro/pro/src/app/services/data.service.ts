@@ -336,4 +336,11 @@ export class DataService {
       this.isSearchedProducts = false;
     }
   }
+
+  // sup filter
+  sups() {
+    return this.users.filter((row) => {
+      return (row.type == "sup") ? true : false;
+    });
+  }
 }

@@ -1,9 +1,71 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-product</ion-title>
+    <ion-title>Add Product</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="addProd" (ngSubmit)="check(addProd.value)">
 
+    <ion-item id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
+      <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required maxlength="30" formControlName="name" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Quantity <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="qty" (input)="allP($event)" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        SKUT (Stock Keeping Unit Threshold)
+        <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="skut" (input)="allP($event)" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        Supplier
+        <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select formControlName="sup" placeholder="Select Supplier">
+        <ion-select-option *ngFor="let s of this.d.sups()" value="{{s.id}}">{{s.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        IPC (Item Per Cartoon)
+        <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="ipc" (input)="allP($event)" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        Image
+        <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="img" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        Price
+        <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="price" (input)="allP($event)" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        Description
+        <ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea formControlName="des"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="!isAllP">
+      <ion-label color="danger">Not ALl Values Positive</ion-label>
+    </ion-item>
+
+    <ion-button block color="primary" type="submit" expand="block" [disabled]="addProd.invalid||!isAllP">
+      Confirm
+    </ion-button>
+  </form>
 </ion-content>
