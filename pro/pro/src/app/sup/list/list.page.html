@@ -3,10 +3,39 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>list</ion-title>
+    <ion-title>Suppliers</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-searchbar (input)="this.d.searchSupBN($event)" placeholder="Search" animated="true"></ion-searchbar>
+
+  <ion-list *ngIf="!this.d.isSearchedSup">
+    <ion-item routerLink="/sup-details/{{s.id}}" *ngFor="let s of this.d.sups()">
+      <ion-label>
+        <h1>
+          {{s.name}}
+        </h1>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-list *ngIf="this.d.isSearchedSup">
+    <ion-item routerLink="/sup-details/{{s.id}}" *ngFor="let s of this.d.searchedSup">
+      <ion-label>
+        <h1>
+          {{s.name}}
+        </h1>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
+
+<ion-footer *ngIf="this.d.isOwner()">
+  <ion-button routerLink="/add-sup" class="ion-margin" expand="block">
+    Add Supplier
+  </ion-button>
+</ion-footer>

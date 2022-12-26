@@ -96,7 +96,7 @@ const routes: Routes = [
     loadChildren: () => import('./sup/list/list.module').then(m => m.ListPageModule)
   },
   {
-    path: 'sup-details',
+    path: 'sup-details/:id',
     loadChildren: () => import('./sup/details/details.module').then(m => m.DetailsPageModule)
   },
   {
