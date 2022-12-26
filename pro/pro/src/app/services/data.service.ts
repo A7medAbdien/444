@@ -233,13 +233,26 @@ export class DataService {
     s.pass = val.pass
     s.phone = val.phone;
     (val.img == "") ? s.image = "https://ionicframework.com/docs/img/demos/avatar.svg" : s.image = val.img
-    console.log(s);
+    // console.log(s);
     this.addUser(s);
   }
-  addEmp(i: Emp) {
+  addEmpFull(i: Emp) {
     i.who = this.me.id;
     this.emp.push(i);
     this.presentToastS("Emp Added Successfully");
+  }
+  addEmp(val) {
+    var s: User = {} as User;
+    s.type = "emp"
+    s.name = val.name
+    s.email = val.email
+    s.pass = val.pass
+    s.phone = val.phone;
+    (val.img == "") ? s.image = "https://ionicframework.com/docs/img/demos/avatar.svg" : s.image = val.img
+    // console.log(s);
+    this.addUser(s);
+    var e: Emp = s as Emp;
+    this.addEmpFull(e);
   }
   addShiftFull(i: Shift) {
     i.who = this.me.id;
