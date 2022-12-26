@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsPage implements OnInit {
   searchBase: string = 'p'
+  sh
   constructor(public d: DataService) { }
 
   ngOnInit() {

@@ -331,6 +331,7 @@ export class DataService {
   }
 
   // Search
+  // ----------------- Products
   isSearchedProducts: boolean = false;
   searchedProducts: Product[] = [] as Product[];
   searchProducts(event, base) {
@@ -338,20 +339,20 @@ export class DataService {
     if (event.target.value.length > 0) {
       switch (base) {
         case "p":
-          this.searchProductsBP(event);
+          this.searchProductsBN(event);
           break;
         case "s":
           this.searchProductsBS(event);
           break;
         default:
-          this.searchProductsBP(event);
+          this.searchProductsBN(event);
           break;
       }
     } else {
       this.isSearchedProducts = false;
     }
   }
-  searchProductsBP(event: any) {
+  searchProductsBN(event: any) {
     if (event.target.value.length > 0) {
       var filteredList = this.products.filter((row) => {
         if (row.name.indexOf(event.target.value) != -1) {
@@ -366,6 +367,33 @@ export class DataService {
     } else {
       this.isSearchedProducts = false;
     }
+  }
+
+  isHiProducts: boolean = false;
+  hiProducts: Product[] = [] as Product[];
+  hiProductsBN(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.products.filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.hiProducts = filteredList;
+      // console.log(filteredList)
+      this.isHiProducts = true;
+    } else {
+      this.isSearchedProducts = false;
+    }
+  }
+  checkHi(id) {
+    for (const i of this.hiProducts) {
+      if (i.id == id)
+        return true;
+    }
+    return false;
+
   }
   searchProductsBS(event: any) {
     if (event.target.value.length > 0) {
@@ -384,6 +412,65 @@ export class DataService {
       this.isSearchedProducts = false;
     }
   }
+  // ----------------------- Suppliers
+  isSearchedSup: boolean = false;
+  searchedSup: User[] = [] as User[];
+  searchSupBN(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.sups().filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.searchedSup = filteredList;
+      // console.log(filteredList)
+      this.isSearchedSup = true;
+    } else {
+      this.isSearchedSup = false;
+    }
+  }
+
+
+  isSearchedEmp: boolean = false;
+  searchedEmp: Emp[] = [] as Emp[];
+  searchEmpBN(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.emp.filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.searchedEmp = filteredList;
+      // console.log(filteredList)
+      this.isSearchedEmp = true;
+    } else {
+      this.isSearchedEmp = false;
+    }
+  }
+
+  isSearchedOrders: boolean = false;
+  searchedOrders: Order[] = [] as Order[];
+  searchOrdersBN(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.orders.filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.searchedOrders = filteredList;
+      // console.log(filteredList)
+      this.isSearchedOrders = true;
+    } else {
+      this.isSearchedOrders = false;
+    }
+  }
+
 
   // sup filter
   sups() {
