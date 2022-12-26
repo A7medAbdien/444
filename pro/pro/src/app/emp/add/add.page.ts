@@ -30,6 +30,7 @@ export class AddPage implements OnInit {
   }
 
   ngOnInit() {
+    this.d.onlyOwner();
   }
 
   addEmpVal(val) {
