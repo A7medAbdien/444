@@ -22,6 +22,16 @@ export interface Cart {
 
 export interface CartItems { [key: string]: number };
 
+export interface OrderCart {
+  id?: string;
+  who: string;
+  cartItems: CartItems,
+  total: number;
+  orderedDate: Date;
+  expectedDate: Date;
+  receivedDate: Date;
+}
+
 export interface Order extends Product {
   id?: string;
   who: string;

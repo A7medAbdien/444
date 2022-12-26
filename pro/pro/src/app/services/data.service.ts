@@ -1,4 +1,4 @@
-import { Emp, Order, Product, Shift, ShiftRequest, User, } from './../../interfaces';
+import { Emp, Order, OrderCart, Product, Shift, ShiftRequest, User, } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
 import { NavController, ToastController } from '@ionic/angular';
@@ -22,7 +22,25 @@ export class DataService {
       id: "789", name: "prod3", quantity: 4, skut: 5, supId: "sup2", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi"
     }
   ];
-  public orders: Order[] = [
+  public orders: OrderCart[] = [
+    {
+      who: "000", id: "156",
+      cartItems: { "123": 5, "456": 5, "789": 10 },
+      total: 100,
+      orderedDate: new Date("2022-04-21"),
+      expectedDate: new Date("2022-04-21"),
+      receivedDate: new Date("2022-04-21"),
+    },
+    {
+      who: "123", id: "166",
+      cartItems: { "456": 5, "789": 10 },
+      total: 150,
+      orderedDate: new Date("2022-04-21"),
+      expectedDate: new Date("2022-04-21"),
+      receivedDate: new Date("2022-04-21"),
+    }
+  ]
+  public orderss: Order[] = [
     {
       id: "111",
       who: "000",
@@ -157,7 +175,7 @@ export class DataService {
     return null;
   }
   getOrder(id: string) {
-    for (const i of this.orders) {
+    for (const i of this.orderss) {
       if (i.id == id)
         return i;
     }
@@ -222,7 +240,7 @@ export class DataService {
   }
   addOrder(i: Order) {
     i.who = this.me.id;
-    this.orders.push(i);
+    this.orderss.push(i);
     this.presentToastS("Order Added Successfully");
   }
   addUser(i: User) {
@@ -301,9 +319,9 @@ export class DataService {
     this.presentToastS("Product Removed Successfully");
   }
   removeOrder(id: string) {
-    for (let i = 0; i < this.orders.length; i++) {
-      const element = this.orders[i];
-      if (element.id == id) this.orders.splice(i, 1);;
+    for (let i = 0; i < this.orderss.length; i++) {
+      const element = this.orderss[i];
+      if (element.id == id) this.orderss.splice(i, 1);;
     }
     this.presentToastS("Order Removed Successfully");
   }
@@ -479,7 +497,7 @@ export class DataService {
   searchedOrders: Order[] = [] as Order[];
   searchOrdersBN(event: any) {
     if (event.target.value.length > 0) {
-      var filteredList = this.orders.filter((row) => {
+      var filteredList = this.orderss.filter((row) => {
         if (row.name.indexOf(event.target.value) != -1) {
           return true;
         } else {

@@ -27,7 +27,7 @@ export class CashierService {
   constructor(public data: DataService, public toastCtrl: ToastController) {
     this.products = this.data.products;
     this.users = this.data.users;
-    this.orders = this.data.orders;
+    this.orders = this.data.orderss;
     this.shifts = this.data.shifts;
     this.emp = this.data.emp;
     this.currUser = this.users[2];
