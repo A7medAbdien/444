@@ -14,7 +14,11 @@
       <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>
       <ion-input required maxlength="30" formControlName="name" type="text"></ion-input>
     </ion-item>
-
+    <ion-item lines="none" *ngIf="addProd.controls['name'].hasError('minlength') && addProd.controls['name'].touched">
+      <ion-text color="danger">
+        <p>Sorry, minimum name length is 2!</p>
+      </ion-text>
+    </ion-item>
     <ion-item>
       <ion-label position="floating">Quantity <ion-text color="danger">*</ion-text></ion-label>
       <ion-input required formControlName="qty" (input)="allP($event)" type="number"></ion-input>
@@ -67,8 +71,8 @@
       <ion-label color="danger">Not ALl Values Positive</ion-label>
     </ion-item>
 
-    <ion-button routerLink="/cashier-tabs/products" routerDirection="back" block color="primary" type="submit"
-      expand="block" [disabled]="addProd.invalid||!isAllP">
+    <ion-button class="button-down" routerLink="/cashier-tabs/products" routerDirection="back" block color="primary"
+      type="submit" expand="block" [disabled]="addProd.invalid||!isAllP">
       Confirm
     </ion-button>
   </form>
