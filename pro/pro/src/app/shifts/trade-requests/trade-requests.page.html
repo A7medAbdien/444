@@ -8,5 +8,23 @@
 </ion-header>
 
 <ion-content>
+  <ion-card *ngFor="let s of this.d.shifts">
+    <ion-card-header>
+      <ion-card-subtitle>{{d.getEmp(s.empId)?.name}}</ion-card-subtitle>
+      <ion-card-title>
+        <h1>{{s.day | date: 'fullDate'}}</h1>
+      </ion-card-title>
+    </ion-card-header>
 
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="time"></ion-icon>
+        {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
+        <ion-button slot="end" routerLink="/trade/{{s.id}}" fill="clear"
+          *ngIf="d.me.id != s.empId && s.startTime.getTime() > this.today.getTime()">
+          <ion-icon size="large" name="shuffle"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

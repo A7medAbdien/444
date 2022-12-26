@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/services/data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trade-requests.page.scss'],
 })
 export class TradeRequestsPage implements OnInit {
-
-  constructor() { }
+  today: Date
+  constructor(public d: DataService) {
+    this.today = new Date();
+  }
 
   ngOnInit() {
   }
