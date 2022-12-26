@@ -11,6 +11,7 @@ export class ListPage implements OnInit {
   constructor(public d: DataService) { }
 
   ngOnInit() {
+    this.d.onlyOwner()
   }
 
 }
