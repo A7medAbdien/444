@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/services/data.service';
 import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
@@ -5,10 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  userType = 'owner'; // TODO get the user type
   public appPages;
-  constructor() {
-    switch (this.userType) {
+  constructor(public d: DataService) {
+    switch (d.me.type) {
       case "owner":
         this.appPages = [
           { title: 'Cashier', url: '/cashier-tabs', icon: 'wallet' },
