@@ -1,3 +1,4 @@
+import { Product } from 'src/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
@@ -46,7 +47,16 @@ export class AddProductPage implements OnInit {
 
   check(val) {
     console.log(val);
-
+    var prod: Product = {} as Product;
+    prod.name = val.name
+    prod.quantity = val.qty
+    prod.skut = val.skut
+    prod.supId = val.sup
+    prod.ipc = val.ipc
+    prod.image = val.img
+    prod.price = val.price
+    prod.description = val.description
+    this.d.addProduct(prod);
   }
 
 }
