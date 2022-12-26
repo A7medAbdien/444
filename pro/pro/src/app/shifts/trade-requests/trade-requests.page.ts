@@ -10,9 +10,12 @@ export class TradeRequestsPage implements OnInit {
   today: Date
   constructor(public d: DataService) {
     this.today = new Date();
+    // this.myShReq = this.d.getMyShiftRequestFull();
   }
 
+  myShReq
   ngOnInit() {
+    this.myShReq = this.d.getMyShiftRequestFull();
   }
 
 }

@@ -101,8 +101,8 @@ export class DataService {
           id: "664", empId: "456", day: new Date("2022-05-01"), startTime: new Date("2022-05-01"), endTime: new Date("2022-05-01")
         }],
       shiftsRequests: [{
-        who: "000",
-        id: "555", myShiftId: "664", otherShiftId: "664", isApproved: false
+        who: "123",
+        id: "555", myShiftId: "664", otherShiftId: "654", isApproved: false
       }]
     }
   ];
@@ -113,17 +113,17 @@ export class DataService {
     },
     {
       who: "000",
-      id: "654", empId: "123", day: new Date("2022-05-01"), startTime: new Date("2022-05-01"), endTime: new Date("2022-05-01")
+      id: "654", empId: "123", day: new Date("2022-12-29"), startTime: new Date("2022-12-27"), endTime: new Date("2022-05-01")
     },
     {
       who: "000",
-      id: "664", empId: "456", day: new Date("2022-05-01"), startTime: new Date("2022-05-01"), endTime: new Date("2022-05-01")
+      id: "664", empId: "456", day: new Date("2022-12-27"), startTime: new Date("2022-12-27"), endTime: new Date("2022-05-01")
     },
   ]
   public shiftRequests: ShiftRequest[] = [
     {
-      who: "000",
-      id: "555", myShiftId: "664", otherShiftId: "664", isApproved: false
+      who: "456",// emp2, //emp1
+      id: "555", myShiftId: "664", otherShiftId: "654", isApproved: false
     }
   ]
 
@@ -132,6 +132,7 @@ export class DataService {
   constructor(public toastCtrl: ToastController, public navCtrl: NavController) {
     // this.me = this.users[0];
     // this.me = this.users[1];
+    // this.me = this.users[4];
     this.me = this.users[3];
   }
 
@@ -328,6 +329,10 @@ export class DataService {
       const element = this.shifts[i];
       if (element.id == id) this.shifts.splice(i, 1);;
     }
+    this.shiftRequests.forEach(s => {
+      if (s.myShiftId == id) this.removeShiftReqSilent(s.myShiftId)
+      if (s.otherShiftId == id) this.removeShiftReqSilent(s.otherShiftId)
+    });
     this.presentToastS("Shift Removed Successfully");
   }
   removeShiftReq(id: string) {
@@ -336,6 +341,13 @@ export class DataService {
       if (element.id == id) this.shiftRequests.splice(i, 1);;
     }
     this.presentToastS("Shift Request Removed Successfully");
+  }
+  removeShiftReqSilent(id: string) {
+    for (let i = 0; i < this.shiftRequests.length; i++) {
+      const element = this.shiftRequests[i];
+      if (element.id == id) this.shiftRequests.splice(i, 1);;
+    }
+    // this.presentToastS("Shift Request Removed Successfully");
   }
 
   // present toast
@@ -530,6 +542,83 @@ export class DataService {
       return (row.empId == empId) ? true : false;
     });
   }
+
+  getMyShiftRequestFull() {
+    return this.getMyShiftRequest().map(row => {
+      var myShift = this.getShift(row.myShiftId);
+      var otherShift = this.getShift(row.otherShiftId);
+      return {
+        otherEmp: this.getUser(row.who),
+        otherShiftDay: otherShift?.day,
+        otherShiftST: otherShift?.startTime,
+        otherShiftET: otherShift?.endTime,
+        myShiftDay: myShift?.day,
+        myShiftST: myShift?.startTime,
+        myShiftET: myShift?.endTime
+      }
+    });
+  }
+  // getOShiftRequestFull() {
+  //   return this.getShiftRequestFromOthers().map(row => {
+  //     var myShift = this.getShift(row.myShiftId);
+  //     var otherShift = this.getShift(row.otherShiftId);
+  //     return {
+  //       otherEmp: this.getUser(row.who),
+  //       otherShiftDay: otherShift?.day,
+  //       otherShiftST: otherShift?.startTime,
+  //       otherShiftET: otherShift?.endTime,
+  //       myShiftDay: myShift?.day,
+  //       myShiftST: myShift?.startTime,
+  //       myShiftET: myShift?.endTime
+  //     }
+  //   });
+  // }
+
+  getAllShiftRequestFull() {
+    return this.shiftRequests.map(row => {
+      var myShift = this.getShift(row.myShiftId);
+      var otherShift = this.getShift(row.otherShiftId);
+      console.log(myShift)
+      console.log(row.who)
+      console.log(this.getEmp(row.who)?.name)
+      return {
+        otherEmp: this.getUser(row.who),
+        otherShiftDay: otherShift?.day,
+        otherShiftST: otherShift?.startTime,
+        otherShiftET: otherShift?.endTime,
+        myShiftDay: myShift?.day,
+        myShiftST: myShift?.startTime,
+        myShiftET: myShift?.endTime
+      }
+    });
+  }
+
+  getMyShiftRequest() {
+    return this.shiftRequests.filter((row) => {
+      // if older don't include
+      if (this.getShift(row.otherShiftId)?.empId == this.me.id) {
+        if (this.getShift(row.myShiftId)!.startTime.getTime() < this.today.getTime()) {
+          return false;
+        } else
+          // if by me include
+          return (row.who != this.me.id) ? true : false;
+      }
+      return false;
+    });
+  }
+
+  // getShiftRequestFromOthers() {
+  //   return this.shiftRequests.filter((row) => {
+  //     // if older don't include
+  //     if (this.getShift(row.myShiftId)!.startTime.getTime() < this.today.getTime()) {
+  //       return false;
+  //     } else
+  //       // if by me don't include
+  //       return (row.who == this.me.id) ? true : false;
+  //   });
+  // }
+
+
 
   //check if all Positive
   allP(e) {

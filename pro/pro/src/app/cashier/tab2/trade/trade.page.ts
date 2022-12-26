@@ -25,8 +25,8 @@ export class TradePage implements OnInit {
 
   addShiftReq() {
     this.d.addShiftReq(this.myShiftId, this.otherShift.id);
-    console.log(this.d.shiftRequests)
-    console.log(this.d.emp[0].shiftsRequests)
-    console.log(this.myShiftId + this.otherShift)
+    // console.log(this.d.shiftRequests)
+    // console.log(this.d.emp[0].shiftsRequests)
+    // console.log(this.myShiftId + this.otherShift)
   }
 }

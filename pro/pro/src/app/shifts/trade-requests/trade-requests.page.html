@@ -3,27 +3,42 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Trade Requests</ion-title>
+    <ion-title>Trade Requests {{this.d.me.name}}{{this.d.me.id}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let s of this.d.shifts">
+  <ion-card *ngFor="let r of myShReq">
     <ion-card-header>
-      <ion-card-subtitle>{{d.getEmp(s.empId)?.name}}</ion-card-subtitle>
+      <ion-card-subtitle>Yours</ion-card-subtitle>
       <ion-card-title>
-        <h1>{{s.day | date: 'fullDate'}}</h1>
+        <h1>{{r.myShiftDay | date:"fullDate"}}</h1>
       </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <ion-item lines="none">
         <ion-icon slot="start" name="time"></ion-icon>
-        {{s.startTime| date: 'hh:mm a'}} - {{s.endTime| date: 'hh:mm a'}}
-        <ion-button slot="end" routerLink="/trade/{{s.id}}" fill="clear"
-          *ngIf="d.me.id != s.empId && s.startTime.getTime() > this.today.getTime()">
-          <ion-icon size="large" name="shuffle"></ion-icon>
-        </ion-button>
+        {{r.myShiftST| date: 'hh:mm a'}} - {{r.myShiftET| date: 'hh:mm a'}}
+      </ion-item>
+    </ion-card-content>
+
+    <ion-button expand="block" shape="round">
+      <ion-label>Accept Trade</ion-label>
+      <ion-icon size="large" name="shuffle"></ion-icon>
+    </ion-button>
+
+    <ion-card-header>
+      <ion-card-subtitle>{{r.otherEmp.name}}</ion-card-subtitle>
+      <ion-card-title>
+        <h1>{{r.otherShiftDay | date:"fullDate"}}</h1>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="time"></ion-icon>
+        {{r.otherShiftST| date: 'hh:mm a'}} - {{r.otherShiftET| date: 'hh:mm a'}}
       </ion-item>
     </ion-card-content>
   </ion-card>

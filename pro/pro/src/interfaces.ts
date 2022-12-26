@@ -64,3 +64,13 @@ export interface ShiftRequest {
   otherShiftId: string;
   isApproved: boolean;
 }
+
+// export interface fullShReq {
+//   otherEmp: string,
+//   otherShiftDay: Date,
+//   otherShiftST: Date,
+//   otherShiftET: Date,
+//   myShiftDay: Date,
+//   myShiftST: Date,
+//   myShiftET: Date,
+// }
