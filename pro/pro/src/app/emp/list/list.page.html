@@ -12,7 +12,7 @@
   <ion-searchbar (ionChange)="this.d.searchEmpBN($event)" placeholder="Search" animated="true"></ion-searchbar>
 
   <ion-list *ngIf="!this.d.isSearchedEmp">
-    <ion-item routerLink="/emp-details/{{s.id}}" *ngFor="let s of this.d.emp">
+    <ion-item routerLink="/emp-details/{{s.id}}" *ngFor="let s of this.d.getEmps()">
       <ion-avatar slot="start">
         <img src="{{s.image}}" />
       </ion-avatar>

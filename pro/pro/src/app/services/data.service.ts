@@ -309,12 +309,15 @@ export class DataService {
       if (element?.id == id) delete this.users[i];
     }
     this.presentToastS(`${element.name} Removed Successfully`);
+    console.log(this.users);
+    console.log(this.emp);
   }
   removeEmp(id: string) {
     for (let i = 0; i < this.emp.length; i++) {
       const element = this.emp[i];
       if (element.id == id) delete this.emp[i];
     }
+    console.log(this.emp)
     // this.presentToastS("Emp Removed Successfully");
   }
   removeShift(id: string) {
@@ -507,6 +510,11 @@ export class DataService {
   sups() {
     return this.users.filter((row) => {
       return (row.type == "sup") ? true : false;
+    });
+  }
+  getEmps() {
+    return this.users.filter((row) => {
+      return (row.type == "emp") ? true : false;
     });
   }
   getSupProducts(supId) {
