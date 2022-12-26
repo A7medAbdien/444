@@ -17,5 +17,9 @@ export class TradeRequestsPage implements OnInit {
   ngOnInit() {
     this.myShReq = this.d.getMyShiftRequestFull();
   }
+  onTrad(mS, oS, SRid) {
+    this.d.trade(mS, oS, SRid)
+    this.myShReq = this.d.getMyShiftRequestFull();
+  }
 
 }

@@ -548,51 +548,19 @@ export class DataService {
       var myShift = this.getShift(row.myShiftId);
       var otherShift = this.getShift(row.otherShiftId);
       return {
+        id: row.id,
         otherEmp: this.getUser(row.who),
+        otherShiftId: otherShift?.id,
         otherShiftDay: otherShift?.day,
         otherShiftST: otherShift?.startTime,
         otherShiftET: otherShift?.endTime,
+        myShiftId: myShift?.id,
         myShiftDay: myShift?.day,
         myShiftST: myShift?.startTime,
         myShiftET: myShift?.endTime
       }
     });
   }
-  // getOShiftRequestFull() {
-  //   return this.getShiftRequestFromOthers().map(row => {
-  //     var myShift = this.getShift(row.myShiftId);
-  //     var otherShift = this.getShift(row.otherShiftId);
-  //     return {
-  //       otherEmp: this.getUser(row.who),
-  //       otherShiftDay: otherShift?.day,
-  //       otherShiftST: otherShift?.startTime,
-  //       otherShiftET: otherShift?.endTime,
-  //       myShiftDay: myShift?.day,
-  //       myShiftST: myShift?.startTime,
-  //       myShiftET: myShift?.endTime
-  //     }
-  //   });
-  // }
-
-  getAllShiftRequestFull() {
-    return this.shiftRequests.map(row => {
-      var myShift = this.getShift(row.myShiftId);
-      var otherShift = this.getShift(row.otherShiftId);
-      console.log(myShift)
-      console.log(row.who)
-      console.log(this.getEmp(row.who)?.name)
-      return {
-        otherEmp: this.getUser(row.who),
-        otherShiftDay: otherShift?.day,
-        otherShiftST: otherShift?.startTime,
-        otherShiftET: otherShift?.endTime,
-        myShiftDay: myShift?.day,
-        myShiftST: myShift?.startTime,
-        myShiftET: myShift?.endTime
-      }
-    });
-  }
-
   getMyShiftRequest() {
     return this.shiftRequests.filter((row) => {
       // if older don't include
@@ -607,17 +575,27 @@ export class DataService {
     });
   }
 
-  // getShiftRequestFromOthers() {
-  //   return this.shiftRequests.filter((row) => {
-  //     // if older don't include
-  //     if (this.getShift(row.myShiftId)!.startTime.getTime() < this.today.getTime()) {
-  //       return false;
-  //     } else
-  //       // if by me don't include
-  //       return (row.who == this.me.id) ? true : false;
-  //   });
-  // }
-
+  setShiftEmp(id, val) {
+    for (let i = 0; i < this.shifts.length; i++) {
+      const s = this.shifts[i];
+      if (s.id == id) {
+        this.shifts[i].empId = val;
+      }
+    }
+  }
+  trade(mS, oS, SRid) {
+    var m = this.getShift(mS);
+    var o = this.getShift(oS);
+    // console.log(m)
+    // console.log(o)
+    var temp = m?.empId
+    this.setShiftEmp(m?.id, o?.empId)
+    this.setShiftEmp(o?.id, temp)
+    this.presentToastS("Shift Treaded Successfully")
+    // console.log(m)
+    // console.log(o)
+    this.removeShiftReqSilent(SRid);
+  }
 
 
   //check if all Positive
