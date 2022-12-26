@@ -369,32 +369,6 @@ export class DataService {
     }
   }
 
-  isHiProducts: boolean = false;
-  hiProducts: Product[] = [] as Product[];
-  hiProductsBN(event: any) {
-    if (event.target.value.length > 0) {
-      var filteredList = this.products.filter((row) => {
-        if (row.name.indexOf(event.target.value) != -1) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      this.hiProducts = filteredList;
-      // console.log(filteredList)
-      this.isHiProducts = true;
-    } else {
-      this.isSearchedProducts = false;
-    }
-  }
-  checkHi(id) {
-    for (const i of this.hiProducts) {
-      if (i.id == id)
-        return true;
-    }
-    return false;
-
-  }
   searchProductsBS(event: any) {
     if (event.target.value.length > 0) {
       var filteredList = this.products.filter((row) => {
@@ -472,10 +446,42 @@ export class DataService {
   }
 
 
+  isHiProducts: boolean = false;
+  hiProducts: Product[] = [] as Product[];
+  hiProductsBN(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.products.filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.hiProducts = filteredList;
+      // console.log(filteredList)
+      this.isHiProducts = true;
+    } else {
+      this.isSearchedProducts = false;
+    }
+  }
+  checkHi(id) {
+    for (const i of this.hiProducts) {
+      if (i.id == id)
+        return true;
+    }
+    return false;
+  }
+
   // sup filter
   sups() {
     return this.users.filter((row) => {
       return (row.type == "sup") ? true : false;
+    });
+  }
+
+  getSupProducts(supId) {
+    return this.products.filter((row) => {
+      return (row.supId == supId) ? true : false;
     });
   }
 
