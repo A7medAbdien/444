@@ -21,7 +21,21 @@
             {{this.d.getUser(p.supId)?.name}}
           </h2>
         </ion-label>
-        <ion-item lines="none" color="primary" style="--border-radius: 15px;">
+        <ion-item *ngIf="p.quantity>p.skut" lines="none" color="primary" style="--border-radius: 15px;">
+          <ion-label>
+            <h1>
+              {{p.quantity}}
+            </h1>
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="p.quantity==p.skut" lines="none" color="warning" style="--border-radius: 15px;">
+          <ion-label>
+            <h1>
+              {{p.quantity}}
+            </h1>
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="p.quantity<p.skut" lines="none" color="danger" style="--border-radius: 15px;">
           <ion-label>
             <h1>
               {{p.quantity}}
@@ -44,7 +58,21 @@
             {{this.d.getUser(p.supId)?.name}}
           </h2>
         </ion-label>
-        <ion-item lines="none" color="primary" style="--border-radius: 15px;">
+        <ion-item *ngIf="p.quantity>p.skut" lines="none" color="primary" style="--border-radius: 15px;">
+          <ion-label>
+            <h1>
+              {{p.quantity}}
+            </h1>
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="p.quantity==p.skut" lines="none" color="warning" style="--border-radius: 15px;">
+          <ion-label>
+            <h1>
+              {{p.quantity}}
+            </h1>
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="p.quantity<p.skut" lines="none" color="danger" style="--border-radius: 15px;">
           <ion-label>
             <h1>
               {{p.quantity}}
