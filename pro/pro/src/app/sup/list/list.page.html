@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <ion-searchbar (input)="this.d.searchSupBN($event)" placeholder="Search" animated="true"></ion-searchbar>
+  <ion-searchbar (ionChange)="this.d.searchSupBN($event)" placeholder="Search" animated="true"></ion-searchbar>
 
   <ion-list *ngIf="!this.d.isSearchedSup">
     <ion-item routerLink="/sup-details/{{s.id}}" *ngFor="let s of this.d.sups()">

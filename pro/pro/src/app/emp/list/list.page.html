@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <ion-searchbar (input)="this.d.searchEmpBN($event)" placeholder="Search" animated="true"></ion-searchbar>
+  <ion-searchbar (ionChange)="this.d.searchEmpBN($event)" placeholder="Search" animated="true"></ion-searchbar>
 
   <ion-list *ngIf="!this.d.isSearchedEmp">
     <ion-item routerLink="/emp-details/{{s.id}}" *ngFor="let s of this.d.emp">
@@ -27,10 +27,10 @@
 
   <ion-list *ngIf="this.d.isSearchedEmp">
     <ion-item routerLink="/emp-details/{{s.id}}" *ngFor="let s of this.d.searchedEmp">
+      <ion-avatar slot="start">
+        <img src="{{s.image}}" />
+      </ion-avatar>
       <ion-label>
-        <ion-avatar slot="start">
-          <img src="{{s.image}}" />
-        </ion-avatar>
         <h1>
           {{s.name}}
         </h1>
