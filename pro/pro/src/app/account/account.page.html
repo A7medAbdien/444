@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back" routerLink="/me-list" routerDirection="back"></ion-icon>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Supplier Details</ion-title>
   </ion-toolbar>
@@ -160,9 +160,9 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button routerLink="/me-list" routerDirection="back" (click)="this.d.removeUser(me?.id)" color="danger"
+  <ion-button routerLink="/me-list" routerDirection="back" (click)="this.d.signOut(me?.id)" color="danger"
     expand="block" fill="outline" shape="round">
-    <ion-icon name="trash"></ion-icon>
-    <ion-label> Remove</ion-label>
+    <ion-label>Sign Out</ion-label>
+    <ion-icon name="log-out-outline"></ion-icon>
   </ion-button>
 </ion-footer>

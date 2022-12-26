@@ -143,6 +143,9 @@ export class DataService {
   isOwner(): boolean {
     return this.me.type == "owner";
   }
+  signOut(id) {
+    console.log("sign out")
+  }
   // get by Id
   getProduct(id: string) {
     for (const i of this.products) {
