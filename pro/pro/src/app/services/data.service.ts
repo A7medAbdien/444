@@ -295,14 +295,14 @@ export class DataService {
   removeProduct(id: string) {
     for (let i = 0; i < this.products.length; i++) {
       const element = this.products[i];
-      if (element.id == id) delete this.products[i];
+      if (element.id == id) this.products.splice(i, 1);;
     }
     this.presentToastS("Product Removed Successfully");
   }
   removeOrder(id: string) {
     for (let i = 0; i < this.orders.length; i++) {
       const element = this.orders[i];
-      if (element.id == id) delete this.orders[i];
+      if (element.id == id) this.orders.splice(i, 1);;
     }
     this.presentToastS("Order Removed Successfully");
   }
@@ -310,7 +310,7 @@ export class DataService {
     var element
     for (let i = 0; i < this.users.length; i++) {
       element = this.users[i];
-      if (element?.id == id) delete this.users[i];
+      if (element?.id == id) this.users.splice(i, 1);;
     }
     this.presentToastS(`${element.name} Removed Successfully`);
     console.log(this.users);
@@ -319,22 +319,21 @@ export class DataService {
   removeEmp(id: string) {
     for (let i = 0; i < this.emp.length; i++) {
       const element = this.emp[i];
-      if (element.id == id) delete this.emp[i];
+      if (element.id == id) this.emp.splice(i, 1);;
     }
-    console.log(this.emp)
     // this.presentToastS("Emp Removed Successfully");
   }
   removeShift(id: string) {
     for (let i = 0; i < this.shifts.length; i++) {
       const element = this.shifts[i];
-      if (element.id == id) delete this.shifts[i];
+      if (element.id == id) this.shifts.splice(i, 1);;
     }
     this.presentToastS("Shift Removed Successfully");
   }
   removeShiftReq(id: string) {
     for (let i = 0; i < this.shiftRequests.length; i++) {
       const element = this.shiftRequests[i];
-      if (element.id == id) delete this.shiftRequests[i];
+      if (element.id == id) this.shiftRequests.splice(i, 1);;
     }
     this.presentToastS("Shift Request Removed Successfully");
   }
