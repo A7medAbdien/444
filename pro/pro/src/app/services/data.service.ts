@@ -130,8 +130,9 @@ export class DataService {
   me
   today: Date = new Date();
   constructor(public toastCtrl: ToastController, public navCtrl: NavController) {
-    // this.me = this.emp[1]
-    this.me = this.users[0];
+    // this.me = this.users[0];
+    // this.me = this.users[1];
+    this.me = this.users[3];
   }
 
 
