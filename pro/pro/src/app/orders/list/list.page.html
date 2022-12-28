@@ -10,7 +10,7 @@
 <ion-content>
   <ion-list *ngIf="toOrder.length>0">
     <ion-list-header>
-      <ion-label>Products to be Ordered</ion-label>
+      <h1>Products to be Ordered</h1>
     </ion-list-header>
     <ion-list *ngFor="let s of d.sups()">
       <ion-card *ngIf="d.getProdNeedToOrderGS(s.id).length>0">
@@ -47,7 +47,7 @@
   </ion-list>
   <ion-list>
     <ion-list-header>
-      <ion-label>Placed Orders</ion-label>
+      <h1>Placed Orders</h1>
     </ion-list-header>
     <ion-card routerLink="/order-details/{{o.id}}" *ngFor="let o of d.orders">
       <ion-card-header>

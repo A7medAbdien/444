@@ -18,7 +18,7 @@ export class OrderDetailsPage implements OnInit {
   ngOnInit() {
     this.id = this.ActRoute.snapshot.paramMap.get('id');
     this.o = this.d.getOrder(this.id)
-    this.cartIds = Object.keys(this.o.cartItems)
+    this.cartIds = Object.keys(this.o.cart)
   }
 
 }
