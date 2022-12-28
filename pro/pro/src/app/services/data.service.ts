@@ -390,9 +390,11 @@ export class DataService {
     prod.description = val.description
     this.addProductFull(prod);
   }
-  addOrder(i: Order) {
+  addOrder(i: OrderCart) {
     i.who = this.me.id;
-    this.orderss.push(i);
+    console.log(this.orders.length);
+    this.orders.push(i);
+    console.log(this.orders.length);
     this.presentToastS("Order Added Successfully");
   }
   addUser(i: User) {

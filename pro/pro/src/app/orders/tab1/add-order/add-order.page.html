@@ -39,6 +39,10 @@
     </ion-modal>
   </ion-item>
 
+  <ion-item lines="none" *ngIf="oc.orderedDate>=oc.expectedDate">
+    <ion-label color="danger">Order date is the same as Expected date</ion-label>
+  </ion-item>
+
   <div *ngIf="oc.sup!=null">
     <!-- <div *ngIf="oc.sup==null"> -->
     <ion-list>
@@ -50,7 +54,7 @@
         <!-- <ion-list> -->
         <ion-item lines="full">
           <ion-icon name="cart" slot="start"></ion-icon> {{d.getCurrOrderCartLength()}} Items
-          <ion-label slot="end">Total: {{d.calcCurrOrderCartTotal()}}</ion-label>
+          <ion-label slot="end">Total: {{d.calcCurrOrderCartTotal()|currency}}</ion-label>
         </ion-item>
         <ion-card *ngFor="let p of this.d.getSupProducts('sup1')">
           <ion-grid fixed>
@@ -67,11 +71,11 @@
                 <h4>Price:</h4>
               </ion-col>
               <ion-col>
-                <h4>{{p.price|currency}}</h4>
+                <h4>{{p.price*p.ipc|currency}}</h4>
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col class="detailsField" size="4">
+              <ion-col class="detailsField" size="6">
                 <h4>Current Quantity:</h4>
               </ion-col>
               <ion-col>
@@ -108,3 +112,14 @@
     </ion-list>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button
+      [disabled]="(oc.sup==null)||( oc.orderedDate==null)|| (oc.expectedDate == null)||(oc.orderedDate>=oc.expectedDate)||(d.getCurrOrderCartLength()==0)"
+      (click)="addOrder()" routerLink="/orders-tabs/list" routerDirection="back" expand="block">
+      <!-- (click)="addOrder()" expand="block"> -->
+      Add Order
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

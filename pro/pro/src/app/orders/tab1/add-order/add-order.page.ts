@@ -27,8 +27,9 @@ export class AddOrderPage implements OnInit {
     return `${maxLength - inputLength} number remaining`;
   }
 
-  addEmpVal(val) {
-    this.d.addEmp(val);
+  addOrder() {
+    this.oc.cart = this.d.currOrderCart
+    this.d.addOrder(this.oc);
   }
 
   ngOnInit() {
