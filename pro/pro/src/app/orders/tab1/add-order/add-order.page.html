@@ -39,15 +39,15 @@
     </ion-modal>
   </ion-item>
 
-  <!-- <div *ngIf="oc.sup!=null"> -->
-  <div *ngIf="oc.sup==null">
+  <div *ngIf="oc.sup!=null">
+    <!-- <div *ngIf="oc.sup==null"> -->
     <ion-list>
       <ion-list-header>
         <ion-card-title>Supplier Products</ion-card-title>
       </ion-list-header>
 
-      <!-- <ion-list *ngIf="this.d.getSupProducts(oc.sup).length>0"> -->
-      <ion-list>
+      <ion-list *ngIf="this.d.getSupProducts(oc.sup).length>0">
+        <!-- <ion-list> -->
         <ion-item lines="full">
           <ion-icon name="cart" slot="start"></ion-icon> {{d.getCurrOrderCartLength()}} Items
           <ion-label slot="end">Total: {{d.calcCurrOrderCartTotal()}}</ion-label>
@@ -75,7 +75,7 @@
                 <h4>Current Quantity:</h4>
               </ion-col>
               <ion-col>
-                <h4>{{p.quantity}} Item</h4>
+                <h4>{{p.quantity + d.currOrderCart[p.id!]!||p.quantity}} Item</h4>
               </ion-col>
             </ion-row>
 
@@ -107,6 +107,4 @@
       </ion-list>
     </ion-list>
   </div>
-
-
 </ion-content>

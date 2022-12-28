@@ -368,8 +368,8 @@ export class DataService {
       this.currOrderCart[id] += ipc;
     } else
       this.currOrderCart[id] = ipc;
-    this.setProduct(id, "q", this.getProduct(id)?.quantity + ipc)
-    console.log(this.currOrderCart)
+    // this.setProduct(id, "q", this.getProduct(id)?.quantity + ipc)
+    // console.log(this.currOrderCart)
   }
 
   addProductFull(i: Product) {
@@ -462,7 +462,10 @@ export class DataService {
     } else this.presentToastF("Employee Not Found");
   }
 
-  // remove by Id
+  addOrderCart() {
+
+  }
+  // --------------------------------------------------------------  remove
   removeProduct(id: string) {
     for (let i = 0; i < this.products.length; i++) {
       const element = this.products[i];
@@ -523,10 +526,10 @@ export class DataService {
   removeFromOrderCart(id: any, ipc) {
     if (this.currOrderCart[id] > 1) {
       this.currOrderCart[id] -= ipc;
-      this.setProduct(id, "q", (this.getProduct(id)!.quantity - ipc));
+      // this.setProduct(id, "q", (this.getProduct(id)!.quantity - ipc));
     } else
       delete this.currOrderCart[id]
-    console.log(this.currOrderCart)
+    // console.log(this.currOrderCart)
   }
 
 
