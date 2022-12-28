@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class OrderDetailsPage implements OnInit {
   id
   o
+  cartIds
   constructor(public d: DataService, public ActRoute: ActivatedRoute) {
 
   }
@@ -17,6 +18,7 @@ export class OrderDetailsPage implements OnInit {
   ngOnInit() {
     this.id = this.ActRoute.snapshot.paramMap.get('id');
     this.o = this.d.getOrder(this.id)
+    this.cartIds = Object.keys(this.o.cartItems)
   }
 
 }

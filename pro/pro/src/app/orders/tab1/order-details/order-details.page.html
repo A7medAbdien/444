@@ -13,14 +13,13 @@
   <ion-item lines="none">
     <ion-label color="primary" position="stacked">
       <h2>
-        Supplier
+        Supplier Name
       </h2>
     </ion-label>
-    <h1 class="detailsField">
+    <h2 class="detailsField">
       {{d.getUser(o.sup)?.name}}
-    </h1>
+    </h2>
   </ion-item>
-  <br>
   <br>
   <ion-item lines="none">
     <ion-label color="primary" position="stacked">
@@ -28,9 +27,9 @@
         Ordered Date
       </h2>
     </ion-label>
-    <h1 class="detailsField">
+    <h2 class="detailsField">
       {{o.orderedDate|date:"fullDate"}}
-    </h1>
+    </h2>
   </ion-item>
   <br>
   <br>
@@ -40,56 +39,54 @@
         Expected Date
       </h2>
     </ion-label>
-    <h1 class="detailsField">
+    <h2 class="detailsField">
       {{o.expectedDate|date:"fullDate"}}
-    </h1>
+    </h2>
   </ion-item>
   <br>
 
   <ion-card>
-    <ion-list *ngIf="this.d.getSupProducts(o.sup).length>0">
-      <ion-list-header>
-        Supplier Products
-      </ion-list-header>
-      <br>
-
+    <ion-list *ngIf="cartIds.length>0">
+      <ion-card-header>
+        <ion-card-title>Order Products</ion-card-title>
+      </ion-card-header>
       <ion-grid fixed>
         <ion-row class="detailsField">
           <ion-col size="3">
             <div class="ion-text-center">
 
-              <h3>IPC</h3>
+              <h4>Qty.</h4>
 
             </div>
           </ion-col>
           <ion-col size="6">
             <div class="ion-text-center">
 
-              <h3>Name</h3>
+              <h4>Name</h4>
 
             </div>
           </ion-col>
           <ion-col size="3">
             <div class="ion-text-center">
-              <h3>Price</h3>
+              <h4>Price</h4>
             </div>
           </ion-col>
         </ion-row>
 
-        <ion-row *ngFor="let p of this.d.getSupProducts(o.sup)">
-          <ion-col size=" 3">
+        <ion-row *ngFor="let pId of cartIds">
+          <ion-col size="3">
             <div class="ion-text-center">
-              <h3>{{p.ipc}}</h3>
+              <h4>{{o.cartItems[pId]}}</h4>
             </div>
           </ion-col>
           <ion-col size="6">
             <div class="ion-text-center">
-              <h3>{{p.name}}</h3>
+              <h4>{{d.getProduct(pId)?.name}}</h4>
             </div>
           </ion-col>
           <ion-col size="3">
             <div class="ion-text-center">
-              <h3>{{p.price|currency}}</h3>
+              <h4>{{d.getProduct(pId)?.price|currency}}</h4>
             </div>
           </ion-col>
         </ion-row>
