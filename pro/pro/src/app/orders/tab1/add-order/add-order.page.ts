@@ -1,3 +1,4 @@
+import { Order, OrderCart } from './../../../../interfaces';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -10,8 +11,10 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class AddOrderPage implements OnInit {
 
-  o
+  o;
+  oc: OrderCart = {} as OrderCart;
   cartIds
+  isSupSelected = false
   constructor(public d: DataService, public ActRoute: ActivatedRoute, public fb: FormBuilder) {
 
   }
@@ -30,6 +33,6 @@ export class AddOrderPage implements OnInit {
 
   ngOnInit() {
     this.o = this.d.getOrder("156")
-    this.cartIds = Object.keys(this.o.cartItems)
+    this.cartIds = Object.keys(this.o.cart)
   }
 }

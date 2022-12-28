@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-icon name="arrow-back" routerLink="/orders-tabs/list" routerDirection="back"></ion-icon>
     </ion-buttons>
-    <ion-title>Order Details</ion-title>
+    <h4>Order Details</h4>
   </ion-toolbar>
 </ion-header>
 
@@ -11,89 +11,102 @@
 
   <br>
 
-  <ion-item lines="none">
-    <ion-label color="primary" position="stacked">
-      <h2>
-        Supplier Name
-      </h2>
-    </ion-label>
-    <h2 class="detailsField">
-      {{d.getUser(o.sup)?.name}}
-    </h2>
+  <ion-item>
+    <ion-label>Supplier Name {{oc.sup}}</ion-label>
+    <ion-select [(ngModel)]="oc.sup" placeholder="Select Supplier">
+      <ion-select-option *ngFor="let s of d.sups()" value="{{s.id}}">{{s.name}}</ion-select-option>
+    </ion-select>
   </ion-item>
-  <br>
-  <ion-item lines="none">
-    <ion-label color="primary" position="stacked">
-      <h2>
-        Ordered Date
-      </h2>
-    </ion-label>
-    <h2 class="detailsField">
-      {{o.orderedDate|date:"fullDate"}}
-    </h2>
+
+  <ion-item>
+    <ion-label>Ordered Date</ion-label>
+    <ion-datetime-button datetime="datetime1"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime [(ngModel)]="oc.orderedDate" min="{{this.d.today.toISOString()}}" id="datetime1"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </ion-item>
-  <br>
-  <br>
-  <ion-item lines="none">
-    <ion-label color="primary" position="stacked">
-      <h2>
-        Expected Date
-      </h2>
-    </ion-label>
-    <h2 class="detailsField">
-      {{o.expectedDate|date:"fullDate"}}
-    </h2>
+
+  <ion-item>
+    <ion-label>Expected Date</ion-label>
+    <ion-datetime-button [disabled]="oc.orderedDate==null" datetime="datetime"></ion-datetime-button>
+    <ion-modal [keepContentsMounted]=" true">
+      <ng-template>
+        <ion-datetime [(ngModel)]="oc.expectedDate" min="{{this.oc.orderedDate||this.d.today.toISOString()}}"
+          id="datetime"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </ion-item>
-  <br>
 
-  <ion-card>
-    <ion-list *ngIf="cartIds.length>0">
-      <ion-card-header>
-        <ion-card-title>Order Products</ion-card-title>
-      </ion-card-header>
-      <ion-grid fixed>
-        <ion-row class="detailsField">
-          <ion-col size="3">
-            <div class="ion-text-center">
+  <!-- <div *ngIf="oc.sup!=null"> -->
+  <div *ngIf="oc.sup==null">
+    <ion-list>
+      <ion-list-header>
+        <ion-card-title>Supplier Products</ion-card-title>
+      </ion-list-header>
 
-              <h4>Qty.</h4>
+      <!-- <ion-list *ngIf="this.d.getSupProducts(oc.sup).length>0"> -->
+      <ion-list>
+        <ion-item lines="full">
+          <ion-icon name="cart" slot="start"></ion-icon> {{d.getCurrOrderCartLength()}} Items
+          <ion-label slot="end">Total: {{d.calcCurrOrderCartTotal()}}</ion-label>
+        </ion-item>
+        <ion-card *ngFor="let p of this.d.getSupProducts('sup1')">
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col class="detailsField" size="4">
+                <h4>Name:</h4>
+              </ion-col>
+              <ion-col>
+                <h4>{{p.name}}</h4>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="detailsField" size="4">
+                <h4>Price:</h4>
+              </ion-col>
+              <ion-col>
+                <h4>{{p.price|currency}}</h4>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="detailsField" size="4">
+                <h4>Current Quantity:</h4>
+              </ion-col>
+              <ion-col>
+                <h4>{{p.quantity}} Item</h4>
+              </ion-col>
+            </ion-row>
 
-            </div>
-          </ion-col>
-          <ion-col size="6">
-            <div class="ion-text-center">
+            <ion-row>
+              <ion-col size="5">
+                <ion-item>
+                  <ion-button (click)="d.addToOrderCart(p.id,p.ipc)" fill="clear" shape="round">
+                    <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+                  </ion-button>
+                  <ion-label>{{d.currOrderCart[p.id!]/p.ipc||0}}</ion-label>
+                  <ion-button (click)="d.removeFromOrderCart(p.id,p.ipc)" fill="clear" shape="round">
+                    <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+                  </ion-button>
+                </ion-item>
+              </ion-col>
 
-              <h4>Name</h4>
+              <ion-col size="4">
+                <h4>IPC: {{p.ipc}}</h4>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
 
-            </div>
-          </ion-col>
-          <ion-col size="3">
-            <div class="ion-text-center">
-              <h4>Price</h4>
-            </div>
-          </ion-col>
-        </ion-row>
-
-        <ion-row *ngFor="let pId of cartIds">
-          <ion-col size="3">
-            <div class="ion-text-center">
-              <h4>{{o.cartItems[pId]}}</h4>
-            </div>
-          </ion-col>
-          <ion-col size="6">
-            <div class="ion-text-center">
-              <h4>{{d.getProduct(pId)?.name}}</h4>
-            </div>
-          </ion-col>
-          <ion-col size="3">
-            <div class="ion-text-center">
-              <h4>{{d.getProduct(pId)?.price|currency}}</h4>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        </ion-card>
+      </ion-list>
+      <ion-list *ngIf="this.d.getSupProducts(oc.sup).length==0">
+        <ion-card-content>
+          The supplier does not supply with any products
+        </ion-card-content>
+      </ion-list>
     </ion-list>
-  </ion-card>
+  </div>
 
 
 </ion-content>
