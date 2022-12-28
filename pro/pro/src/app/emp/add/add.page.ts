@@ -20,6 +20,9 @@ export class AddPage implements OnInit {
     });
   }
 
+  ngOnInit() {
+    this.d.onlyOwner();
+  }
 
   customCounterFormatter(inputLength: number, maxLength: number) {
     return `${maxLength - inputLength} characters remaining`;
@@ -29,9 +32,6 @@ export class AddPage implements OnInit {
     return `${maxLength - inputLength} number remaining`;
   }
 
-  ngOnInit() {
-    this.d.onlyOwner();
-  }
 
   addEmpVal(val) {
     this.d.addEmp(val);
