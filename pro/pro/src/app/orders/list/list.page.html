@@ -51,7 +51,7 @@
     </ion-list-header>
     <ion-card routerLink="/order-details/{{o.id}}" *ngFor="let o of d.orders">
       <ion-card-header>
-        <ion-card-subtitle>{{d.getCartLength(o.cartItems)}} item</ion-card-subtitle>
+        <ion-card-subtitle>{{d.getOrderCartLength(o.cart)}} item</ion-card-subtitle>
         <ion-card-title>{{d.getUser(o.sup)?.name}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
