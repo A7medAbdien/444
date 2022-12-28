@@ -11,21 +11,10 @@ export interface Product {
   description: string;
 };
 
-export interface Cart {
-  id?: string;
-  who: string;
-  cartItems: CartItems,
-  total: number;
-  paymentDate: Date;
-  remaining: number;
-}
-
-export interface CartItems { [key: string]: number };
-
 export interface OrderCart {
   id?: string;
   who: string;
-  sup: string;
+  sup: string;//supId
   cart: CartItems,
   total: number;
   orderedDate: Date;
@@ -34,12 +23,24 @@ export interface OrderCart {
 }
 
 export interface Order extends Product {
+  oid?: string;
   id?: string;
   who: string;
   orderedDate: Date;
   expectedDate: Date;
   receivedDate: Date;
   cartoons: number;
+}
+
+export interface CartItems { [key: string]: number };
+
+export interface Cart {
+  id?: string;
+  who: string;
+  cartItems: CartItems,
+  total: number;
+  paymentDate: Date;
+  remaining: number;
 }
 
 export interface User {
