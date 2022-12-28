@@ -53,7 +53,7 @@ export class DataService {
       // receivedDate: new Date("2022-04-21"),
     }
   ];
-  public orderss: Order[] = [
+  public ordered: Order[] = [
     {
       id: "111",
       who: "000",
@@ -299,7 +299,7 @@ export class DataService {
   }
   getProdNeedToOrder() {
     return this.products.filter(x => {
-      return (x.quantity > x.skut) ? true : false;
+      return (x.quantity < x.skut) ? true : false;
     })
   }
   getProdNeedToOrderGS(s) {
@@ -513,9 +513,9 @@ export class DataService {
     this.presentToastS("Product Removed Successfully");
   }
   removeOrder(id: string) {
-    for (let i = 0; i < this.orderss.length; i++) {
-      const element = this.orderss[i];
-      if (element.id == id) this.orderss.splice(i, 1);;
+    for (let i = 0; i < this.orders.length; i++) {
+      const element = this.orders[i];
+      if (element.id == id) this.orders.splice(i, 1);;
     }
     this.presentToastS("Order Removed Successfully");
   }
@@ -727,7 +727,7 @@ export class DataService {
   searchedOrders: Order[] = [] as Order[];
   searchOrdersBN(event: any) {
     if (event.target.value.length > 0) {
-      var filteredList = this.orderss.filter((row) => {
+      var filteredList = this.ordered.filter((row) => {
         if (row.name.indexOf(event.target.value) != -1) {
           return true;
         } else {
@@ -799,8 +799,42 @@ export class DataService {
     (this.isFav(orderCartId)) ? this.removeFromFav(orderCartId) : this.addToFav(orderCartId)
   }
 
-  onDeliver(id) {
-
+  onDeliver(orderCartId) {
+    var receivedDate = new Date();
+    var orderCart = this.getOrder(orderCartId)
+    this.removeOrder(orderCartId);
+    var cart = orderCart!.cart
+    var expectedDate = orderCart!.expectedDate
+    var orderedDate = orderCart!.orderedDate
+    for (const order in cart) {
+      if (Object.prototype.hasOwnProperty.call(cart, order)) {
+        const quantity = cart[order];
+        const p = this.getProduct(order)!
+        // 1. added to the product quantities
+        this.setProduct(order, "q", p.quantity + quantity)
+        // 2. add to ordered list
+        console.log(this.ordered.length)
+        this.ordered.push({
+          id: p.id,
+          who: this.me.id,
+          orderedDate: orderedDate,
+          expectedDate: expectedDate,
+          receivedDate: receivedDate,
+          cartoons: quantity / p.ipc,
+          name: p.name,
+          quantity: quantity,
+          skut: p.skut,
+          supId: orderCart!.sup,
+          ipc: p.ipc,
+          image: p.image,
+          price: p.price,
+          description: p.description
+        })
+      }
+    }
+    console.log(this.ordered.length)
+    console.log(this.getProdNeedToOrder())
+    this.presentToastS("Order Delivered Successfully");
   }
 
 
