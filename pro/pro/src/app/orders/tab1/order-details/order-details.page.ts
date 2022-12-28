@@ -1,4 +1,6 @@
+import { DataService } from 'src/app/services/data.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order-details',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-details.page.scss'],
 })
 export class OrderDetailsPage implements OnInit {
+  id
+  o
+  constructor(public d: DataService, public ActRoute: ActivatedRoute) {
 
-  constructor() { }
+  }
 
   ngOnInit() {
+    this.id = this.ActRoute.snapshot.paramMap.get('id');
+    this.o = this.d.getOrder(this.id)
   }
 
 }

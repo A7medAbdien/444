@@ -52,8 +52,6 @@ export class DataService {
       expectedDate: new Date("2022-04-21"),
       receivedDate: new Date("2022-04-21"),
       cartoons: 5,
-
-
     },
     {
       id: "121",
@@ -63,7 +61,6 @@ export class DataService {
       expectedDate: new Date("2022-04-26"),
       receivedDate: new Date("2022-04-26"),
       cartoons: 5,
-
     },
     {
       id: "131",
@@ -73,7 +70,6 @@ export class DataService {
       expectedDate: new Date("2022-04-26"),
       receivedDate: new Date("2022-04-28"),
       cartoons: 5,
-
     }
   ];
   public users: User[] = [
@@ -178,7 +174,7 @@ export class DataService {
     return null;
   }
   getOrder(id: string) {
-    for (const i of this.orderss) {
+    for (const i of this.orders) {
       if (i.id == id)
         return i;
     }

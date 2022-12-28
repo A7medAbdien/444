@@ -30,7 +30,7 @@ export interface OrderCart {
   total: number;
   orderedDate: Date;
   expectedDate: Date;
-  receivedDate: Date;
+  receivedDate?: Date;
 }
 
 export interface Order extends Product {

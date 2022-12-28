@@ -1,9 +1,100 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>order-details</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" routerLink="/orders-tabs/list" routerDirection="back"></ion-icon>
+    </ion-buttons>
+    <ion-title>Order Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <br>
+  <ion-item lines="none">
+    <ion-label color="primary" position="stacked">
+      <h2>
+        Supplier
+      </h2>
+    </ion-label>
+    <h1 class="detailsField">
+      {{d.getUser(o.sup)?.name}}
+    </h1>
+  </ion-item>
+  <br>
+  <br>
+  <ion-item lines="none">
+    <ion-label color="primary" position="stacked">
+      <h2>
+        Ordered Date
+      </h2>
+    </ion-label>
+    <h1 class="detailsField">
+      {{o.orderedDate|date:"fullDate"}}
+    </h1>
+  </ion-item>
+  <br>
+  <br>
+  <ion-item lines="none">
+    <ion-label color="primary" position="stacked">
+      <h2>
+        Expected Date
+      </h2>
+    </ion-label>
+    <h1 class="detailsField">
+      {{o.expectedDate|date:"fullDate"}}
+    </h1>
+  </ion-item>
+  <br>
+
+  <ion-card>
+    <ion-list *ngIf="this.d.getSupProducts(o.sup).length>0">
+      <ion-list-header>
+        Supplier Products
+      </ion-list-header>
+      <br>
+
+      <ion-grid fixed>
+        <ion-row class="detailsField">
+          <ion-col size="3">
+            <div class="ion-text-center">
+
+              <h3>IPC</h3>
+
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="ion-text-center">
+
+              <h3>Name</h3>
+
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div class="ion-text-center">
+              <h3>Price</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let p of this.d.getSupProducts(o.sup)">
+          <ion-col size=" 3">
+            <div class="ion-text-center">
+              <h3>{{p.ipc}}</h3>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="ion-text-center">
+              <h3>{{p.name}}</h3>
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div class="ion-text-center">
+              <h3>{{p.price|currency}}</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </ion-card>
 
 </ion-content>

@@ -136,7 +136,7 @@ const routes: Routes = [
     loadChildren: () => import('./orders/tab1/add-order/add-order.module').then(m => m.AddOrderPageModule)
   },
   {
-    path: 'order-details',
+    path: 'order-details/:id',
     loadChildren: () => import('./orders/tab1/order-details/order-details.module').then(m => m.OrderDetailsPageModule)
   },
   // ---------------------------- Tab 3
