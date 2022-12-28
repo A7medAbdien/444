@@ -1,5 +1,4 @@
-import { CartItems } from 'src/interfaces';
-import { Emp, Order, OrderCart, Product, Shift, ShiftRequest, User, } from './../../interfaces';
+import { CartItems, Emp, Order, OrderCart, Product, Shift, ShiftRequest, User, } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
 import { NavController, ToastController } from '@ionic/angular';
@@ -26,7 +25,7 @@ export class DataService {
   public orders: OrderCart[] = [
     {
       who: "000", id: "156",
-      cartItems: { "123": 5, "456": 5, "789": 10 },
+      cart: { "123": 5, "456": 5, "789": 10 },
       sup: "sup1",
       total: 100,
       orderedDate: new Date("2022-04-21"),
@@ -35,7 +34,7 @@ export class DataService {
     },
     {
       who: "123", id: "166",
-      cartItems: { "456": 5, "789": 10 },
+      cart: { "456": 5, "789": 10 },
       sup: "sup2",
       total: 150,
       orderedDate: new Date("2022-04-21"),
@@ -152,6 +151,9 @@ export class DataService {
     // this.me = this.users[4];
     this.me = this.users[3];
   }
+
+  currOrderCart: CartItems = {};
+  currOrderCartTotal: number = 0;
 
 
   onlyOwner(): void {
@@ -271,8 +273,8 @@ export class DataService {
       return false;
     });
   }
-  getCartLength(cartItems) {
-    return Object.keys(cartItems).length
+  getOrderCartLength(cartOrders) {
+    return Object.keys(cartOrders).length
   }
   getProdNeedToOrder() {
     return this.products.filter(x => {
@@ -284,9 +286,92 @@ export class DataService {
       return (x.quantity <= x.skut) ? true : false;
     })
   }
+  getCurrOrderCartLength() {
+    return Object.keys(this.currOrderCart).length
+  }
+
+
+  setProduct(id, key, value) {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].id == id) {
+        switch (key) {
+          case "all":
+            value = {} as Product
+            this.products[i].who = this.me.id
+            this.products[i].name = value.name
+            this.products[i].price = value.price
+            this.products[i].quantity = value.quantity
+            this.products[i].skut = value.skut
+            this.products[i].supId = value.supId
+            this.products[i].ipc = value.ipc
+            this.products[i].description = value.description
+            this.products[i].image = value.image
+            break;
+          case "n"://1
+            this.products[i].name = value
+            break;
+          case "q":
+            this.products[i].quantity = value
+            break;
+          case "skut"://3
+            this.products[i].skut = value
+            break;
+          case "sup":
+            this.products[i].supId = value
+            break;
+          case "ipc"://5
+            this.products[i].ipc = value
+            break;
+          case "img":
+            this.products[i].image = value
+            break;
+          case "p"://7
+            this.products[i].price = value
+            break;
+          case "d":
+            this.products[i].description = value
+            break;
+          default:
+            break;
+        }
+      } else console.log("product not found");
+    }
+  }
+  setShiftEmp(id, val) {
+    for (let i = 0; i < this.shifts.length; i++) {
+      const s = this.shifts[i];
+      if (s.id == id) {
+        this.shifts[i].empId = val;
+      }
+    }
+  }
+  trade(mS, oS, SRid) {
+    var m = this.getShift(mS);
+    var o = this.getShift(oS);
+    // console.log(m)
+    // console.log(o)
+    var temp = m?.empId
+    this.setShiftEmp(m?.id, o?.empId)
+    this.setShiftEmp(o?.id, temp)
+    this.presentToastS("Shift Treaded Successfully")
+    // console.log(m)
+    // console.log(o)
+    this.removeShiftReqSilent(SRid);
+  }
+
 
 
   // add
+
+  addToOrderCart(id: any, ipc) {
+    if (this.currOrderCart[id] > 0) {
+      this.currOrderCart[id] += ipc;
+    } else
+      this.currOrderCart[id] = ipc;
+    this.setProduct(id, "q", this.getProduct(id)?.quantity + ipc)
+    console.log(this.currOrderCart)
+  }
+
   addProductFull(i: Product) {
     i.who = this.me.id;
     this.products.push(i);
@@ -434,6 +519,16 @@ export class DataService {
     }
     // this.presentToastS("Shift Request Removed Successfully");
   }
+  // TODO: better way to remove
+  removeFromOrderCart(id: any, ipc) {
+    if (this.currOrderCart[id] > 1) {
+      this.currOrderCart[id] -= ipc;
+      this.setProduct(id, "q", (this.getProduct(id)!.quantity - ipc));
+    } else
+      delete this.currOrderCart[id]
+    console.log(this.currOrderCart)
+  }
+
 
   // present toast
   async presentToastS(massage: string) {
@@ -599,7 +694,29 @@ export class DataService {
     }
   }
 
-
+  calcOrderCartTotal(order: OrderCart): number {
+    order.total = 0
+    for (const prod in order.cart) {
+      if (Object.prototype.hasOwnProperty.call(order.cart, prod)) {
+        const quantity = order.cart[prod];
+        const price = this.getProduct(prod)?.price
+        order.total += quantity * price!
+      }
+    }
+    return order.total
+  }
+  calcCurrOrderCartTotal(): number {
+    var total = 0
+    for (const prod in this.currOrderCart) {
+      if (Object.prototype.hasOwnProperty.call(this.currOrderCart, prod)) {
+        const quantity = this.currOrderCart[prod];
+        const price = this.getProduct(prod)?.price
+        total += quantity * price!
+      }
+    }
+    this.currOrderCartTotal = total
+    return total
+  }
 
   checkHi(id) {
     for (const i of this.hiProducts) {
@@ -610,27 +727,7 @@ export class DataService {
   }
 
 
-  setShiftEmp(id, val) {
-    for (let i = 0; i < this.shifts.length; i++) {
-      const s = this.shifts[i];
-      if (s.id == id) {
-        this.shifts[i].empId = val;
-      }
-    }
-  }
-  trade(mS, oS, SRid) {
-    var m = this.getShift(mS);
-    var o = this.getShift(oS);
-    // console.log(m)
-    // console.log(o)
-    var temp = m?.empId
-    this.setShiftEmp(m?.id, o?.empId)
-    this.setShiftEmp(o?.id, temp)
-    this.presentToastS("Shift Treaded Successfully")
-    // console.log(m)
-    // console.log(o)
-    this.removeShiftReqSilent(SRid);
-  }
+
 
 
   //check if all Positive
