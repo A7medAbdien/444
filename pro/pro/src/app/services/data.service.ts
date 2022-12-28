@@ -1,4 +1,4 @@
-import { CartItems, Emp, FavOrderCart, Order, OrderCart, Product, Shift, ShiftRequest, User, } from './../../interfaces';
+import { CartItems, Emp, Order, OrderCart, Product, Shift, ShiftRequest, User, } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
 import { NavController, ToastController } from '@ionic/angular';
@@ -42,7 +42,7 @@ export class DataService {
       receivedDate: new Date("2022-04-21"),
     }
   ]
-  public fav: FavOrderCart[] = [
+  public fav: OrderCart[] = [
     {
       who: "123", id: "166",
       cart: { "456": 5, "789": 10 },
@@ -490,9 +490,12 @@ export class DataService {
       this.presentToastS("Request Added Successfully");
     } else this.presentToastF("Employee Not Found");
   }
-
-  addOrderCart() {
-
+  reOrder(id) {
+    var o = this.getFav(id)
+    var speed = o!.expectedDate.getTime() - o!.orderedDate.getTime()
+    o!.orderedDate = new Date();
+    o!.expectedDate = new Date(o!.orderedDate.getTime() + speed);
+    this.addOrder(o!);
   }
   // --------------------------------------------------------------  remove
   removeFromFav(id: string) {

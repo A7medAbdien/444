@@ -3,10 +3,36 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>favorites</ion-title>
+    <ion-title>Favorites</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-list>
+    <ion-card *ngFor="let o of d.fav">
+      <ion-card-header>
+        <ion-card-subtitle>{{d.getOrderCartLength(o.cart)}} item</ion-card-subtitle>
+        <ion-card-title>{{d.getUser(o.sup)?.name}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text>
+          <h2>
+            <ion-icon name="calendar"></ion-icon>
+            {{o.expectedDate|date:"yyyy-MM-dd"}}
+          </h2>
+        </ion-text>
+        <ion-button (click)="d.reOrder(o.id)" expand="block" fill="clear" shape="round">
+          ReOrder
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
 </ion-content>
+
+<ion-footer>
+  <ion-button routerLink="/add-order" expand="block" shape="round">
+    Place Order
+  </ion-button>
+</ion-footer>
