@@ -30,7 +30,7 @@ export class DataService {
       total: 100,
       orderedDate: new Date("2022-04-21"),
       expectedDate: new Date("2022-04-21"),
-      receivedDate: new Date("2022-04-21"),
+      // receivedDate: new Date("2022-04-21"),
     },
     {
       who: "123", id: "166",
@@ -39,7 +39,7 @@ export class DataService {
       total: 150,
       orderedDate: new Date("2022-04-21"),
       expectedDate: new Date("2022-04-21"),
-      receivedDate: new Date("2022-04-21"),
+      // receivedDate: new Date("2022-04-21"),
     }
   ]
   public fav: OrderCart[] = [
@@ -50,7 +50,7 @@ export class DataService {
       total: 150,
       orderedDate: new Date("2022-04-21"),
       expectedDate: new Date("2022-04-21"),
-      receivedDate: new Date("2022-04-21"),
+      // receivedDate: new Date("2022-04-21"),
     }
   ];
   public orderss: Order[] = [
@@ -797,6 +797,10 @@ export class DataService {
 
   onFav(orderCartId: string) {
     (this.isFav(orderCartId)) ? this.removeFromFav(orderCartId) : this.addToFav(orderCartId)
+  }
+
+  onDeliver(id) {
+
   }
 
 
