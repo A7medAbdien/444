@@ -33,6 +33,8 @@ export interface OrderCart {
   receivedDate?: Date;
 }
 
+export interface FavOrderCart extends OrderCart { }
+
 export interface Order extends Product {
   id?: string;
   who: string;

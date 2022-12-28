@@ -1,4 +1,4 @@
-import { CartItems, Emp, Order, OrderCart, Product, Shift, ShiftRequest, User, } from './../../interfaces';
+import { CartItems, Emp, FavOrderCart, Order, OrderCart, Product, Shift, ShiftRequest, User, } from './../../interfaces';
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
 import { NavController, ToastController } from '@ionic/angular';
@@ -42,6 +42,17 @@ export class DataService {
       receivedDate: new Date("2022-04-21"),
     }
   ]
+  public fav: FavOrderCart[] = [
+    {
+      who: "123", id: "166",
+      cart: { "456": 5, "789": 10 },
+      sup: "sup2",
+      total: 150,
+      orderedDate: new Date("2022-04-21"),
+      expectedDate: new Date("2022-04-21"),
+      receivedDate: new Date("2022-04-21"),
+    }
+  ];
   public orderss: Order[] = [
     {
       id: "111",
@@ -164,8 +175,18 @@ export class DataService {
   isOwner(): boolean {
     return this.me.type == "owner";
   }
+  isFav(orderId: string) {
+    return this.getFav(orderId) != null
+  }
   signOut(id) {
     console.log("sign out")
+  }
+  getFav(id) {
+    for (const i of this.fav) {
+      if (i.id == id)
+        return i;
+    }
+    return null;
   }
   // get by Id
   getProduct(id: string) {
@@ -362,6 +383,12 @@ export class DataService {
 
 
   // add
+  addToFav(i) {
+    // i.who = this.me.id;
+    (this.getOrder(i) != null) ? this.fav.push(this.getOrder(i)!) : console.log(i)
+    console.log(this.fav)
+    this.presentToastSB("Order Favored Successfully")
+  }
 
   addToOrderCart(id: any, ipc) {
     if (this.currOrderCart[id] > 0) {
@@ -468,6 +495,13 @@ export class DataService {
 
   }
   // --------------------------------------------------------------  remove
+  removeFromFav(id: string) {
+    for (let i = 0; i < this.fav.length; i++) {
+      const element = this.fav[i];
+      if (element.id == id) this.fav.splice(i, 1);;
+    }
+    this.presentToastFB("Order Unfavored Successfully");
+  }
   removeProduct(id: string) {
     for (let i = 0; i < this.products.length; i++) {
       const element = this.products[i];
@@ -539,9 +573,22 @@ export class DataService {
   async presentToastS(massage: string) {
     const toast = await this.toastCtrl.create({
       message: massage,
-      duration: 2000,
+      duration: 500,
       color: 'primary',
       position: 'top',
+    });
+
+    toast.present();
+    toast.onDidDismiss().then((resp) => {
+      console.log('Dismissed toast');
+    });
+  }
+  async presentToastSB(massage: string) {
+    const toast = await this.toastCtrl.create({
+      message: massage,
+      duration: 500,
+      color: 'primary',
+      position: 'bottom',
     });
 
     toast.present();
@@ -553,9 +600,22 @@ export class DataService {
   async presentToastF(massage: string) {
     const toast = await this.toastCtrl.create({
       message: massage,
-      duration: 2000,
+      duration: 500,
       color: 'danger',
       position: 'top',
+    });
+
+    toast.present();
+    toast.onDidDismiss().then((resp) => {
+      console.log('Dismissed toast');
+    });
+  }
+  async presentToastFB(massage: string) {
+    const toast = await this.toastCtrl.create({
+      message: massage,
+      duration: 500,
+      color: 'danger',
+      position: 'bottom',
     });
 
     toast.present();
@@ -732,7 +792,9 @@ export class DataService {
   }
 
 
-
+  onFav(orderCartId: string) {
+    (this.isFav(orderCartId)) ? this.removeFromFav(orderCartId) : this.addToFav(orderCartId)
+  }
 
 
   //check if all Positive

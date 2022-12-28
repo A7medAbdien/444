@@ -4,6 +4,14 @@
       <ion-icon name="arrow-back" routerLink="/orders-tabs/list" routerDirection="back"></ion-icon>
     </ion-buttons>
     <ion-title>Order Details</ion-title>
+    <ion-button (click)="d.onFav(o.id)" fill="clear" slot="end" size="large">
+      <div *ngIf="d.isFav(o.id)">
+        <ion-icon slot="icon-only" color="warning" name="star"></ion-icon>
+      </div>
+      <div *ngIf="!d.isFav(o.id)">
+        <ion-icon slot="icon-only" color="warning" name="star-outline"></ion-icon>
+      </div>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
