@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-icon name="arrow-back" routerLink="/orders-tabs/list" routerDirection="back"></ion-icon>
     </ion-buttons>
-    <h4>Order Details</h4>
+    <ion-title>Order Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,8 @@
   <br>
 
   <ion-item>
-    <ion-label>Supplier Name {{oc.sup}}</ion-label>
+    <!-- <ion-label>Supplier Name {{oc.sup}}</ion-label> -->
+    <ion-label>Supplier Name</ion-label>
     <ion-select [(ngModel)]="oc.sup" placeholder="Select Supplier">
       <ion-select-option *ngFor="let s of d.sups()" value="{{s.id}}">{{s.name}}</ion-select-option>
     </ion-select>
@@ -52,10 +53,7 @@
 
       <ion-list *ngIf="this.d.getSupProducts(oc.sup).length>0">
         <!-- <ion-list> -->
-        <ion-item lines="full">
-          <ion-icon name="cart" slot="start"></ion-icon> {{d.getCurrOrderCartLength()}} Items
-          <ion-label slot="end">Total: {{d.calcCurrOrderCartTotal()|currency}}</ion-label>
-        </ion-item>
+
         <ion-card *ngFor="let p of this.d.getSupProducts('sup1')">
           <ion-grid fixed>
             <ion-row>
@@ -67,8 +65,8 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col class="detailsField" size="4">
-                <h4>Price:</h4>
+              <ion-col class="detailsField" size="6">
+                <h4>Cartoon Price:</h4>
               </ion-col>
               <ion-col>
                 <h4>{{p.price*p.ipc|currency}}</h4>
@@ -115,6 +113,10 @@
 
 <ion-footer>
   <ion-toolbar>
+    <ion-item lines="full">
+      <ion-icon name="cart" slot="start"></ion-icon> {{d.getCurrOrderCartLength()}} Items
+      <ion-label slot="end">Total: {{d.calcCurrOrderCartTotal()|currency}}</ion-label>
+    </ion-item>
     <ion-button
       [disabled]="(oc.sup==null)||( oc.orderedDate==null)|| (oc.expectedDate == null)||(oc.orderedDate>=oc.expectedDate)||(d.getCurrOrderCartLength()==0)"
       (click)="addOrder()" routerLink="/orders-tabs/list" routerDirection="back" expand="block">
