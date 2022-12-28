@@ -22,7 +22,9 @@
             {{o.expectedDate|date:"yyyy-MM-dd"}}
           </h2>
         </ion-text>
-        <ion-button (click)="d.reOrder(o.id)" expand="block" fill="clear" shape="round">
+        <br>
+        <ion-button (click)="d.reOrder(o.id)" expand="block" fill="outline" shape="round">
+          <ion-icon name="refresh-outline"></ion-icon>
           ReOrder
         </ion-button>
       </ion-card-content>
@@ -30,9 +32,3 @@
   </ion-list>
 
 </ion-content>
-
-<ion-footer>
-  <ion-button routerLink="/add-order" expand="block" shape="round">
-    Place Order
-  </ion-button>
-</ion-footer>
