@@ -11,9 +11,7 @@ export class ListPage implements OnInit {
   searchBase = "p"
   constructor(public d: DataService) { }
 
-  toOrder
   ngOnInit() {
-    this.toOrder = this.d.getProdNeedToOrder()
   }
 
 }
