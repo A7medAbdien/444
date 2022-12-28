@@ -8,5 +8,94 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>Search or Highlight</ion-label>
+    <ion-toggle [(ngModel)]="sh" slot="end"></ion-toggle>
+  </ion-item>
+  <div *ngIf="!sh">
+    <ion-item>
+      <ion-label>Search By</ion-label>
+      <ion-select [(ngModel)]="searchBase" placeholder=" Select Pizza">
+        <ion-select-option value="p">Ordered</ion-select-option>
+        <ion-select-option value="s">Supplier</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-searchbar (ionChange)="this.d.searchOrdered($event,searchBase)" placeholder="Search"
+      animated="true"></ion-searchbar>
+  </div>
+  <div *ngIf="sh">
+    <ion-searchbar (ionChange)="this.d.hiOrderedBN($event)" placeholder="Search" animated="true"></ion-searchbar>
+  </div>
+  <ion-list *ngIf="!this.d.isSearchedOrdered">
+
+    <ion-card *ngFor="let p of this.d.ordered">
+      <div *ngIf="this.d.checkHiOrdered(p.id)">
+        <ion-item color="success" lines="none">
+          <ion-label>
+            <h1>
+              {{p.name}}
+            </h1>
+            <h2>
+              {{this.d.getUser(p.supId)?.name}}
+            </h2>
+          </ion-label>
+          <ion-item lines="none" color="primary" style="--border-radius: 15px;">
+            <ion-label>
+              <h1>
+                {{p.quantity}}
+              </h1>
+            </ion-label>
+          </ion-item>
+        </ion-item>
+      </div>
+      <div *ngIf="!this.d.checkHiOrdered(p.id)">
+        <ion-item lines="none">
+          <ion-label>
+            <h1>
+              {{p.name}}
+            </h1>
+            <h2>
+              {{this.d.getUser(p.supId)?.name}}
+            </h2>
+          </ion-label>
+          <ion-item lines="none" color="primary" style="--border-radius: 15px;">
+            <ion-label>
+              <h1>
+                {{p.quantity}}
+              </h1>
+            </ion-label>
+          </ion-item>
+        </ion-item>
+      </div>
+    </ion-card>
+  </ion-list>
+
+  <ion-list *ngIf="this.d.isSearchedOrdered">
+    <ion-card *ngFor="let p of this.d.searchedOrdered">
+      <ion-item lines="none">
+        <ion-label>
+          <h1>
+            {{p.name}}
+          </h1>
+          <h2>
+            {{this.d.getUser(p.supId)?.name}}
+          </h2>
+        </ion-label>
+        <ion-item lines="none" color="primary" style="--border-radius: 15px;">
+          <ion-label>
+            <h1>
+              {{p.quantity}}
+            </h1>
+          </ion-label>
+        </ion-item>
+      </ion-item>
+    </ion-card>
+  </ion-list>
 
 </ion-content>
+
+<ion-footer>
+  <ion-button routerLink="/add-product" class="ion-margin" expand="block">
+    Add Product
+  </ion-button>
+</ion-footer>

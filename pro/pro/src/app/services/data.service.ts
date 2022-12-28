@@ -628,6 +628,61 @@ export class DataService {
   }
 
   // Search
+  // ----------------- Ordered
+  isSearchedOrdered: boolean = false;
+  searchedOrdered: Product[] = [] as Product[];
+  searchOrdered(event, base) {
+    console.log(base)
+    if (event.target.value.length > 0) {
+      switch (base) {
+        case "p":
+          this.searchOrderedBN(event);
+          break;
+        case "s":
+          this.searchOrderedBS(event);
+          break;
+        default:
+          this.searchOrderedBN(event);
+          break;
+      }
+    } else {
+      this.isSearchedOrdered = false;
+    }
+  }
+  searchOrderedBN(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.ordered.filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.searchedOrdered = filteredList;
+      // console.log(filteredList)
+      this.isSearchedOrdered = true;
+    } else {
+      this.isSearchedOrdered = false;
+    }
+  }
+
+  searchOrderedBS(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.ordered.filter((row) => {
+        var sup = this.getUser(row.supId)
+        if (sup?.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.searchedOrdered = filteredList;
+      // console.log(filteredList)
+      this.isSearchedOrdered = true;
+    } else {
+      this.isSearchedOrdered = false;
+    }
+  }
   // ----------------- Products
   isSearchedProducts: boolean = false;
   searchedProducts: Product[] = [] as Product[];
@@ -761,6 +816,39 @@ export class DataService {
       this.isSearchedProducts = false;
     }
   }
+  checkHi(id) {
+    for (const i of this.hiProducts) {
+      if (i.id == id)
+        return true;
+    }
+    return false;
+  }
+
+  isHiOrdered: boolean = false;
+  hiOrdered: Product[] = [] as Product[];
+  hiOrderedBN(event: any) {
+    if (event.target.value.length > 0) {
+      var filteredList = this.ordered.filter((row) => {
+        if (row.name.indexOf(event.target.value) != -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.hiOrdered = filteredList;
+      // console.log(filteredList)
+      this.isHiOrdered = true;
+    } else {
+      this.isSearchedOrdered = false;
+    }
+  }
+  checkHiOrdered(id) {
+    for (const i of this.hiOrdered) {
+      if (i.id == id)
+        return true;
+    }
+    return false;
+  }
 
   calcOrderCartTotal(order: OrderCart): number {
     order.total = 0
@@ -786,13 +874,7 @@ export class DataService {
     return total
   }
 
-  checkHi(id) {
-    for (const i of this.hiProducts) {
-      if (i.id == id)
-        return true;
-    }
-    return false;
-  }
+
 
 
   onFav(orderCartId: string) {
