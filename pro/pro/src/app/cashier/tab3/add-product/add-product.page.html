@@ -21,14 +21,14 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Quantity <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required formControlName="qty" (input)="allP($event)" type="number"></ion-input>
+      <ion-input required formControlName="qty" (ionChange)="allP($event)" type="number"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">
         SKUT (Stock Keeping Unit Threshold)
         <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required formControlName="skut" (input)="allP($event)" type="number"></ion-input>
+      <ion-input required formControlName="skut" (ionChange)="allP($event)" type="number"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -44,7 +44,7 @@
       <ion-label position="floating">
         IPC (Item Per Cartoon)
         <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required formControlName="ipc" (input)="allP($event)" type="number"></ion-input>
+      <ion-input required formControlName="ipc" (ionChange)="allP($event)" type="number"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -58,7 +58,7 @@
       <ion-label position="floating">
         Price
         <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required formControlName="price" (input)="allP($event)" type="number"></ion-input>
+      <ion-input required formControlName="price" (ionChange)="allP($event)" type="number"></ion-input>
     </ion-item>
 
     <ion-item>

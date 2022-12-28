@@ -20,11 +20,11 @@
         <ion-select-option value="s">Supplier</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-searchbar (input)="this.d.searchProducts($event,searchBase)" placeholder="Search"
+    <ion-searchbar (ionChange)="this.d.searchProducts($event,searchBase)" placeholder="Search"
       animated="true"></ion-searchbar>
   </div>
   <div *ngIf="sh">
-    <ion-searchbar (input)="this.d.hiProductsBN($event)" placeholder="Search" animated="true"></ion-searchbar>
+    <ion-searchbar (ionChange)="this.d.hiProductsBN($event)" placeholder="Search" animated="true"></ion-searchbar>
   </div>
   <ion-list *ngIf="!this.d.isSearchedProducts">
     <ion-card *ngFor="let p of this.d.products">
