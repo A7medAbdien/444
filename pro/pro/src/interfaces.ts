@@ -26,7 +26,7 @@ export interface OrderCart {
   id?: string;
   who: string;
   sup: string;
-  cartItems: CartItems,
+  cart: CartItems,
   total: number;
   orderedDate: Date;
   expectedDate: Date;
