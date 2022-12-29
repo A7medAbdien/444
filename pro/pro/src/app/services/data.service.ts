@@ -11,15 +11,15 @@ export class DataService {
   public products: Product[] = [
     {
       who: "000",
-      id: "123", name: "prod1", quantity: 55, skut: 5, supId: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 12, description: "hi"
+      id: "123", name: "Eggs", quantity: 55, skut: 5, supId: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 12, description: "hi"
     },
     {
       who: "000",
-      id: "456", name: "prod2", quantity: 10, skut: 10, supId: "sup1", ipc: 10, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 11, description: "hi"
+      id: "456", name: "Milk", quantity: 10, skut: 10, supId: "sup2", ipc: 10, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 11, description: "hi"
     },
     {
       who: "000",
-      id: "789", name: "prod3", quantity: 4, skut: 5, supId: "sup2", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi"
+      id: "789", name: "Laban", quantity: 4, skut: 5, supId: "sup3", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi"
     }
   ];
   public orders: OrderCart[] = [
@@ -89,11 +89,15 @@ export class DataService {
     },
     {
       who: "000",
-      id: "sup1", type: "sup", name: "supp", pass: "pass", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+      id: "sup1", type: "sup", name: "BNEC", pass: "pass", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       who: "000",
-      id: "sup2", type: "sup", name: "supo", pass: "pass", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+      id: "sup2", type: "sup", name: "Awal", pass: "pass", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
+    },
+    {
+      who: "000",
+      id: "sup3", type: "sup", name: "AlMaraai", pass: "pass", email: "sup1@gmail.com", phone: 121, image: "https://ionicframework.com/docs/img/demos/avatar.svg"
     },
     {
       who: "000",
@@ -157,8 +161,8 @@ export class DataService {
   me
   today: Date = new Date();
   constructor(public toastCtrl: ToastController, public navCtrl: NavController) {
-    // this.me = this.users[0]; //owner
-    this.me = this.users[1]; //sup
+    this.me = this.users[0]; //owner
+    // this.me = this.users[1]; //sup
     // this.me = this.users[4]; //emp2
     // this.me = this.users[3];
     if (this.me.type == "sup") {
