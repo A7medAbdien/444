@@ -23,7 +23,7 @@
           </h2>
         </ion-text>
         <br>
-        <ion-button (click)="d.reOrder(o.id)" expand="block" fill="outline" shape="round">
+        <ion-button *ngIf="d.isNotSup()" (click)="d.reOrder(o.id)" expand="block" fill="outline" shape="round">
           <ion-icon name="refresh-outline"></ion-icon>
           ReOrder
         </ion-button>

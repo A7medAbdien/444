@@ -36,6 +36,7 @@ export class AddProductPage implements OnInit {
   }
 
   ngOnInit() {
+    this.d.notSup()
   }
 
   addProduct(val) {

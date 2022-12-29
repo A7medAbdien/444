@@ -4,7 +4,7 @@
       <ion-icon name="arrow-back" routerLink="/orders-tabs/list" routerDirection="back"></ion-icon>
     </ion-buttons>
     <ion-title>Order Details</ion-title>
-    <ion-button (click)="d.onFav(o.id)" fill="clear" slot="end" size="large">
+    <ion-button *ngIf="d.isNotSup()" (click)="d.onFav(o.id)" fill="clear" slot="end" size="large">
       <div *ngIf="d.isFav(o.id)">
         <ion-icon slot="icon-only" color="warning" name="star"></ion-icon>
       </div>
@@ -103,7 +103,7 @@
   </ion-card>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="d.isNotSup()">
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6">
@@ -118,6 +118,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
 </ion-footer>

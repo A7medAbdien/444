@@ -33,7 +33,8 @@ export class AddOrderPage implements OnInit {
   }
 
   ngOnInit() {
-    this.o = this.d.getOrder("156")
+    this.d.notSup()
+    // this.o = this.d.getOrder("156")
     this.cartIds = Object.keys(this.o.cart)
   }
 }

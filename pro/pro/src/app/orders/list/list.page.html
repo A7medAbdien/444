@@ -72,7 +72,7 @@
 
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="d.isNotSup()">
   <ion-button routerLink="/add-order" expand="block" shape="round">
     Place Order
   </ion-button>

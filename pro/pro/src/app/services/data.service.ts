@@ -75,7 +75,7 @@ export class DataService {
     {
       id: "131",
       who: "000",
-      name: "prod3", quantity: 45, skut: 5, supId: "sup1", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi",
+      name: "prod3", quantity: 45, skut: 5, supId: "sup2", ipc: 5, image: "https://ionicframework.com/docs/img/demos/thumbnail.svg", price: 15, description: "hi",
       orderedDate: new Date("2022-04-25"),
       expectedDate: new Date("2022-04-26"),
       receivedDate: new Date("2022-04-28"),
@@ -157,10 +157,23 @@ export class DataService {
   me
   today: Date = new Date();
   constructor(public toastCtrl: ToastController, public navCtrl: NavController) {
-    // this.me = this.users[0];
-    // this.me = this.users[1];
-    // this.me = this.users[4];
-    this.me = this.users[3];
+    // this.me = this.users[0]; //owner
+    this.me = this.users[1]; //sup
+    // this.me = this.users[4]; //emp2
+    // this.me = this.users[3];
+    if (this.me.type == "sup") {
+      console.log(this.orders)
+      this.orders = this.orders.filter(row => {
+        return row.sup == this.me.id
+      })
+      this.ordered = this.ordered.filter(row => {
+        return row.supId == this.me.id
+      })
+      this.fav = this.fav.filter(row => {
+        return row.sup == this.me.id
+      })
+      console.log(this.fav)
+    }
   }
 
   currOrderCart: CartItems = {};
@@ -171,6 +184,15 @@ export class DataService {
     if (this.me.type != "owner") {
       this.navCtrl.navigateRoot('/');
     }
+  }
+
+  notSup() {
+    if (this.me.type != "sup") {
+      this.navCtrl.navigateRoot('/');
+    }
+  }
+  isNotSup(): boolean {
+    return this.me.type != "sup";
   }
   isOwner(): boolean {
     return this.me.type == "owner";
