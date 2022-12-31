@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
@@ -6,7 +6,7 @@ import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { GestureController, ToastController } from '@ionic/angular';
+import { Gesture, GestureController, IonItem, ToastController } from '@ionic/angular';
 
 export interface Idea {
   id?: string,
@@ -20,49 +20,119 @@ export interface Idea {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
-  @ViewChild('rectangle') rect: ElementRef;
-  public type;
-  public currentX;
+  @ViewChild('dropzoneA') dropA: ElementRef;
+  @ViewChild('dropzoneB') dropB: ElementRef;
+  @ViewChildren(IonItem, { read: ElementRef }) items: QueryList<ElementRef>;
+  public myArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  public teamA = [];
+  public teamB = [];
+  contentScrollActive = true;
+  gestureArray: Gesture[] = [];
+
+
+  constructor(private gestureCtrl: GestureController, private changeDetectorRef: ChangeDetectorRef) { }
+
   ngAfterViewInit(): void {
     this.updateGestures();
   }
 
+  // Remove and add gestures based on ViewChildren QueryList
   updateGestures() {
-    const drag = this.gestureCtrl.create({
-      el: this.rect.nativeElement,
-      threshold: 1,
-      gestureName: 'drag',
-      onMove: ev => {
-        this.type = ev.type;
-        this.currentX = ev.currentX;
-        if (ev.currentX > 200) this.presentToast()
-        console.log(this.currentX);
-        console.log(this.type);
-      }
+    // clean before starting the current gesture,
+    // to ensure the behavior consistency and as a good practice
+    this.gestureArray.map(gesture => gesture.destroy());
+    this.gestureArray = [];
+
+    // "items" are the ion-items, what we drag and drop
+    // to deal with them in easier way
+    const arr = this.items.toArray();
+
+    // we want to apply this gesture to all ion-items
+    for (let i = 0; i < arr.length; i++) {
+      const oneItem = arr[i];
+      const drag = this.gestureCtrl.create({
+        el: oneItem.nativeElement,
+        threshold: 1,
+        gestureName: 'drag',
+        onStart: ev => {
+          oneItem.nativeElement.style.transition = '';
+          oneItem.nativeElement.style.opacity = '0.8';
+          oneItem.nativeElement.style.fontWeight = 'bold';
+          this.changeDetectorRef.detectChanges();
+        },
+        onMove: ev => {
+          oneItem.nativeElement.style.transform = `translate(${ev.deltaX}px, ${ev.deltaY}px)`;
+          oneItem.nativeElement.style.zIndex = 11;
+          this.checkDropZoneHover(ev.currentX, ev.currentY);
+        },
+        onEnd: ev => {
+          this.handleDrop(oneItem, ev.currentX, ev.currentY, i);
+        }
+      }); // end of Gesture Configuration
+
+      drag.enable();
+      this.gestureArray.push(drag);
+    } // end of loop
+
+    this.items.changes.subscribe(res => {
+      this.updateGestures();
     });
-    drag.enable();
   }
 
-  constructor(private gestureCtrl: GestureController, public toastCtrl: ToastController) { }
+  // Check if we are dragging above a zone
+  checkDropZoneHover(x, y) {
+    const dropA = this.dropA.nativeElement.getBoundingClientRect();
+    const dropB = this.dropB.nativeElement.getBoundingClientRect();
+    if (this.isInZone(x, y, dropA)) {
+      this.dropA.nativeElement.style.backgroundColor = '#009fff';
+    } else {
+      this.dropA.nativeElement.style.backgroundColor = 'white';
+    }
+    if (this.isInZone(x, y, dropB)) {
+      this.dropB.nativeElement.style.backgroundColor = 'red';
+    } else {
+      this.dropB.nativeElement.style.backgroundColor = 'white';
+    }
+  }
 
-  async presentToast() {
-    const toast = await this.toastCtrl.create({
-      message: 'Your settings have been saved.',
-      duration: 2000,
-      color: 'primary',
-      position: 'top',
-      buttons: [{
-        text: 'wow', handler: () => {
-          toast.dismiss();
-        }
-      }]
-    });
 
-    toast.present();
-    toast.onDidDismiss().then((resp) => {
-      console.log('Dismissed toast');
-    });
+  // check if coordinates are within a dropzone rect
+  isInZone(x, y, dropzone) {
+    if (x < dropzone.left || x >= dropzone.right) {
+      return false;
+    }
+    if (y < dropzone.top || y >= dropzone.bottom) {
+      return false;
+    }
+    return true;
+  }
 
+
+  // Decide what to do with dropped item
+  handleDrop(item, endX, endY, index) {
+    const dropA = this.dropA.nativeElement.getBoundingClientRect();
+    const dropB = this.dropB.nativeElement.getBoundingClientRect();
+    // Dropped in Zone A
+    if (this.isInZone(endX, endY, dropA)) {
+      item.nativeElement.remove();
+      const removeditem = this.myArray.splice(index, 1);
+      this.teamA.push(removeditem[0]);
+    } else if (this.isInZone(endX, endY, dropB)) {
+      item.nativeElement.remove();
+      const removeditem = this.myArray.splice(index, 1);
+      this.teamB.push(removeditem[0]);
+    }
+    // don't drop it in a zone, bring it back to the initial position
+    else {
+      item.nativeElement.style.transition = '.2s ease-out';
+      item.nativeElement.style.zIndex = 'inherit';
+      item.nativeElement.style.transform = `translate(0,0)`;
+      item.nativeElement.style.opacity = '1';
+      item.nativeElement.style.fontWeight = 'normal';
+    }
+    this.dropA.nativeElement.style.backgroundColor = 'white';
+    this.dropB.nativeElement.style.backgroundColor = 'white';
+    this.updateGestures();
   }
 
 }

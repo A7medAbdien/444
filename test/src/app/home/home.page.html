@@ -7,17 +7,43 @@
 </ion-header>
 
 <style>
-  .rectangle {
-    width: 500px;
-    height: 100px;
-    background: rgba(0, 0, 255, 0.5);
+  .fixed-box {
+    width: 100%;
+    background: #fff;
+    height: 160px;
+    z-index: 10;
+  }
+
+  .drop-area {
+    border: 2px dashed #2746f1;
+    margin: 2px;
+    width: 48%;
+    height: 150px;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    user-select: none;
+    background: #fff;
+  }
+
+  .item-group {
+    margin-top: 160px;
   }
 </style>
 <ion-content [fullscreen]="true">
+  <div slot="fixed" class="fixed-box">
+    <div class="drop-area" #dropzoneA>
+      Zone A {{ teamA | json }}
+    </div>
+    <div class="drop-area" #dropzoneB>
+      Zone B {{ teamB | json }}
+    </div>
+  </div>
 
-  <div #rectangle class="rectangle"></div>
-  <p>
-    Swipe to start tracking
-    {{type}} {{currentX}}
-  </p>
+  <div class="item-group">
+    <ion-item *ngFor="let item of myArray">
+      {{item}}
+    </ion-item>
+  </div>
+
 </ion-content>
