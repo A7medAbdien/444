@@ -6,8 +6,18 @@
   </ion-toolbar>
 </ion-header>
 
+<style>
+  .rectangle {
+    width: 500px;
+    height: 100px;
+    background: rgba(0, 0, 255, 0.5);
+  }
+</style>
 <ion-content [fullscreen]="true">
 
-  <ion-button (click)="presentToast()">Toast</ion-button>
-
+  <div #rectangle class="rectangle"></div>
+  <p>
+    Swipe to start tracking
+    {{type}} {{currentX}}
+  </p>
 </ion-content>
