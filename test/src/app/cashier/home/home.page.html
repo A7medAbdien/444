@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
-  homweee
-
+  <ion-item *ngFor="let i of d.cocoList() | async">
+    <ion-label>{{i.name}}</ion-label>
+  </ion-item>
 </ion-content>

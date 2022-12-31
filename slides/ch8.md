@@ -91,6 +91,7 @@ export class HomePage {
     return this.ideaCollection.doc(id).delete();
   }
 
+  idea;
   Insert() {
     this.ideaCollection.add(this.idea).then((res) => {
       alert('Inserted successfully');

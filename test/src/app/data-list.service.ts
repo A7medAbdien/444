@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Student {
   name: string,
@@ -11,13 +14,72 @@ export interface Student {
   my_fields: string[]
 }
 
+export interface Chocolate {
+  id?: string,
+  name: string,
+  type: string,
+  nutrition: string,
+  percentage: number,
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataListService {
 
-  constructor(public alertCtrl: AlertController) { }
+  public cocoList: Observable<Chocolate[]>;
+  private cocoCollection: AngularFirestoreCollection<Chocolate>;
+
+  constructor(public alertCtrl: AlertController, private afs: AngularFirestore) {
+    this.cocoCollection = this.afs.collection<Chocolate>('Coco');
+    this.cocoList = this.cocoCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
+  getChocolates(): Observable<Chocolate[]> {
+    return this.cocoList;
+  }
+  getChocolate(id: string): Observable<Chocolate> {
+    return this.cocoCollection.doc<Chocolate>(id).valueChanges().pipe(
+      map(choc => {
+        choc.id = id;
+        return choc
+      })
+    );
+  }
+
+  addChocolate(choc: Chocolate): Promise<DocumentReference> {
+    return this.cocoCollection.add(choc);
+  }
+
+  updateChocolate(choc: Chocolate): Promise<void> {
+    return this.cocoCollection.doc(choc.id).update(
+      {
+        name: choc.name,
+        type: choc.type,
+        nutrition: choc.nutrition,
+        percentage: choc.percentage
+      }
+    );
+  }
+
+  deleteChocolate(id: string): Promise<void> {
+    return this.cocoCollection.doc(id).delete();
+  }
+
+  choc;
+  Insert() {
+    this.cocoCollection.add(this.choc).then((res) => {
+      alert('Inserted successfully');
+    });
+  }
 
   public name;
   public age;
