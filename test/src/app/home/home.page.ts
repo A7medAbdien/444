@@ -20,10 +20,11 @@ export interface Idea {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
+  // get ViewChildren
   @ViewChild('dropzoneA') dropA: ElementRef;
   @ViewChild('dropzoneB') dropB: ElementRef;
   @ViewChildren(IonItem, { read: ElementRef }) items: QueryList<ElementRef>;
-  public myArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  public myArray = [1, 2, 3, 4, 5, 6];
   public teamA = [];
   public teamB = [];
   contentScrollActive = true;
@@ -36,18 +37,13 @@ export class HomePage implements AfterViewInit {
     this.updateGestures();
   }
 
-  // Remove and add gestures based on ViewChildren QueryList
   updateGestures() {
-    // clean before starting the current gesture,
-    // to ensure the behavior consistency and as a good practice
     this.gestureArray.map(gesture => gesture.destroy());
     this.gestureArray = [];
 
-    // "items" are the ion-items, what we drag and drop
-    // to deal with them in easier way
     const arr = this.items.toArray();
 
-    // we want to apply this gesture to all ion-items
+    // ############################# Set gesture for each child
     for (let i = 0; i < arr.length; i++) {
       const oneItem = arr[i];
       const drag = this.gestureCtrl.create({
