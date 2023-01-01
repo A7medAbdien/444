@@ -4,10 +4,14 @@
 2. app.models.ts
 
 ## CML
-`npm install firebase @angular/fire –-save`
+`npm install firebase @angular/fire --save`
 
 ## app.models.ts
 ```typescript
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
+
 var firebaseConfig = {
   apiKey: "AIzaSyDEGcc9Td9SnVPV4eA9741wYPFstMmP1Qc",
   authDomain: "test-a4a87.firebaseapp.com",

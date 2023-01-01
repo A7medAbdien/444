@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-item *ngFor="let i of d.cocoList() | async">
+  <ion-item *ngFor="let i of d.cocoList | async">
     <ion-label>{{i.name}}</ion-label>
+    <ion-label>{{i|json}}</ion-label>
   </ion-item>
 </ion-content>

@@ -1,3 +1,4 @@
+import { DataListService } from 'src/app/data-list.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(public d: DataListService) { }
 
   ngOnInit() {
   }

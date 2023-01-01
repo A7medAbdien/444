@@ -41,6 +41,12 @@ export class DataListService {
         });
       })
     );
+    this.addChocolate({
+      name: 'Coco',
+      type: 'list',
+      nutrition: 'Chocolate',
+      percentage: 50,
+    })
   }
 
   getChocolates(): Observable<Chocolate[]> {
