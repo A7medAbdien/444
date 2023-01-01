@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  appPages: { title: string; url: string; icon: string; }[];
+  constructor() {
+    this.appPages = [
+      { title: 'Cashier', url: '/home', icon: 'wallet' },
+    ];
+  }
 }
