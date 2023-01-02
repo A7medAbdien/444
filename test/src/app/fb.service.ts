@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 export interface User {
+  id?: string,
   name: string,
   shift: boolean[],
   quantity: number,
@@ -81,8 +82,10 @@ export class FBService {
       approved: this.isApproved
     }
     if (this.isValidName) {
-      this.addUser(user)
-      this.showAlert("Successful", "Good job")
+      this.addUser(user).then(() => {
+        // this.showAlert("Successful " + user.id, "Good job")
+        this.showAlert("Successful ", "Good job")
+      })
     } else {
       console.log(user)
       this.showAlert("Error", "Try Again")
