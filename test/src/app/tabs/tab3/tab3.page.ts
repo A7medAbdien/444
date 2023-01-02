@@ -43,27 +43,27 @@ export class Tab3Page implements AfterViewInit {
       const oneItem = arr[i];
       const oneLet = ar[i]
       const drag = this.gestureCtrl.create({
-        el: oneItem.nativeElement,
+        el: oneLet.nativeElement,
         threshold: 1,
         gestureName: 'drag',
         onStart: ev => {
-          oneItem.nativeElement.style.transition = '';
-          oneItem.nativeElement.style.opacity = '0.8';
-          oneItem.nativeElement.style.fontWeight = 'bold';
-          console.log(oneItem.nativeElement);
-          console.log(oneLet.nativeElement);
+          // oneItem.nativeElement.style.transition = '';
+          // oneItem.nativeElement.style.opacity = '0.8';
+          // oneItem.nativeElement.style.fontWeight = 'bold';
+          // console.log(oneItem.nativeElement);
+          // console.log(oneLet.nativeElement);
           oneLet.nativeElement.style.color = 'red'
           this.changeDetectorRef.detectChanges();
         },
         onMove: ev => {
-          oneItem.nativeElement.style.transform = `translate(${ev.deltaX}px, ${ev.deltaY}px)`;
+          // oneItem.nativeElement.style.transform = `translate(${ev.deltaX}px, ${ev.deltaY}px)`;
           oneLet.nativeElement.style.transform = `translate(${ev.deltaX}px, ${ev.deltaY}px)`;
-          oneItem.nativeElement.style.zIndex = 11;
+          // oneItem.nativeElement.style.zIndex = 11;
           oneLet.nativeElement.style.zIndex = 11;
           this.checkDropZoneHover(ev.currentX, ev.currentY);
         },
         onEnd: ev => {
-          this.handleDrop(oneItem, ev.currentX, ev.currentY, i);
+          // this.handleDrop(oneItem, ev.currentX, ev.currentY, i);
           this.handleDrop(oneLet, ev.currentX, ev.currentY, i);
         }
       }); // end of Gesture Configuration
@@ -72,9 +72,9 @@ export class Tab3Page implements AfterViewInit {
       this.gestureArray.push(drag);
     } // end of loop
 
-    this.items.changes.subscribe(res => {
-      this.updateGestures();
-    });
+    // this.items.changes.subscribe(res => {
+    //   this.updateGestures();
+    // });
     this.letters.changes.subscribe(res => {
       this.updateGestures();
     });
