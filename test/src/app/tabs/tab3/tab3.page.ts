@@ -17,7 +17,6 @@ export class Tab3Page implements AfterViewInit {
 
   public myArray = ['H', 'O', 'M', 'E'];
   public teamA = [];
-  public teamB = [];
   contentScrollActive = true;
   gestureArray: Gesture[] = [];
 
