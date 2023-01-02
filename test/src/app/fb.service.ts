@@ -111,4 +111,50 @@ export class FBService {
   reset() {
     this.name = ''
   }
+
+
+
+
+  getUsers(): Observable<User[]> {
+    return this.users;
+  }
+  // getUser(id: string): Observable<User> {
+  //   return this.userCollection.doc<User>(id).valueChanges().pipe(
+  //     map(user => {
+  //       user.id = id;
+  //       return user
+  //     })
+  //   );
+  // }
+  // updateUser(user: User): Promise<void> {
+  //   return this.userCollection.doc(user.id).update({ name: user.name, notes: user.notes });
+  // }
+
+  deleteUser(id: string): Promise<void> {
+    return this.userCollection.doc(id).delete();
+  }
+
+  user;
+  Insert() {
+    this.userCollection.add(this.user).then((res) => {
+      alert('Inserted successfully');
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
