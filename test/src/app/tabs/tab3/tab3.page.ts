@@ -1,3 +1,4 @@
+import { FBService } from './../../fb.service';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Gesture, GestureController, IonItem } from '@ionic/angular';
 
@@ -21,7 +22,7 @@ export class Tab3Page implements AfterViewInit {
   gestureArray: Gesture[] = [];
 
 
-  constructor(private gestureCtrl: GestureController, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private gestureCtrl: GestureController, private changeDetectorRef: ChangeDetectorRef, public d: FBService) { }
 
   ngAfterViewInit(): void {
     this.updateGestures();
@@ -136,4 +137,16 @@ export class Tab3Page implements AfterViewInit {
     this.updateGestures();
   }
 
+
+  verify() {
+    if (
+      this.teamA[0] == 'H' &&
+      this.teamA[1] == 'O' &&
+      this.teamA[2] == 'M' &&
+      this.teamA[3] == 'E'
+    ) { this.d.showAlert("Correct", "Correct"); }
+    else {
+      this.d.showAlert("Incorrect", "Incorrect");
+    }
+  }
 }

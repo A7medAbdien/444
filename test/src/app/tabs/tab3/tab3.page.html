@@ -65,8 +65,20 @@
   </div>
 
   <div class="fixed-box">
-    <div *ngFor="let l of list1" class="drop-area" #letters>
+    <div *ngFor="let l of myArray" class="drop-area" #letters>
       {{ l }}
     </div>
   </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <ion-button (click)="verify()" expand="block">
+    Click me
+  </ion-button>
 </ion-content>
