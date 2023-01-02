@@ -1,4 +1,6 @@
+import { FBService } from './../../fb.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tab1',
@@ -6,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tab1.page.scss'],
 })
 export class Tab1Page implements OnInit {
+  loginForm: FormGroup;
 
-  constructor() { }
+  constructor(public formBuilder: FormBuilder, public d: FBService) {
+    this.loginForm = formBuilder.group({
+      name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.minLength(3)])],
+    });
+  }
 
+  login(val) {
+    if (this.loginForm.valid) {
+
+    }
+  }
   ngOnInit() {
   }
 

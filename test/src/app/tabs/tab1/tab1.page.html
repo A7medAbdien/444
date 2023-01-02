@@ -1,9 +1,35 @@
 <ion-header>
   <ion-toolbar>
+
     <ion-title>tab1</ion-title>
+    <ion-button *ngIf="loginForm.invalid" slot="end" fill="clear" shape="round">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="!loginForm.invalid" slot="end" fill="clear" shape="round">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="loginForm">
+    <ion-item>
+      <ion-label position="floating">Enter User <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="name" type="text"></ion-input>
+    </ion-item>
 
+    <ion-item *ngIf="loginForm.controls['name'].hasError('required') && loginForm.controls['name'].touched">
+      <p>Sorry, field name is required!</p>
+    </ion-item>
+    <ion-item *ngIf="loginForm.controls['name'].hasError('pattern') && loginForm.controls['name'].touched">
+      <p>Sorry, only small and capital letters are allowed!</p>
+    </ion-item>
+    <ion-item *ngIf="loginForm.controls['name'].hasError('minlength') && loginForm.controls['name'].touched">
+      <p>Sorry, minimum name length is 8!</p>
+    </ion-item>
+
+    <ion-button block color="primary" (click)="d.verify()" type="submit" [disabled]="loginForm.invalid">
+      Verify
+    </ion-button>
+  </form>
 </ion-content>
