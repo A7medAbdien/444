@@ -13,9 +13,9 @@ export class Tab3Page implements AfterViewInit {
   @ViewChild('dropzoneA') dropA: ElementRef;
   // @ViewChild('dropzoneB') dropB: ElementRef;
   @ViewChildren('letters', { read: ElementRef }) letters: QueryList<ElementRef>;
-  @ViewChildren(IonItem, { read: ElementRef }) items: QueryList<ElementRef>;
+  // @ViewChildren(IonItem, { read: ElementRef }) items: QueryList<ElementRef>;
 
-  public myArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+  public myArray = ['H', 'O', 'M', 'E'];
   public teamA = [];
   public teamB = [];
   contentScrollActive = true;
@@ -31,16 +31,16 @@ export class Tab3Page implements AfterViewInit {
   updateGestures() {
     this.gestureArray.map(gesture => gesture.destroy());
     this.gestureArray = [];
-    console.log(this.items)
+    // console.log(this.items)
     console.log(this.letters)
-    const arr = this.items.toArray();
+    // const arr = this.items.toArray();
     const ar = this.letters.toArray();
-    console.log(arr)
+    // console.log(arr)
     console.log(ar)
 
     // ############################# Set gesture for each child
-    for (let i = 0; i < arr.length; i++) {
-      const oneItem = arr[i];
+    for (let i = 0; i < ar.length; i++) {
+      // const oneItem = arr[i];
       const oneLet = ar[i]
       const drag = this.gestureCtrl.create({
         el: oneLet.nativeElement,
