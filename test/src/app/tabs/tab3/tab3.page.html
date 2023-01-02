@@ -58,15 +58,17 @@
     </ion-item>
   </div>
 
-  <!-- <div slot="fixed" class="fixed-box">
-    <div *ngFor="let l of list1" class="drop-area" #letters>
-      {{ l }}
-    </div>
-  </div> -->
+
 
   <div slot="fixed" class="fixed-box">
     <div class="drop-area2" #dropzoneA>
       {{ teamA | json }}
+    </div>
+  </div>
+
+  <div class="fixed-box">
+    <div *ngFor="let l of list1" class="drop-area" #letters>
+      {{ l }}
     </div>
   </div>
 </ion-content>
