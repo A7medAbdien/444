@@ -21,6 +21,10 @@ export class Tab1Page implements OnInit {
 
     }
   }
+  verify(val, isVal) {
+    this.d.verify(isVal)
+    this.d.name = val
+  }
   ngOnInit() {
   }
 

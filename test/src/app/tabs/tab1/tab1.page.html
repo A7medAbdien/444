@@ -38,7 +38,7 @@
           <ion-note *ngIf="d.verifyClicked && loginForm.invalid" color="danger">{{d.userStatus}}</ion-note>
         </ion-col>
         <ion-col size="8">
-          <ion-button block color="primary" (click)="d.verify(loginForm.invalid)">
+          <ion-button block color="primary" (click)="verify(loginForm.value.name,loginForm.invalid)">
             Verify
           </ion-button>
         </ion-col>
@@ -51,7 +51,7 @@
     <ion-label>2.Select Shift </ion-label>
   </ion-item>
   <ion-item *ngFor="let i of d.shifts">
-    <ion-checkbox value="{{i.v}}" slot="start"></ion-checkbox>
+    <ion-checkbox [(ngModel)]="i.v" slot="start"></ion-checkbox>
     <ion-label>{{i.t}}</ion-label>
   </ion-item>
 
