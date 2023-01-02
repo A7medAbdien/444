@@ -12,10 +12,10 @@ export class Tab3Page implements AfterViewInit {
   // get ViewChildren
   @ViewChild('dropzoneA') dropA: ElementRef;
   // @ViewChild('dropzoneB') dropB: ElementRef;
-  // @ViewChildren('letters') items: QueryList<ElementRef>;
+  @ViewChildren('letters', { read: ElementRef }) letters: QueryList<ElementRef>;
   @ViewChildren(IonItem, { read: ElementRef }) items: QueryList<ElementRef>;
 
-  public myArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  public myArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
   public teamA = [];
   public teamB = [];
   contentScrollActive = true;
@@ -31,12 +31,17 @@ export class Tab3Page implements AfterViewInit {
   updateGestures() {
     this.gestureArray.map(gesture => gesture.destroy());
     this.gestureArray = [];
-
+    console.log(this.items)
+    console.log(this.letters)
     const arr = this.items.toArray();
+    const ar = this.letters.toArray();
+    console.log(arr)
+    console.log(ar)
 
     // ############################# Set gesture for each child
     for (let i = 0; i < arr.length; i++) {
       const oneItem = arr[i];
+      const oneLet = ar[i]
       const drag = this.gestureCtrl.create({
         el: oneItem.nativeElement,
         threshold: 1,
@@ -45,15 +50,21 @@ export class Tab3Page implements AfterViewInit {
           oneItem.nativeElement.style.transition = '';
           oneItem.nativeElement.style.opacity = '0.8';
           oneItem.nativeElement.style.fontWeight = 'bold';
+          console.log(oneItem.nativeElement);
+          console.log(oneLet.nativeElement);
+          oneLet.nativeElement.style.color = 'red'
           this.changeDetectorRef.detectChanges();
         },
         onMove: ev => {
           oneItem.nativeElement.style.transform = `translate(${ev.deltaX}px, ${ev.deltaY}px)`;
+          oneLet.nativeElement.style.transform = `translate(${ev.deltaX}px, ${ev.deltaY}px)`;
           oneItem.nativeElement.style.zIndex = 11;
+          oneLet.nativeElement.style.zIndex = 11;
           this.checkDropZoneHover(ev.currentX, ev.currentY);
         },
         onEnd: ev => {
           this.handleDrop(oneItem, ev.currentX, ev.currentY, i);
+          this.handleDrop(oneLet, ev.currentX, ev.currentY, i);
         }
       }); // end of Gesture Configuration
 
@@ -62,6 +73,9 @@ export class Tab3Page implements AfterViewInit {
     } // end of loop
 
     this.items.changes.subscribe(res => {
+      this.updateGestures();
+    });
+    this.letters.changes.subscribe(res => {
       this.updateGestures();
     });
   }
