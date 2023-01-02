@@ -13,11 +13,14 @@
 
 <ion-content>
   <form [formGroup]="loginForm">
+    <ion-item color="medium">
+      <ion-label>1.Enter User <ion-text color="danger">*</ion-text></ion-label>
+    </ion-item>
     <ion-item>
-      <ion-label position="floating">Enter User <ion-text color="danger">*</ion-text></ion-label>
       <ion-input required formControlName="name" type="text"></ion-input>
     </ion-item>
 
+    <!--
     <ion-item *ngIf="loginForm.controls['name'].hasError('required') && loginForm.controls['name'].touched">
       <p>Sorry, field name is required!</p>
     </ion-item>
@@ -26,10 +29,71 @@
     </ion-item>
     <ion-item *ngIf="loginForm.controls['name'].hasError('minlength') && loginForm.controls['name'].touched">
       <p>Sorry, minimum name length is 8!</p>
-    </ion-item>
+    </ion-item> -->
 
-    <ion-button block color="primary" (click)="d.verify()" type="submit" [disabled]="loginForm.invalid">
-      Verify
-    </ion-button>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4">
+          <ion-note *ngIf="d.verifyClicked && !loginForm.invalid" color="primary">{{d.userStatus}}</ion-note>
+          <ion-note *ngIf="d.verifyClicked && loginForm.invalid" color="danger">{{d.userStatus}}</ion-note>
+        </ion-col>
+        <ion-col size="8">
+          <ion-button block color="primary" (click)="d.verify(loginForm.invalid)">
+            Verify
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
+
+
+  <ion-item color="medium">
+    <ion-label>2.Select Shift </ion-label>
+  </ion-item>
+  <ion-item *ngFor="let i of d.shifts">
+    <ion-checkbox value="{{i.v}}" slot="start"></ion-checkbox>
+    <ion-label>{{i.t}}</ion-label>
+  </ion-item>
+
+
+
+
+  <ion-item color="medium">
+    <ion-label>3.Quantity </ion-label>
+    <ion-item color="medium">
+      <ion-button slot="start" (click)="d.addQty()" color="dark" fill="clear" shape="round">
+        <ion-icon name="caret-up"></ion-icon>
+      </ion-button>
+      <ion-label>{{d.qty}}</ion-label>
+      <ion-button slot="end" (click)="d.removeQty()" color="dark" fill="clear" shape="round">
+        <ion-icon name="caret-down"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-item>
+  <ion-item>
+  </ion-item>
+
+  <ion-item color="medium">
+    <ion-label>4.Do you Approve?</ion-label>
+    <ion-toggle [(ngModel)]="d.isApproved"></ion-toggle>
+  </ion-item>
+  <ion-item>
+  </ion-item>
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6">
+
+        <ion-button (click)="d.submit()" expand="block" [disabled]="!d.isApproved">
+          Submit
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="d.submitAny()" expand="block">
+          Submit Anyway
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
