@@ -107,4 +107,8 @@ export class FBService {
     });
     alert.present();
   }
+
+  reset() {
+    this.name = ''
+  }
 }

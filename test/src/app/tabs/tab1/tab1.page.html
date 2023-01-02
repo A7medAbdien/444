@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
 
+    <ion-button (click)="reset()" fill="clear" shape="round">
+      Reset
+    </ion-button>
     <ion-title>tab1</ion-title>
     <ion-button *ngIf="loginForm.invalid" slot="end" fill="clear" shape="round">
       <ion-icon name="close"></ion-icon>

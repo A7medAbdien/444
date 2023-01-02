@@ -25,6 +25,10 @@ export class Tab1Page implements OnInit {
     this.d.verify(isVal)
     this.d.name = val
   }
+  reset() {
+    this.d.reset()
+    this.loginForm.reset()
+  }
   ngOnInit() {
   }
 
