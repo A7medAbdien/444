@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      base
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <form [formGroup]="loginForm">
+    <ion-item>
+      <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="email" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">
+      <p>Sorry, field email is required!</p>
+    </ion-item>
+    <ion-item *ngIf="loginForm.controls['email'].hasError('pattern') && loginForm.controls['email'].touched">
+      <p>Sorry, only small and capital letters are allowed!</p>
+    </ion-item>
+    <ion-item *ngIf="loginForm.controls['email'].hasError('minlength') && loginForm.controls['email'].touched">
+      <p>Sorry, minimum email length is 8!</p>
+    </ion-item>
+    <ion-item *ngIf="loginForm.controls['email'].hasError('maxlength') && loginForm.controls['email'].touched">
+      <p>Sorry, maximum email length is 30!</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="password" type="text"></ion-input>
+    </ion-item>
+    <ion-button block color="primary" (click)="login(loginForm.value)" type="submit" [disabled]="loginForm.invalid">
+      Login
+    </ion-button>
+    <ion-button block color="primary" (click)="d.logoutUser()" type="submit">
+      Login
+    </ion-button>
+  </form>
+</ion-content>
