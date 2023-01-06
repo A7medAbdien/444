@@ -229,7 +229,7 @@ export class DataService {
   }
 
   notSup() {
-    if (this.me.type != "sup") {
+    if (this.me.type == "sup") {
       this.navCtrl.navigateRoot('/');
     }
   }
